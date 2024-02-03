@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isJoystick)
         {
+            
             var movementDirection = new Vector3(joystick.Direction.x, 0f, joystick.Direction.y);
             controller.SimpleMove(movementDirection * moveSpeed);
             // If player is not moving
