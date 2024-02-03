@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public VariableJoystick joystick;
     public Canvas inputCanvas;
     public CharacterController controller;
+    //public Animator animator;
 
     [SerializeField] float moveSpeed;
     [SerializeField] float rotationSpeed;
@@ -30,11 +31,15 @@ public class PlayerMovement : MonoBehaviour
         {
             var movementDirection = new Vector3(joystick.Direction.x, 0f, joystick.Direction.y);
             controller.SimpleMove(movementDirection * moveSpeed);
-
+            // If player is not moving
             if (movementDirection.sqrMagnitude <= 0f) 
             {
+                // Disables walk animation
+                //animator.SetBool("Walk", false);
                 return;
             }
+            // Walk animation plays when the player is moving
+            //animator.SetBool("Walk", true);
 
             var targetDirection = Vector3.RotateTowards(controller.transform.forward, movementDirection, rotationSpeed * Time.deltaTime, 0f);
 
