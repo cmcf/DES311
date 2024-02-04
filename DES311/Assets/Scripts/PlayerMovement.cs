@@ -6,24 +6,25 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public VariableJoystick joystick;
+    [Header("Joystick")]
+    public VariableJoystick movementJoystick;
     public VariableJoystick aimJoystick;
     public Canvas inputCanvas;
     public CharacterController controller;
 
     //public Animator animator;
-
+    [Header("Projectile Settings")]
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform spawnPoint;
     [SerializeField] float projectileSpeed;
     [SerializeField] float firingCooldown = 1f;
     float lastFireTime;
 
-
+    [Header("Movement Settings")]
     [SerializeField] float moveSpeed;
     [SerializeField] float rotationSpeed;
 
-    bool isJoystick;
+    bool isMoving;
     bool isAiming;
 
 
@@ -34,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public void EnableJoystick()
     {
         // Enables the joystick by setting it to visible
-        isJoystick = true;
+        isMoving = true;
         inputCanvas.gameObject.SetActive(true);
     }
 
@@ -47,10 +48,10 @@ public class PlayerMovement : MonoBehaviour
     void Movement()
     {
         // Checks if the joystick is enabled
-        if (isJoystick)
+        if (isMoving)
         {
             // Gets the movement direction from the joystick
-            var movementDirection = new Vector3(joystick.Direction.x, 0f, joystick.Direction.y);
+            var movementDirection = new Vector3(movementJoystick.Direction.x, 0f, movementJoystick.Direction.y);
 
             // Moves the character using the SimpleMove method with speed
             controller.SimpleMove(movementDirection * moveSpeed);
@@ -82,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (aimJoystick == null)
         {
-            Debug.LogError("Aim Joystick not assigned!");
+           
             return;
         }
 
@@ -95,11 +96,12 @@ public class PlayerMovement : MonoBehaviour
 
         isAiming = true;
 
+        // Calculates and rotates the player character towards the target direction 
         var targetDirection = Vector3.RotateTowards(controller.transform.forward, rotationDirection, rotationSpeed * Time.deltaTime, 0f);
         controller.transform.rotation = Quaternion.LookRotation(targetDirection);
 
-        // Fire projectile when the aim joystick is pressed
-        if (aimJoystick.Direction.magnitude > 0.1f && CanFire()) // Adjust the threshold as needed
+        // Fire projectile when the aim joystick is pressed and cooldown has passed
+        if (aimJoystick.Direction.magnitude > 0.01f && CanFire())
         {
             FireProjectile();
         }
@@ -111,11 +113,10 @@ public class PlayerMovement : MonoBehaviour
         {
             if (projectilePrefab == null || spawnPoint == null)
             {
-                Debug.LogError("Projectile prefab or spawn point not assigned!");
                 return;
             }
 
-            // Instantiate a new projectile
+            // Spawn a new projectile
             GameObject projectile = Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
 
             // Get the rigidbody component of the projectile
@@ -127,12 +128,8 @@ public class PlayerMovement : MonoBehaviour
                 // Set the velocity of the projectile based on the world forward direction
                 projectileRb.velocity = projectile.transform.forward * projectileSpeed;
 
-                // Add a script for handling bullet behavior (e.g., destroying after a certain distance or hitting a target)
+                // Add a script for handling bullet behaviour
                 projectile.AddComponent<Bullet>();
-            }
-            else
-            {
-                Debug.LogError("Projectile prefab does not have a Rigidbody component!");
             }
 
             // Update the last fire time

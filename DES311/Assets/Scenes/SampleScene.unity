@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699ef00f835effc4985aaec01eb59e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 520646953}
+  movementJoystick: {fileID: 520646953}
   aimJoystick: {fileID: 1682810210}
   inputCanvas: {fileID: 1701370185}
   controller: {fileID: 529666625}
