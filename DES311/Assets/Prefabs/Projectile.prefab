@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2653252574833198458}
   - component: {fileID: 6914277464580860965}
+  - component: {fileID: 7652159865269469660}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -41,8 +42,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 848651948933118654}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 0.2
+  m_Drag: 0.1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -59,7 +60,20 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
+--- !u!114 &7652159865269469660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848651948933118654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a84dece07c61b3459eec5d85c24b8db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 500
 --- !u!1 &8468356504867863899
 GameObject:
   m_ObjectHideFlags: 0

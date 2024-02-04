@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public VariableJoystick joystick;
-    public FixedJoystick aimJoystick;
+    public VariableJoystick aimJoystick;
     public Canvas inputCanvas;
     public CharacterController controller;
 
@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float rotationSpeed;
 
     bool isJoystick;
+    bool isAiming;
 
 
     void Start()
@@ -50,8 +51,10 @@ public class PlayerMovement : MonoBehaviour
         {
             // Gets the movement direction from the joystick
             var movementDirection = new Vector3(joystick.Direction.x, 0f, joystick.Direction.y);
+
             // Moves the character using the SimpleMove method with speed
             controller.SimpleMove(movementDirection * moveSpeed);
+
             // Checks if the player is not moving
             if (movementDirection.sqrMagnitude <= 0f)
             {
@@ -59,13 +62,19 @@ public class PlayerMovement : MonoBehaviour
                 //animator.SetBool("Walk", false);
                 return;
             }
+
             // Walk animation plays when the player is moving
             //animator.SetBool("Walk", true);
 
-            // Calculates the target direction for character rotation
-            var targetDirection = Vector3.RotateTowards(controller.transform.forward, movementDirection, rotationSpeed * Time.deltaTime, 0f);
-            // Rotates the character towards the target direction
-            controller.transform.rotation = Quaternion.LookRotation(targetDirection);
+            // If not aiming, rotate the character
+            if (!isAiming)
+            {
+                // Calculates the target direction for character rotation
+                var targetDirection = Vector3.RotateTowards(controller.transform.forward, movementDirection, rotationSpeed * Time.deltaTime, 0f);
+
+                // Rotates the character towards the target direction
+                controller.transform.rotation = Quaternion.LookRotation(targetDirection);
+            }
         }
     }
 
@@ -80,8 +89,11 @@ public class PlayerMovement : MonoBehaviour
         var rotationDirection = new Vector3(aimJoystick.Direction.x, 0f, aimJoystick.Direction.y);
         if (rotationDirection.sqrMagnitude <= 0f)
         {
+            isAiming = false;
             return;
         }
+
+        isAiming = true;
 
         var targetDirection = Vector3.RotateTowards(controller.transform.forward, rotationDirection, rotationSpeed * Time.deltaTime, 0f);
         controller.transform.rotation = Quaternion.LookRotation(targetDirection);
@@ -112,8 +124,11 @@ public class PlayerMovement : MonoBehaviour
             // Check if the projectile has a rigidbody
             if (projectileRb != null)
             {
-                // Set the velocity of the projectile based on the direction the player is facing
-                projectileRb.velocity = controller.transform.forward * projectileSpeed;
+                // Set the velocity of the projectile based on the world forward direction
+                projectileRb.velocity = projectile.transform.forward * projectileSpeed;
+
+                // Add a script for handling bullet behavior (e.g., destroying after a certain distance or hitting a target)
+                projectile.AddComponent<Bullet>();
             }
             else
             {
