@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float maxDistance = 100f; // Adjust the maximum travel distance as needed
+    public float maxDistance = 100f;
     private Vector3 initialPosition;
-
+    float damageAmount = 10f;
+    Enemy enemy;
+    bool hasHitEnemy = false;
     void Start()
     {
         initialPosition = transform.position;
+        enemy = FindObjectOfType<Enemy>();
     }
 
     void Update()
@@ -20,6 +23,15 @@ public class Bullet : MonoBehaviour
         // Check if the bullet has traveled far enough
         if (traveledDistance >= maxDistance)
         {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            enemy.Damage(damageAmount);
             Destroy(gameObject);
         }
     }
