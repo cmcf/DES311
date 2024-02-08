@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
             var movementDirection = new Vector3(movementJoystick.Direction.x, 0f, movementJoystick.Direction.y);
 
             // Moves the character using the SimpleMove method with speed
-            controller.SimpleMove(movementDirection * moveSpeed);
+            controller.Move(movementDirection * Time.deltaTime * moveSpeed);
 
             // Checks if the player is not moving
             if (movementDirection.sqrMagnitude <= 0f)
