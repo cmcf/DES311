@@ -7,13 +7,18 @@ public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] float maxHealth = 60f;
     float currentHealth;
-    
-    // Gets the Position property from IDamageable interface
+
+    MeshRenderer meshRenderer;
+    Material redMaterial;
+
+    public bool isDead = false;
     public float Health { get; set; }
 
     void Start()
     {
         currentHealth = maxHealth;
+        meshRenderer = GetComponent<MeshRenderer>();
+        redMaterial = Resources.Load<Material>("red");
     }
 
     void Update()
@@ -32,7 +37,8 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        Debug.Log("Player Died");
+        isDead = true;
+        meshRenderer.material = redMaterial;
     }
    
 }

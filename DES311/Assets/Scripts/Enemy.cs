@@ -10,18 +10,20 @@ public class Enemy : MonoBehaviour, IDamageable
     public Transform playerLocation;
     Player player;
     NavMeshAgent agent;
-    
-    public float moveSpeed = 5f;
-    public float rotationSpeed = 2f;
-    float stoppingDistance = 2f;
+
+    [Header("Movement")]
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float rotationSpeed = 2f;
+
+    [SerializeField] float stoppingDistance = 2.2f;
 
     [Header("Health")]
     [SerializeField] float maxHealth = 100f;
-    public float currentHealth;
+    float currentHealth;
 
     [Header("Damage")]
-    [SerializeField] float attackCooldown = 1f; // Cooldown period in seconds
-    float lastAttackTime = -Mathf.Infinity; // Set to negative infinity to allow the first attack immediately
+    [SerializeField] float attackCooldown = 1f;
+    float lastAttackTime = -Mathf.Infinity;
     [SerializeField] float damageAmount = 10f;
 
     bool hit = false;
@@ -115,6 +117,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void AttackPlayer()
     {
+        // Enemy only attacks if the player is alive
+        if (player.isDead)
+        {
+            return;
+        }
         // Check if enough time has passed since the last attack
         if (Time.time - lastAttackTime >= attackCooldown)
         {
