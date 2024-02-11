@@ -6,7 +6,7 @@ public class Damage : MonoBehaviour
 {
     public interface IDamageable
     {
-        Vector3 Position { get; }
+        float Health { get; }
         void Damage(float damage);
     }
 }

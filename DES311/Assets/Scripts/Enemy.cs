@@ -7,35 +7,40 @@ using static Damage;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    public Transform player;
+    public Transform playerLocation;
+    Player player;
     NavMeshAgent agent;
+    
     public float moveSpeed = 5f;
     public float rotationSpeed = 2f;
     float stoppingDistance = 2f;
 
-    public float maxHealth = 100f;
+    [Header("Health")]
+    [SerializeField] float maxHealth = 100f;
     public float currentHealth;
+
+    [Header("Damage")]
+    [SerializeField] float attackCooldown = 1f; // Cooldown period in seconds
+    float lastAttackTime = -Mathf.Infinity; // Set to negative infinity to allow the first attack immediately
+    [SerializeField] float damageAmount = 10f;
 
     bool hit = false;
     bool reachedPlayer = false;
+
     // Gets the Position property from IDamageable interface
-    public Vector3 Position
-    {
-        get
-        {
-            return transform.position;
-        }
-    }
+    public float Health { get; set; }
+
 
     void Start()
     {
         currentHealth = maxHealth;
         agent = GetComponent<NavMeshAgent>();
+        player = FindObjectOfType<Player>();
     }
 
     void Update()
     {
-        MoveTowardsPlayer();
+        MoveAndRotateTowardsPlayer();
     }
 
     public void Damage(float damage)
@@ -65,24 +70,24 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Die()
     {
-
         Destroy(gameObject);
     }
-    void MoveTowardsPlayer()
+    void MoveAndRotateTowardsPlayer()
     {
         // Calculate distance between enemy and player
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, playerLocation.position);
 
         // Check if the enemy is near the player
         if (distanceToPlayer < stoppingDistance)
         {
-            // Stop moving
+            // Stop moving and attack player
             agent.isStopped = true;
+            AttackPlayer();
 
             // Rotate towards the player only if not reached player yet
             if (!reachedPlayer)
             {
-                Vector3 direction = (player.position - transform.position).normalized;
+                Vector3 direction = (playerLocation.position - transform.position).normalized;
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
             }
@@ -95,7 +100,7 @@ public class Enemy : MonoBehaviour, IDamageable
             // If not reached player yet, set destination to the player's position
             if (!reachedPlayer)
             {
-                agent.SetDestination(player.position);
+                agent.SetDestination(playerLocation.position);
             }
             else
             {
@@ -105,6 +110,19 @@ public class Enemy : MonoBehaviour, IDamageable
                 // Reset reachedPlayer flag
                 reachedPlayer = false;
             }
+        }
+    }
+
+    void AttackPlayer()
+    {
+        // Check if enough time has passed since the last attack
+        if (Time.time - lastAttackTime >= attackCooldown)
+        {
+            // Perform the attack
+            player.Damage(damageAmount);
+
+            // Update the last attack time to the current time
+            lastAttackTime = Time.time;
         }
     }
 }
