@@ -6,13 +6,12 @@ public class Bullet : MonoBehaviour
 {
     public float maxDistance = 100f;
     private Vector3 initialPosition;
-    float damageAmount = 10f;
+    float damageAmount = 15f;
     Enemy enemy;
     bool hasHitEnemy = false;
     void Start()
     {
         initialPosition = transform.position;
-        enemy = FindObjectOfType<Enemy>();
     }
 
     void Update()
@@ -29,9 +28,12 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.CompareTag("Enemy"))
         {
-            enemy.Damage(damageAmount);
+            // Apply damage to the enemy
+            other.GetComponent<Enemy>().Damage(damageAmount);
+
+            // Destroy the bullet
             Destroy(gameObject);
         }
     }

@@ -37,12 +37,17 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         currentHealth = maxHealth;
         agent = GetComponent<NavMeshAgent>();
+         // Find the player GameObject and get its transform component
+        playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
         player = FindObjectOfType<Player>();
     }
 
     void Update()
     {
-        MoveAndRotateTowardsPlayer();
+        if (playerLocation != null)
+        {
+            MoveAndRotateTowardsPlayer();
+        }  
     }
 
     public void Damage(float damage)
