@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] float attackCooldown = 1f;
     float lastAttackTime = -Mathf.Infinity;
     [SerializeField] float damageAmount = 10f;
+    [SerializeField] int XPAmount = 25;
+   
 
     bool hit = false;
     bool reachedPlayer = false;
@@ -58,7 +60,8 @@ public class Enemy : MonoBehaviour, IDamageable
         // Only deals damage if damage has not already been dealt
         if (!hit)
         {
-            Debug.Log("Hit");
+            GameManager.instance.IncreaseXP(XPAmount);
+ 
             currentHealth -= damage;
             if (currentHealth <= 0)
             {

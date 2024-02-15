@@ -236,6 +236,7 @@ MonoBehaviour:
   maxHealth: 25
   attackCooldown: 1
   damageAmount: 10
+  xpAmount: 25
 --- !u!195 &5326410920341968992
 NavMeshAgent:
   m_ObjectHideFlags: 0

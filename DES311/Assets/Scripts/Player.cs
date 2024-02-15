@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 using static Damage;
 
 public class Player : MonoBehaviour, IDamageable
 {
+    [Header("Stats")]
     [SerializeField] float maxHealth = 60f;
     float currentHealth;
-
+    public int currentXP;
+    public int requiredXP;
+    [SerializeField] int requiredXPIncreaseRate = 150;
+    [SerializeField] int currentLevel = 1;
+    
     MeshRenderer meshRenderer;
     Material redMaterial;
 
@@ -21,10 +27,40 @@ public class Player : MonoBehaviour, IDamageable
         redMaterial = Resources.Load<Material>("red");
     }
 
-    void Update()
+    void OnEnable()
     {
-
+        // Enable the XPEvent
+        GameManager.instance.XPEvent += HandleXP;
     }
+
+    void OnDisable()
+    {
+        // Disable the from the XPEvent when the script is disabled
+        GameManager.instance.XPEvent -= HandleXP;
+    }
+ 
+    // Function called when the XPEvent is invoked
+    void HandleXP(int newXP)
+    {
+        // Increase current XP
+        currentXP += newXP;
+        // If players current XP is equal or more than the required XP, the player levels up
+        if (currentXP >= requiredXP)
+        {
+            LevelUp();
+        }
+    }
+
+    void LevelUp()
+    {
+        // Players current level increases
+        currentLevel++;
+        // XP is reset
+        currentXP = 0;
+        // The amount of XP required to reach the next level is increased each level by the increase rate
+        requiredXP += requiredXPIncreaseRate;
+    }
+
     public void Damage(float damage)
     {
         Debug.Log("PlayerHit");
