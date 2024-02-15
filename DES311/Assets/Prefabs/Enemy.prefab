@@ -228,9 +228,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26abb1086bc1f264b9f50b793e1d3773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLocation: {fileID: 5983632728683274195, guid: 9b49051379261b843ba31c5c5d3a4fd3,
-    type: 3}
-  moveSpeed: 1
+  playerLocation: {fileID: 0}
+  minMoveSpeed: 1
+  maxMoveSpeed: 4
   rotationSpeed: 0.001
   stoppingDistance: 2.2
   maxHealth: 25

@@ -9,12 +9,13 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     public Transform playerLocation;
     Player player;
-    NavMeshAgent agent;
+    NavMeshAgent nav;
 
     [Header("Movement")]
-    [SerializeField] float moveSpeed = 5f;
+    float moveSpeed;
+    [SerializeField] float minMoveSpeed = 1f;
+    [SerializeField] float maxMoveSpeed = 5f;
     [SerializeField] float rotationSpeed = 2f;
-
     [SerializeField] float stoppingDistance = 2.2f;
 
     [Header("Health")]
@@ -35,9 +36,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Start()
     {
+        moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
         currentHealth = maxHealth;
-        agent = GetComponent<NavMeshAgent>();
-         // Find the player GameObject and get its transform component
+        nav = GetComponent<NavMeshAgent>();
+        nav.speed = moveSpeed;
+        // Find the player GameObject and get its transform component
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
         player = FindObjectOfType<Player>();
     }
@@ -88,7 +91,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (distanceToPlayer < stoppingDistance)
         {
             // Stop moving and attack player
-            agent.isStopped = true;
+            nav.isStopped = true;
             AttackPlayer();
 
             // Rotate towards the player only if not reached player yet
@@ -107,12 +110,12 @@ public class Enemy : MonoBehaviour, IDamageable
             // If not reached player yet, set destination to the player's position
             if (!reachedPlayer)
             {
-                agent.SetDestination(playerLocation.position);
+                nav.SetDestination(playerLocation.position);
             }
             else
             {
                 // Resume moving
-                agent.isStopped = false;
+                nav.isStopped = false;
 
                 // Reset reachedPlayer flag
                 reachedPlayer = false;
