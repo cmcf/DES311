@@ -229,8 +229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLocation: {fileID: 0}
-  minMoveSpeed: 1
-  maxMoveSpeed: 4
+  minMoveSpeed: 1.2
+  maxMoveSpeed: 2.5
   rotationSpeed: 0.001
   stoppingDistance: 2.2
   maxHealth: 25

@@ -15,53 +15,69 @@ public class Spawner : MonoBehaviour
 
     int currentWave = 0;
     int currentEnemyAmount;
+    bool canSpawn = true;
 
     void Start()
     {
         currentEnemyAmount = initialEnemyAmount;
         StartCoroutine(SpawnWave());
+        CheckCurrentWave();
     }
 
     IEnumerator SpawnWave()
     {
-        // Waits until the delay has finished before spawning a new wave of enemies
-        yield return new WaitForSeconds(delayBetweenWaves);
-
-        // Iterates through each enemy to be spawned in the current wave
-        for (int i = 0; i < currentEnemyAmount; i++)
+        // Waves only spawn if can spawn is true
+        if (canSpawn)
         {
-            // Iterate through each spawn point in the scene
-            foreach (Transform spawnPoint in spawnPoints)
+            // Waits until the delay has finished before spawning a new wave of enemies
+            yield return new WaitForSeconds(delayBetweenWaves);
+
+            // Iterates through each enemy to be spawned in the current wave
+            for (int i = 0; i < currentEnemyAmount; i++)
             {
-                // Randomly selects an enemy prefab from the enemy prefab array
-                GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-
-                // Check a random chance for spawning at this spawn point
-                if (Random.value < spawnProbability)
+                // Iterate through each spawn point in the scene
+                foreach (Transform spawnPoint in spawnPoints)
                 {
-                    // Instantiate the selected enemy prefab at the current spawn point's position with no rotation
-                    Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+                    // Randomly selects an enemy prefab from the enemy prefab array
+                    GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
-                    // Break after spawning one enemy per spawn point
-                    break;
+                    // Check a random chance for spawning at this spawn point
+                    if (Random.value < spawnProbability)
+                    {
+                        // Instantiate the selected enemy prefab at the current spawn point's position with no rotation
+                        Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+
+                        // Break after spawning one enemy per spawn point
+                        break;
+                    }
                 }
+
+                // Controls the rate of spawning
+                yield return new WaitForSeconds(spawnRate);
             }
 
-            // Controls the rate of spawning
-            yield return new WaitForSeconds(spawnRate);
-        }
+            // Wait until all enemies in the waves are defeated
+            while (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
+            {
+                yield return null;
+            }
 
-        // Wait until all enemies in the waves are defeated
-        while (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
+            // Increase difficulty by adding more enemies each wave
+            currentWave++;
+            currentEnemyAmount += enemiesPerWaveIncrease;
+
+            // Start next wave
+            StartCoroutine(SpawnWave());
+        }
+      
+    }
+
+    void CheckCurrentWave()
+    {
+        // Stop spawning waves after wave 10 is reached
+        if (currentWave == 10)
         {
-            yield return null;
+            canSpawn = false;
         }
-
-        // Increase difficulty by adding more enemies each wave
-        currentWave++;
-        currentEnemyAmount += enemiesPerWaveIncrease;
-
-        // Start next wave
-        StartCoroutine(SpawnWave());
     }
 }
