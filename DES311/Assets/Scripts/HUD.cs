@@ -19,13 +19,13 @@ public class HUD : MonoBehaviour
             return;
         }
 
-        // Set initial values for the Slider
+        // Update values for the Slider
         UpdateLevelProgressBar();
     }
 
     void Update()
     {
-        // Check if the levelSlider or player reference is null
+        // Checks if the levelSlider or player reference is null
         if (levelSlider == null || player == null)
         {
             return;

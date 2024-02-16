@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    Animator animator;
     [Header("Joystick")]
     public VariableJoystick movementJoystick;
     public VariableJoystick aimJoystick;
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         // Enables the joystick by setting it to visible
         isMoving = true;
         inputCanvas.gameObject.SetActive(true);
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -49,23 +51,24 @@ public class PlayerMovement : MonoBehaviour
     {
         // Checks if the joystick is enabled
         if (isMoving)
-        {
+        { 
             // Gets the movement direction from the joystick
             var movementDirection = new Vector3(movementJoystick.Direction.x, 0f, movementJoystick.Direction.y);
-
+            
             // Moves the character using the SimpleMove method with speed
             controller.Move(movementDirection * Time.deltaTime * moveSpeed);
 
-            // Checks if the player is not moving
+            float forward = Vector3.Dot(movementDirection, transform.forward);
+            float right = Vector3.Dot(movementDirection, transform.right);
+
+            animator.SetFloat("ForwardSpeed", forward);
+            animator.SetFloat ("RightSpeed", right);
+
+            // Checks if the player is not moving   
             if (movementDirection.sqrMagnitude <= 0f)
             {
-                // Disables walk animation
-                //animator.SetBool("Walk", false);
                 return;
             }
-
-            // Walk animation plays when the player is moving
-            //animator.SetBool("Walk", true);
 
             // If not aiming, rotate the character
             if (!isAiming)
@@ -75,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
                 // Rotates the character towards the target direction
                 controller.transform.rotation = Quaternion.LookRotation(targetDirection);
+
             }
         }
     }
@@ -83,9 +87,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (aimJoystick == null)
         {
-           
             return;
         }
+        
 
         var rotationDirection = new Vector3(aimJoystick.Direction.x, 0f, aimJoystick.Direction.y);
         if (rotationDirection.sqrMagnitude <= 0f)
@@ -94,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        isAiming = true;
+        isAiming = true; // Trigger firing animation
 
         // Calculates and rotates the player character towards the target direction 
         var targetDirection = Vector3.RotateTowards(controller.transform.forward, rotationDirection, rotationSpeed * Time.deltaTime, 0f);
@@ -109,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FireProjectile()
     {
+
         if (Time.time - lastFireTime >= firingCooldown)
         {
             if (projectilePrefab == null || spawnPoint == null)
@@ -128,12 +133,11 @@ public class PlayerMovement : MonoBehaviour
                 // Set the velocity of the projectile based on the world forward direction
                 projectileRb.velocity = projectile.transform.forward * projectileSpeed;
 
-                // Add a script for handling bullet behaviour
-                projectile.AddComponent<Bullet>();
             }
 
             // Update the last fire time
             lastFireTime = Time.time;
+            
         }
     }
 

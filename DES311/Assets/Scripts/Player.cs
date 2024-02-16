@@ -14,8 +14,6 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] int requiredXPIncreaseRate = 150;
     [SerializeField] int currentLevel = 1;
     
-    MeshRenderer meshRenderer;
-    Material redMaterial;
 
     public bool isDead = false;
     public float Health { get; set; }
@@ -23,8 +21,6 @@ public class Player : MonoBehaviour, IDamageable
     void Start()
     {
         currentHealth = maxHealth;
-        meshRenderer = GetComponent<MeshRenderer>();
-        redMaterial = Resources.Load<Material>("red");
     }
 
     void OnEnable()
@@ -74,7 +70,6 @@ public class Player : MonoBehaviour, IDamageable
     public void Die()
     {
         isDead = true;
-        meshRenderer.material = redMaterial;
     }
    
 }
