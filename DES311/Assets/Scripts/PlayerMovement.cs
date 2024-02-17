@@ -58,11 +58,15 @@ public class PlayerMovement : MonoBehaviour
             // Moves the character using the SimpleMove method with speed
             controller.Move(movementDirection * Time.deltaTime * moveSpeed);
 
+            // Calculate the forward and right speed based on movement direction and player position
             float forward = Vector3.Dot(movementDirection, transform.forward);
             float right = Vector3.Dot(movementDirection, transform.right);
 
+            // Sets the forward speed parameter in the animator controller
             animator.SetFloat("ForwardSpeed", forward);
-            animator.SetFloat ("RightSpeed", right);
+
+            // Sets the right speed parameter in the animator controller
+            animator.SetFloat("RightSpeed", right);
 
             // Checks if the player is not moving   
             if (movementDirection.sqrMagnitude <= 0f)
