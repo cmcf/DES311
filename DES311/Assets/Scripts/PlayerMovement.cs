@@ -7,27 +7,30 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     Animator animator;
+
     [Header("Joystick")]
     public VariableJoystick movementJoystick;
     public VariableJoystick aimJoystick;
     public Canvas inputCanvas;
     public CharacterController controller;
 
-    //public Animator animator;
-    [Header("Projectile Settings")]
+    [Header("Firing Settings")]
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform spawnPoint;
     [SerializeField] float projectileSpeed;
     [SerializeField] float firingCooldown = 1f;
-    float lastFireTime;
-
+    [SerializeField] float fireDelay = 0.3f;
+    public bool isAiming;
+    public bool isFiring = false;
+    
     [Header("Movement Settings")]
     [SerializeField] float moveSpeed;
     [SerializeField] float rotationSpeed;
 
-    bool isMoving;
-    bool isAiming;
+    
+    float lastFireTime;
 
+    bool isMoving;
 
     void Start()
     {
@@ -117,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FireProjectile()
     {
+        isFiring = true;
 
         if (Time.time - lastFireTime >= firingCooldown)
         {
@@ -141,8 +145,17 @@ public class PlayerMovement : MonoBehaviour
 
             // Update the last fire time
             lastFireTime = Time.time;
-            
+
+            // Call StopFiring after a delay
+            StartCoroutine(StopFiring(fireDelay)); // Adjust the delay as needed
+
         }
+    }
+
+    IEnumerator StopFiring(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isFiring = false;   
     }
 
     bool CanFire()
