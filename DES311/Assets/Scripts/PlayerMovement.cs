@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     Animator animator;
+    public WeaponItem currentWeapon;
 
     [Header("Joystick")]
     public VariableJoystick movementJoystick;
@@ -14,12 +15,10 @@ public class PlayerMovement : MonoBehaviour
     public Canvas inputCanvas;
     public CharacterController controller;
 
-    [Header("Firing Settings")]
+    [Header("Projectile")]
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform spawnPoint;
-    [SerializeField] float projectileSpeed;
-    [SerializeField] float firingCooldown = 1f;
-    [SerializeField] float fireDelay = 0.3f;
+
     public bool isAiming;
     public bool isFiring = false;
     
@@ -122,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isFiring = true;
 
-        if (Time.time - lastFireTime >= firingCooldown)
+        if (Time.time - lastFireTime >= currentWeapon.cooldown)
         {
             if (projectilePrefab == null || spawnPoint == null)
             {
@@ -139,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
             if (projectileRb != null)
             {
                 // Set the velocity of the projectile based on the world forward direction
-                projectileRb.velocity = projectile.transform.forward * projectileSpeed;
+                projectileRb.velocity = projectile.transform.forward * currentWeapon.speed;
 
             }
 
@@ -147,8 +146,7 @@ public class PlayerMovement : MonoBehaviour
             lastFireTime = Time.time;
 
             // Call StopFiring after a delay
-            StartCoroutine(StopFiring(fireDelay)); // Adjust the delay as needed
-
+            StartCoroutine(StopFiring(currentWeapon.fireDelay));
         }
     }
 
@@ -161,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
     bool CanFire()
     {
         // Check if enough time has passed since the last firing
-        return Time.time - lastFireTime >= firingCooldown;
+        return Time.time - lastFireTime >= currentWeapon.cooldown;
     }
 
 }

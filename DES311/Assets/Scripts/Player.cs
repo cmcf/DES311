@@ -6,6 +6,8 @@ using static Damage;
 
 public class Player : MonoBehaviour, IDamageable
 {
+    public ItemDisplay itemDisplay;
+
     [Header("Stats")]
     [SerializeField] float maxHealth = 60f;
     float currentHealth;
@@ -49,6 +51,7 @@ public class Player : MonoBehaviour, IDamageable
 
     void LevelUp()
     {
+        itemDisplay.DisplayItems();
         // Players current level increases
         currentLevel++;
         // XP is reset
