@@ -9,10 +9,10 @@ public class WeaponItem : ScriptableObject
     public string description;
 
     public Sprite icon;
+    public GameObject projectilePrefab;
 
     public float fireRate;
-    public float fireDelay;
-    public int cooldown;
-    public int speed;
+    public float cooldown;
+    public float speed;
 
 }

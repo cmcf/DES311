@@ -7,6 +7,7 @@ using static Damage;
 public class Player : MonoBehaviour, IDamageable
 {
     public ItemDisplay itemDisplay;
+    public PlayerMovement playerMovementScript;
 
     [Header("Stats")]
     [SerializeField] float maxHealth = 60f;

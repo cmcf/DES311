@@ -33,7 +33,19 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        // Initialize currentWeapon if necessary
+        if (currentWeapon == null)
+        {
+            // For example, you can set it to a default weapon
+            currentWeapon = GetDefaultWeapon();
+        }
         EnableJoystick();
+    }
+    public WeaponItem GetDefaultWeapon()
+    {
+        // Implement logic to get the default weapon
+        // For example, you might load it from a ScriptableObject
+        return currentWeapon;
     }
     public void EnableJoystick()
     {
@@ -129,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // Spawn a new projectile
-            GameObject projectile = Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
+            GameObject projectile = Instantiate(currentWeapon.projectilePrefab, spawnPoint.position, spawnPoint.rotation);
 
             // Get the rigidbody component of the projectile
             Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
@@ -146,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
             lastFireTime = Time.time;
 
             // Call StopFiring after a delay
-            StartCoroutine(StopFiring(currentWeapon.fireDelay));
+            StartCoroutine(StopFiring(currentWeapon.fireRate));
         }
     }
 
