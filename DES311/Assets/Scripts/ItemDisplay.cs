@@ -3,66 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static WeaponItem;
 
 public class ItemDisplay : MonoBehaviour
 {
     public PlayerMovement playerScript;
 
     [Header("Text Components")]
-    public TextMeshProUGUI projectileSpeedIncrease;
-    public TextMeshProUGUI weaponChoice;
+    public TextMeshProUGUI description;
+    public TextMeshProUGUI cooldownDecrease;
+    public TextMeshProUGUI weaponName;
 
-
-    public WeaponItem weaponItem;
-    public WeaponItem currentWeapon;
+    public WeaponItem weaponUpgrade;
+    WeaponItem currentWeapon;
 
     void Start()
     {
-        gameObject.SetActive(false);
-        playerScript.GetDefaultWeapon();
+        currentWeapon = playerScript.GetDefaultWeapon();
+        weaponName.text = weaponUpgrade.itemName;
+        description.text = weaponUpgrade.description;
     }
 
-    public void DisplayItems()
-    {
-        weaponChoice.text = weaponItem.itemName;
-        float currentWeaponSpeed = playerScript.currentWeapon.speed;
-        float projectileSpeedDifference = weaponItem.speed - currentWeaponSpeed;
-        projectileSpeedIncrease.text = "+ " + projectileSpeedDifference.ToString() + " projectile speed";
-        gameObject.SetActive(true);
-
-    }
-
-    public void HideItemSelction()
+    public void HideItemSelection()
     {
         gameObject.SetActive(false);
     }
 
     public void ChosenUpgrade(WeaponItem upgrade)
     {
-       
-        // Check if the upgrade has a prefab
-        if (upgrade.projectilePrefab == null)
-        {
-            Debug.LogWarning("Upgrade prefab is null.");
-            return;
-        }
+  // Apply modifications based on upgrade attributes to the default weapon
+    switch (upgrade.modifiedAttribute)
+    {
+        case WeaponItem.UpgradeType.FireRate:
+            playerScript.currentWeapon.baseFireRate += upgrade.fireRateIncrease;
+            break;
+        case WeaponItem.UpgradeType.Cooldown:
+            playerScript.currentWeapon.baseCooldown -= upgrade.cooldownDecrease;
+            Debug.Log(playerScript.currentWeapon.baseCooldown);
+            break;
+        case WeaponItem.UpgradeType.Speed:
+            playerScript.currentWeapon.baseSpeed += upgrade.speedIncrease;
+            Debug.Log(playerScript.currentWeapon.baseSpeed);
+            break;
+        // Add more cases for additional attributes
+    }
 
-        // Find the player object in the scene
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-
-        if (playerObject != null)
-        {
-            PlayerMovement playerMovement = playerObject.GetComponent<PlayerMovement>();
-
-            // Check if the PlayerMovement script was found
-            if (playerMovement != null)
-            {
-                // Set the current weapon of the PlayerMovement script to the chosen upgrade
-                playerMovement.currentWeapon = upgrade;
-                Debug.Log(upgrade.name);
-            }
-        }
-
-        HideItemSelction();
+    // Log the name of the applied upgrade
+    Debug.Log("Applied upgrade: " + upgrade.name);
+        HideItemSelection();
     }
 }

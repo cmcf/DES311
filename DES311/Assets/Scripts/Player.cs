@@ -7,6 +7,7 @@ using static Damage;
 public class Player : MonoBehaviour, IDamageable
 {
     public ItemDisplay itemDisplay;
+    public ItemManager itemManager;
     public PlayerMovement playerMovementScript;
 
     [Header("Stats")]
@@ -52,7 +53,9 @@ public class Player : MonoBehaviour, IDamageable
 
     void LevelUp()
     {
-        itemDisplay.DisplayItems();
+        // Pauses the game
+        Time.timeScale = 0f;
+        itemManager.DisplayItemChoice();
         // Players current level increases
         currentLevel++;
         // XP is reset

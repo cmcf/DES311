@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ItemButton : MonoBehaviour
 {
-    public WeaponItem upgrade; // Assign the upgrade to this field in the Inspector
-
+    public WeaponItem upgrade;
     public void OnUpgradeButtonClick()
     {
         ItemDisplay upgradeManager = FindObjectOfType<ItemDisplay>();
@@ -13,6 +12,8 @@ public class ItemButton : MonoBehaviour
         if (upgradeManager != null)
         {
             upgradeManager.ChosenUpgrade(upgrade);
+            // Resume the game
+            Time.timeScale = 1f;
         }
         else
         {
