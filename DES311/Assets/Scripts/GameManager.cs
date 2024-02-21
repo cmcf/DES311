@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
     public delegate void XPHandler(int amount);
     // Event is triggered when called from another script
     public event XPHandler XPEvent;
-  
+
+    public GameObject itemDisplayObject; // Reference to the game object with the ItemDisplay script
+
     void Awake()
     {
         //Check if instance already exists
@@ -27,6 +29,18 @@ public class GameManager : MonoBehaviour
 
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        // Enable the game object temporarily to call the reset function
+        itemDisplayObject.SetActive(true);
+
+        // Call the reset weapon function
+        itemDisplayObject.GetComponent<ItemDisplay>().ResetDefaultRifleUpgrades();
+
+        // Disable the game object again if needed
+        itemDisplayObject.SetActive(false);
     }
 
     public void IncreaseXP (int amount)

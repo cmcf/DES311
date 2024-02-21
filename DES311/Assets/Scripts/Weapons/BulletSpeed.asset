@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ab8061e3fed8e4b8843cf49e5c5513, type: 3}
   m_Name: BulletSpeed
   m_EditorClassIdentifier: 
+  modifiedAttribute: 2
+  baseFireRate: 1
+  baseCooldown: 1
+  baseSpeed: 20
+  fireRateIncrease: 0
+  cooldownDecrease: 0
+  speedIncrease: 20
   itemName: Bullet Speed Increase
-  description: Increases projectile speed
+  description: Increases projectile speed by 20
   icon: {fileID: 21300002, guid: fc49794cc535bef4f969645c4eb97b80, type: 3}
   projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
-  fireRate: 0.3
-  cooldown: 1
-  speed: 60

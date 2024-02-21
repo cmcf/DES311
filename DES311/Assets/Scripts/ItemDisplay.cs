@@ -35,21 +35,28 @@ public class ItemDisplay : MonoBehaviour
     switch (upgrade.modifiedAttribute)
     {
         case WeaponItem.UpgradeType.FireRate:
-            playerScript.currentWeapon.baseFireRate += upgrade.fireRateIncrease;
+            playerScript.currentWeapon.fireRate += upgrade.fireRateIncrease;
             break;
         case WeaponItem.UpgradeType.Cooldown:
-            playerScript.currentWeapon.baseCooldown -= upgrade.cooldownDecrease;
+            playerScript.currentWeapon.cooldown -= upgrade.cooldownDecrease;
             Debug.Log(playerScript.currentWeapon.baseCooldown);
             break;
         case WeaponItem.UpgradeType.Speed:
-            playerScript.currentWeapon.baseSpeed += upgrade.speedIncrease;
+            playerScript.currentWeapon.speed += upgrade.speedIncrease;
             Debug.Log(playerScript.currentWeapon.baseSpeed);
             break;
         // Add more cases for additional attributes
     }
-
-    // Log the name of the applied upgrade
-    Debug.Log("Applied upgrade: " + upgrade.name);
+        Debug.Log("Applied upgrade: " + upgrade.name);
         HideItemSelection();
     }
+
+    public void ResetDefaultRifleUpgrades()
+    {
+        // Reset default rifle upgrades to their base values
+        playerScript.currentWeapon.fireRate = playerScript.currentWeapon.baseFireRate;
+        playerScript.currentWeapon.cooldown = playerScript.currentWeapon.baseCooldown;
+        playerScript.currentWeapon.speed = playerScript.currentWeapon.baseSpeed;
+    }
+
 }

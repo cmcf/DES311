@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isFiring = true;
 
-        if (Time.time - lastFireTime >= currentWeapon.baseCooldown)
+        if (Time.time - lastFireTime >= currentWeapon.cooldown)
         {
             if (projectilePrefab == null || spawnPoint == null)
             {
@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
             if (projectileRb != null)
             {
                 // Set the velocity of the projectile based on the world forward direction
-                projectileRb.velocity = projectile.transform.forward * currentWeapon.baseSpeed;
+                projectileRb.velocity = projectile.transform.forward * currentWeapon.speed;
 
             }
 
@@ -158,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
             lastFireTime = Time.time;
 
             // Call StopFiring after a delay
-            StartCoroutine(StopFiring(currentWeapon.baseFireRate));
+            StartCoroutine(StopFiring(currentWeapon.fireRate));
         }
     }
 
@@ -171,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
     bool CanFire()
     {
         // Check if enough time has passed since the last firing
-        return Time.time - lastFireTime >= currentWeapon.baseCooldown;
+        return Time.time - lastFireTime >= currentWeapon.cooldown;
     }
 
 }
