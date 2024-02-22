@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BulletSpeed
   m_EditorClassIdentifier: 
   itemName: Bullet Speed Increase
-  description: Increases projectile speed by 20
+  description: Increases projectile speed by 10
   icon: {fileID: 21300002, guid: fc49794cc535bef4f969645c4eb97b80, type: 3}
   projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
@@ -23,6 +23,6 @@ MonoBehaviour:
   cooldown: 0
   speed: 0
   cooldownDecrease: 0
-  speedIncrease: 20
+  speedIncrease: 10
   minCooldown: 0.2
   maxSpeed: 95

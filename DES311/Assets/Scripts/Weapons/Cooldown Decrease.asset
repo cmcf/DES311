@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cooldown Decrease
   m_EditorClassIdentifier: 
   itemName: Cooldown Decrease
-  description: Decreases Cooldown by 0.2
+  description: Decreases Cooldown by 0.1
   icon: {fileID: 0}
   projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
@@ -22,7 +22,7 @@ MonoBehaviour:
   baseSpeed: 20
   cooldown: 0
   speed: 0
-  cooldownDecrease: 0.2
+  cooldownDecrease: 0.1
   speedIncrease: 0
   minCooldown: 0.2
   maxSpeed: 95

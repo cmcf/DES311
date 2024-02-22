@@ -42,7 +42,6 @@ public class ItemDisplay : MonoBehaviour
             currentWeapon.speed += upgrade.speedIncrease;
             Debug.Log(playerScript.currentWeapon.baseSpeed);
             break;
-        // Add more cases for additional attributes
     }
         Debug.Log("Applied upgrade: " + upgrade.name);
         HideItemSelection();
