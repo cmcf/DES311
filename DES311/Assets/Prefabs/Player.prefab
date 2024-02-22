@@ -73,16 +73,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699ef00f835effc4985aaec01eb59e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 11400000, guid: 7330dc1902b5ede4f8360ff3f39f8623, type: 2}
   movementJoystick: {fileID: 0}
   aimJoystick: {fileID: 0}
   inputCanvas: {fileID: 0}
   controller: {fileID: 7543318854598395680}
-  projectilePrefab: {fileID: 848651948933118654, guid: 6a92e83a13d618d44b6619d00a023de3,
+  projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
-  spawnPoint: {fileID: 0}
-  projectileSpeed: 50
-  firingCooldown: 1
-  moveSpeed: 4
+  spawnPoint: {fileID: 8930375505085652025}
+  isAiming: 0
+  isFiring: 0
   rotationSpeed: 8
 --- !u!143 &7543318854598395680
 CharacterController:
@@ -122,10 +122,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff34e7e80b16b0d409381d1e9354347c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
+  itemDisplay: {fileID: 0}
+  itemManager: {fileID: 0}
+  playerMovementScript: {fileID: 2031717858816543538}
   currentXP: 0
-  requiredXP: 250
-  requiredXPIncreaseRate: 200
+  requiredXP: 60
+  requiredXPIncreaseRate: 60
   currentLevel: 1
   isDead: 0
 --- !u!95 &3591363647149444670
@@ -162,11 +164,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8579df33071551b42a1b849c8110484e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
+  weaponPrefabs:
   - {fileID: -6272749043881159947, guid: 0d440a5244cf57443a2d50c0abdc061c, type: 3}
   weaponSlots:
   - {fileID: 6655903804422065369}
-  defaultSlot: {fileID: 4257285073067388691}
+  defaultSlot: {fileID: 6655903804422065369}
+--- !u!1 &8068929511044211159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8930375505085652025}
+  m_Layer: 0
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8930375505085652025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8068929511044211159}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.033, y: 0.148, z: 0.77}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6655903804422065369}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8846767643569422548
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +228,8 @@ Transform:
   m_LocalPosition: {x: 0.0799, y: 0.0625, z: 0.1197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8930375505085652025}
   m_Father: {fileID: 4257285073067388691}
   m_LocalEulerAnglesHint: {x: -169.589, y: -92.578, z: 81.549}
 --- !u!1001 &4257285073067783167

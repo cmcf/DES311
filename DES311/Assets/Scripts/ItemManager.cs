@@ -24,6 +24,7 @@ public class ItemManager : MonoBehaviour
         bool cooldownMaxed = playerScript.currentWeapon.cooldown <= playerScript.currentWeapon.minCooldown;
         bool speedMaxed = playerScript.currentWeapon.speed >= playerScript.currentWeapon.maxSpeed;
         bool moveSpeedMaxed = playerScript.currentWeapon.moveSpeed >= playerScript.currentWeapon.maxMoveSpeed;
+        bool healthMaxed = playerScript.currentWeapon.healthMaxValue >= playerScript.currentWeapon.healthUpgradeMax;
 
         // Deactivate all item cards
         foreach (var card in itemCards)
@@ -53,6 +54,10 @@ public class ItemManager : MonoBehaviour
         if (!moveSpeedMaxed)
         {
             availableTags.Add("MoveSpeed");
+        }
+        if (!healthMaxed)
+        {
+            availableTags.Add("Health");
         }
 
         // Activate a random card from the available tags
