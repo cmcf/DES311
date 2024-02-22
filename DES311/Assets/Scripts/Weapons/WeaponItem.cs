@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[CreateAssetMenu(fileName = "New Weapon Upgrade", menuName = "Weapon Item")]
+[CreateAssetMenu(fileName = "New Upgrade", menuName = "Upgrade Item")]
 public class WeaponItem : ScriptableObject
 {
     public enum UpgradeType
@@ -13,6 +13,8 @@ public class WeaponItem : ScriptableObject
         Speed,
         Bullet,
         Default,
+        Health,
+        MoveSpeed,
     }
 
     [Header("Details")]
@@ -27,17 +29,21 @@ public class WeaponItem : ScriptableObject
     [Header("Default Values")]
     public float baseCooldown = 1f;
     public float baseSpeed = 20f;
+    public float baseMoveSpeed = 3.5f;
 
     [Header("Current Values")]
     public float cooldown;
     public float speed;
+    public float moveSpeed;
 
     [Header("Upgrade Values")]
     public float cooldownDecrease;
     public float speedIncrease;
+    public float movementSpeedIncrease;
 
     [Header("Max Upgrade Values")]
     public float minCooldown = 0.2f;
     public float maxSpeed = 95f;
+    public float maxMoveSpeed = 8.5f;
 
 }

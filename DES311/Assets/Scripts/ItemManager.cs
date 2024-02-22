@@ -23,6 +23,7 @@ public class ItemManager : MonoBehaviour
         // Check if the current weapon has reached the maximum upgrade for each attribute
         bool cooldownMaxed = playerScript.currentWeapon.cooldown <= playerScript.currentWeapon.minCooldown;
         bool speedMaxed = playerScript.currentWeapon.speed >= playerScript.currentWeapon.maxSpeed;
+        bool moveSpeedMaxed = playerScript.currentWeapon.moveSpeed >= playerScript.currentWeapon.maxMoveSpeed;
 
         // Deactivate all item cards
         foreach (var card in itemCards)
@@ -31,43 +32,39 @@ public class ItemManager : MonoBehaviour
         }
 
         // If both cooldown and speed are maxed, resume the game
-        if (speedMaxed && cooldownMaxed)
+        if (speedMaxed && cooldownMaxed && moveSpeedMaxed)
         {
             Time.timeScale = 1f;
             return;
         }
 
-        // If not, activate the corresponding card
-        if (!cooldownMaxed && !speedMaxed)
+        // Activate the corresponding card based on the attribute that is not maxed
+        if (!moveSpeedMaxed)
         {
-            // Choose a random index
-            int randomIndex = Random.Range(0, itemCards.Length);
+            // Activate the cooldown card
+            ActivateCardWithTag("MoveSpeed");
+        }
+        else if (!speedMaxed)
+        {
+            // Activate the speed card
+            ActivateCardWithTag("Speed");
+        }
+        else if (!cooldownMaxed)
+        {
+            // Activate the move speed card
+            ActivateCardWithTag("Cooldown");
+        }
+    }
 
-            // Activate the chosen item card
-            itemCards[randomIndex].SetActive(true);
-        }
-        else if (cooldownMaxed && !speedMaxed)
+    void ActivateCardWithTag(string tag)
+    {
+        // Activate the card with the specified tag
+        foreach (var card in itemCards)
         {
-            // Activate the speed card if cooldown is maxed
-            foreach (var card in itemCards)
+            if (card.CompareTag(tag))
             {
-                if (card.CompareTag("Speed"))
-                {
-                    card.SetActive(true);
-                    break;
-                }
-            }
-        }
-        else if (!cooldownMaxed && speedMaxed)
-        {
-            // Activate the cooldown card if speed is maxed
-            foreach (var card in itemCards)
-            {
-                if (card.CompareTag("Cooldown"))
-                {
-                    card.SetActive(true);
-                    break;
-                }
+                card.SetActive(true);
+                return;
             }
         }
     }

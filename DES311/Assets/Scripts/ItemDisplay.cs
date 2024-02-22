@@ -42,7 +42,12 @@ public class ItemDisplay : MonoBehaviour
             currentWeapon.speed += upgrade.speedIncrease;
             Debug.Log(playerScript.currentWeapon.baseSpeed);
             break;
-    }
+         case WeaponItem.UpgradeType.MoveSpeed:
+              currentWeapon.moveSpeed += upgrade.movementSpeedIncrease;
+              Debug.Log(playerScript.currentWeapon.baseMoveSpeed);
+              break;
+
+        }
         Debug.Log("Applied upgrade: " + upgrade.name);
         HideItemSelection();
     }
@@ -52,6 +57,7 @@ public class ItemDisplay : MonoBehaviour
         // Reset default rifle upgrades to their base values
         playerScript.currentWeapon.cooldown = playerScript.currentWeapon.baseCooldown;
         playerScript.currentWeapon.speed = playerScript.currentWeapon.baseSpeed;
+        playerScript.currentWeapon.moveSpeed = playerScript.currentWeapon.baseMoveSpeed;
     }
 
 }

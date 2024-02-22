@@ -23,9 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isAiming;
     public bool isFiring = false;
-    
+
     [Header("Movement Settings")]
-    [SerializeField] float moveSpeed;
     [SerializeField] float rotationSpeed;
 
     
@@ -69,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
             var movementDirection = new Vector3(movementJoystick.Direction.x, 0f, movementJoystick.Direction.y);
             
             // Moves the character using the SimpleMove method with speed
-            controller.Move(movementDirection * Time.deltaTime * moveSpeed);
+            controller.Move(movementDirection * Time.deltaTime * currentWeapon.moveSpeed);
 
             // Calculate the forward and right speed based on movement direction and player position
             float forward = Vector3.Dot(movementDirection, transform.forward);
