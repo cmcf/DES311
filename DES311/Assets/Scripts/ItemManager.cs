@@ -31,28 +31,35 @@ public class ItemManager : MonoBehaviour
             card.SetActive(false);
         }
 
-        // If both cooldown and speed are maxed, resume the game
-        if (speedMaxed && cooldownMaxed && moveSpeedMaxed)
+        // If all upgrades are maxed, resume the game
+        if (cooldownMaxed && speedMaxed && moveSpeedMaxed)
         {
             Time.timeScale = 1f;
             return;
         }
 
-        // Activate the corresponding card based on the attribute that is not maxed
+        // List to store the available cards
+        List<string> availableTags = new List<string>();
+
+        // Add tags for attributes that are not maxed out
+        if (!cooldownMaxed)
+        {
+            availableTags.Add("Cooldown");
+        }
+        if (!speedMaxed)
+        {
+            availableTags.Add("Speed");
+        }
         if (!moveSpeedMaxed)
         {
-            // Activate the cooldown card
-            ActivateCardWithTag("MoveSpeed");
+            availableTags.Add("MoveSpeed");
         }
-        else if (!speedMaxed)
+
+        // Activate a random card from the available tags
+        if (availableTags.Count > 0)
         {
-            // Activate the speed card
-            ActivateCardWithTag("Speed");
-        }
-        else if (!cooldownMaxed)
-        {
-            // Activate the move speed card
-            ActivateCardWithTag("Cooldown");
+            int randomIndex = Random.Range(0, availableTags.Count);
+            ActivateCardWithTag(availableTags[randomIndex]);
         }
     }
 
