@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class Rifle : Weapon
 {
-   PlayerMovement playerScript;
-   [SerializeField] GameObject muzzle;
+    PlayerMovement playerScript;
+    public GameObject muzzle;
+
+    bool playMuzzle;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -30,4 +34,5 @@ public class Rifle : Weapon
             }
         }
     }
+
 }
