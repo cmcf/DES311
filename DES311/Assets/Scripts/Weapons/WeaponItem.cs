@@ -15,28 +15,28 @@ public class WeaponItem : ScriptableObject
         Default,
     }
 
-    public UpgradeType modifiedAttribute;
-
-    // Default values for starting weapon
-    public float baseFireRate = 0.3f;
-    public float baseCooldown = 1f;
-    public float baseSpeed = 20f;
-
-    //Current values for weapon that can be modified
-    public float fireRate;
-    public float cooldown;
-    public float speed;
-
-    // Upgrade amounts for each attribute
-    public float fireRateIncrease;
-    public float cooldownDecrease;
-    public float speedIncrease;
-
-    // Upgrade details
+    [Header("Details")]
     public string itemName;
     public string description;
 
     public Sprite icon;
     public GameObject projectilePrefab;
+
+    public UpgradeType modifiedAttribute;
+
+    [Header("Default Values")]
+    public float baseFireRate = 0.3f;
+    public float baseCooldown = 1f;
+    public float baseSpeed = 20f;
+
+    [Header("Current Values")]
+    public float fireRate;
+    public float cooldown;
+    public float speed;
+
+    [Header("Upgrade Values")]
+    public float fireRateIncrease;
+    public float cooldownDecrease;
+    public float speedIncrease;
 
 }
