@@ -11,6 +11,7 @@ public class WeaponItem : ScriptableObject
     {
         Cooldown,
         Speed,
+        Bullet,
         Default,
     }
 

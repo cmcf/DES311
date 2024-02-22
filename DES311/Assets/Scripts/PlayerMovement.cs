@@ -35,18 +35,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        // Initialize currentWeapon if necessary
         if (currentWeapon == null)
         {
-            // For example, you can set it to a default weapon
             currentWeapon = GetDefaultWeapon();
         }
+
         EnableJoystick();
     }
     public WeaponItem GetDefaultWeapon()
     {
-        // Implement logic to get the default weapon
-        // For example, you might load it from a ScriptableObject
         return currentWeapon;
     }
     public void EnableJoystick()
@@ -166,7 +163,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator StopFiring(float delay)
     {
-        yield return new WaitForSeconds(lastFireTime);
+        yield return new WaitForSeconds(delay);
         isFiring = false;
     }
 
