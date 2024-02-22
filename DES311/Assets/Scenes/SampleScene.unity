@@ -3073,6 +3073,11 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 2105267925}
+    - target: {fileID: 1299060605005795708, guid: 4b81c9bf3ee1dc84e8654c8bbbd3868e,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3238210739591880057, guid: 4b81c9bf3ee1dc84e8654c8bbbd3868e,
         type: 3}
       propertyPath: m_Pivot.x

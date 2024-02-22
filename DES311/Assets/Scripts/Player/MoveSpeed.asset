@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ab8061e3fed8e4b8843cf49e5c5513, type: 3}
   m_Name: MoveSpeed
   m_EditorClassIdentifier: 
-  itemName: Increase Movement Speed
+  itemName: Player Speed
   description: Increase movement speed by 1
   icon: {fileID: 0}
   projectilePrefab: {fileID: 0}
