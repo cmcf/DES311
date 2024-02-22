@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
@@ -8,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 {
     Animator animator;
     public WeaponItem currentWeapon;
+
+    Rifle muzzle;
 
     [Header("Joystick")]
     public VariableJoystick movementJoystick;
@@ -33,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        muzzle = FindObjectOfType<Rifle>();
         // Initialize currentWeapon if necessary
         if (currentWeapon == null)
         {
@@ -116,8 +121,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        isAiming = true; // Trigger firing animation
-
+        isAiming = true;
         // Calculates and rotates the player character towards the target direction 
         var targetDirection = Vector3.RotateTowards(controller.transform.forward, rotationDirection, rotationSpeed * Time.deltaTime, 0f);
         controller.transform.rotation = Quaternion.LookRotation(targetDirection);
@@ -125,14 +129,15 @@ public class PlayerMovement : MonoBehaviour
         // Fire projectile when the aim joystick is pressed and cooldown has passed
         if (aimJoystick.Direction.magnitude > 0.01f && CanFire())
         {
+            isFiring = true;
             FireProjectile();
         }
+      
     }
 
     void FireProjectile()
     {
-        isFiring = true;
-
+        
         if (Time.time - lastFireTime >= currentWeapon.cooldown)
         {
             if (projectilePrefab == null || spawnPoint == null)
@@ -156,16 +161,16 @@ public class PlayerMovement : MonoBehaviour
 
             // Update the last fire time
             lastFireTime = Time.time;
-
+            
             // Call StopFiring after a delay
-            StartCoroutine(StopFiring(currentWeapon.fireRate));
+            StartCoroutine(StopFiring(currentWeapon.cooldown));
         }
     }
 
     IEnumerator StopFiring(float delay)
     {
-        yield return new WaitForSeconds(delay);
-        isFiring = false;   
+        yield return new WaitForSeconds(lastFireTime);
+        isFiring = false;
     }
 
     bool CanFire()
