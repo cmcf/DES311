@@ -1192,9 +1192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d907d9f8f3a7646a19af209e1c251c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemCards:
-  - {fileID: 22799494}
-  - {fileID: 2130062845}
+  weaponCards: []
+  playerScript: {fileID: 2105267925}
 --- !u!224 &520646952 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3881087803549984436, guid: ec536a7718376554185e4a856d5ae230,
@@ -3003,12 +3002,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699ef00f835effc4985aaec01eb59e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2130062845 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8345487478687004123, guid: 411ff9756f1a1ab48a175723187c1de5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1592345622}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2130062846 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5857229225137071144, guid: 411ff9756f1a1ab48a175723187c1de5,
@@ -3021,7 +3014,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1592345622}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130062845}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1d49f9d6f89467469e15f46604adab0, type: 3}
@@ -3101,7 +3094,7 @@ PrefabInstance:
     - target: {fileID: 4576724743769377918, guid: 9b49051379261b843ba31c5c5d3a4fd3,
         type: 3}
       propertyPath: requiredXP
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4576724743769377918, guid: 9b49051379261b843ba31c5c5d3a4fd3,
         type: 3}

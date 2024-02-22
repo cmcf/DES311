@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Bullet
   - RifleSlot
+  - Cooldown
+  - Speed
   layers:
   - Default
   - TransparentFX

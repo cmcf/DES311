@@ -24,6 +24,9 @@ MonoBehaviour:
   speedIncrease: 0
   itemName: Rifle
   description: Starting weapon
+  minFireRate: 0.2
+  minCooldown: 0.4
+  maxSpeed: 40
   icon: {fileID: 0}
   projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}

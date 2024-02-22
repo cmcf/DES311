@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
         // Disable the game object again if needed
         itemDisplayObject.SetActive(false);
     }
-
     public void IncreaseXP (int amount)
     {
         // If not null, increase XP by amoung gained

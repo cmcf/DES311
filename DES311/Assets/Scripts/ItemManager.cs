@@ -4,29 +4,55 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    public GameObject[] itemCards;
+    public GameObject[] weaponCards;
+    public PlayerMovement playerScript;
+
+    private void Start()
+    {
+        playerScript = FindObjectOfType<PlayerMovement>();
+    }
     public void DisplayItemChoice()
     {
         // Ensure there are items in the array
-        if (itemCards.Length == 0)
+        if (weaponCards.Length == 0)
         {
             Debug.LogWarning("No item cards assigned.");
             return;
         }
 
-        // Choose a random index
-        int randomIndex = Random.Range(0, itemCards.Length);
+        // Check if the current weapon has reached the maximum upgrade for each attribute
+        bool cooldownMaxed = playerScript.currentWeapon.cooldown <= playerScript.currentWeapon.minCooldown;
+        bool speedMaxed = playerScript.currentWeapon.speed >= playerScript.currentWeapon.maxSpeed;
 
-        // Activate the chosen item card
-        itemCards[randomIndex].SetActive(true);
+        // Remove cards from the array if the corresponding attribute is maxed out
+        List<GameObject> remainingCards = new List<GameObject>(weaponCards);
 
-        // Deactivate all other item cards
-        for (int i = 0; i < itemCards.Length; i++)
+        if (cooldownMaxed)
         {
-            if (i != randomIndex)
+            remainingCards.RemoveAll(card => card.CompareTag("Cooldown"));
+        }
+        if (speedMaxed)
+        {
+            remainingCards.RemoveAll(card => card.CompareTag("Speed"));
+        }
+
+        // Choose a random index from the remaining cards
+        if (remainingCards.Count > 0)
+        {
+            int randomIndex = Random.Range(0, remainingCards.Count);
+
+            // Deactivate all item cards
+            foreach (var card in weaponCards)
             {
-                itemCards[i].SetActive(false);
+                card.SetActive(false);
             }
+
+            // Activate the chosen item card
+            remainingCards[randomIndex].SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("No valid item cards left.");
         }
     }
 }
