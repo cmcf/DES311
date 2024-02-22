@@ -11,6 +11,7 @@ public class WeaponItem : ScriptableObject
     {
         Cooldown,
         Speed,
+        Bullet,
         Default,
     }
 
@@ -34,5 +35,9 @@ public class WeaponItem : ScriptableObject
     [Header("Upgrade Values")]
     public float cooldownDecrease;
     public float speedIncrease;
+
+    [Header("Max Upgrade Values")]
+    public float minCooldown = 0.2f;
+    public float maxSpeed = 95f;
 
 }
