@@ -9,7 +9,6 @@ public class WeaponItem : ScriptableObject
 {
     public enum UpgradeType
     {
-        FireRate,
         Cooldown,
         Speed,
         Default,
@@ -25,17 +24,14 @@ public class WeaponItem : ScriptableObject
     public UpgradeType modifiedAttribute;
 
     [Header("Default Values")]
-    public float baseFireRate = 0.3f;
     public float baseCooldown = 1f;
     public float baseSpeed = 20f;
 
     [Header("Current Values")]
-    public float fireRate;
     public float cooldown;
     public float speed;
 
     [Header("Upgrade Values")]
-    public float fireRateIncrease;
     public float cooldownDecrease;
     public float speedIncrease;
 

@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     public WeaponItem currentWeapon;
 
-    Rifle muzzle;
-
     [Header("Joystick")]
     public VariableJoystick movementJoystick;
     public VariableJoystick aimJoystick;
@@ -37,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        muzzle = FindObjectOfType<Rifle>();
         // Initialize currentWeapon if necessary
         if (currentWeapon == null)
         {
