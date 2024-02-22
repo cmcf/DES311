@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 7789180724541004422}
   m_Layer: 5
   m_Name: Speed Card
-  m_TagString: Untagged
+  m_TagString: Speed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -629,10 +629,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 0}
-  projectileSpeedIncrease: {fileID: 8771671971901274979}
+  description: {fileID: 0}
   cooldownDecrease: {fileID: 9000004490625200445}
   weaponName: {fileID: 1538483024026987562}
-  weaponItem: {fileID: 11400000, guid: 8074004727335fe40b292f3865f83bc3, type: 2}
+  weaponUpgrade: {fileID: 0}
 --- !u!114 &7789180724541004422
 MonoBehaviour:
   m_ObjectHideFlags: 0

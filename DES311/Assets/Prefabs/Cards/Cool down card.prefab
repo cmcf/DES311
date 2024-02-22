@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: -6471992876063719197}
   m_Layer: 5
   m_Name: Cool down card
-  m_TagString: Untagged
+  m_TagString: Cooldown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,10 +228,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 0}
-  projectileSpeedIncrease: {fileID: 8482087538409509147}
+  description: {fileID: 0}
   cooldownDecrease: {fileID: 1489177050454635661}
   weaponName: {fileID: 3940976593791883916}
-  weaponItem: {fileID: 11400000, guid: f9d558a7549302d41a8c1d2f54cae60c, type: 2}
+  weaponUpgrade: {fileID: 0}
 --- !u!114 &-6471992876063719197
 MonoBehaviour:
   m_ObjectHideFlags: 0
