@@ -30,20 +30,26 @@ public class WeaponItem : ScriptableObject
     public float baseCooldown = 1f;
     public float baseSpeed = 20f;
     public float baseMoveSpeed = 3.5f;
+    public float baseHealth = 50f; 
 
     [Header("Current Values")]
     public float cooldown;
     public float speed;
     public float moveSpeed;
+    public float health;
+    public float healthMaxValue = 50f;
 
     [Header("Upgrade Values")]
     public float cooldownDecrease;
     public float speedIncrease;
     public float movementSpeedIncrease;
+    public float healthIncrease;
 
     [Header("Max Upgrade Values")]
     public float minCooldown = 0.2f;
     public float maxSpeed = 95f;
     public float maxMoveSpeed = 8.5f;
+    public float healthUpgradeMax = 90f;
+    
 
 }

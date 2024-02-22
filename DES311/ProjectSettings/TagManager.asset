@@ -10,6 +10,7 @@ TagManager:
   - Cooldown
   - Speed
   - MoveSpeed
+  - Health
   layers:
   - Default
   - TransparentFX

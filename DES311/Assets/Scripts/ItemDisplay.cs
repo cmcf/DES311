@@ -8,7 +8,7 @@ using static WeaponItem;
 public class ItemDisplay : MonoBehaviour
 {
     public PlayerMovement playerScript;
-
+    public Player playerHealth;
     [Header("Text Components")]
     public TextMeshProUGUI description;
     public TextMeshProUGUI cooldownDecrease;
@@ -46,6 +46,11 @@ public class ItemDisplay : MonoBehaviour
               currentWeapon.moveSpeed += upgrade.movementSpeedIncrease;
               Debug.Log(playerScript.currentWeapon.baseMoveSpeed);
               break;
+            case WeaponItem.UpgradeType.Health:
+                currentWeapon.healthMaxValue += upgrade.healthIncrease;
+                currentWeapon.health += upgrade.healthIncrease;
+                break;
+             
 
         }
         Debug.Log("Applied upgrade: " + upgrade.name);
@@ -58,6 +63,7 @@ public class ItemDisplay : MonoBehaviour
         playerScript.currentWeapon.cooldown = playerScript.currentWeapon.baseCooldown;
         playerScript.currentWeapon.speed = playerScript.currentWeapon.baseSpeed;
         playerScript.currentWeapon.moveSpeed = playerScript.currentWeapon.baseMoveSpeed;
+        playerScript.currentWeapon.health = playerScript.currentWeapon.baseHealth;
     }
 
 }

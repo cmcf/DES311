@@ -11,20 +11,17 @@ public class Player : MonoBehaviour, IDamageable
     public PlayerMovement playerMovementScript;
 
     [Header("Stats")]
-    [SerializeField] float maxHealth = 60f;
-    float currentHealth;
     public int currentXP;
     public int requiredXP;
     [SerializeField] int requiredXPIncreaseRate = 150;
     [SerializeField] int currentLevel = 1;
-    
 
     public bool isDead = false;
     public float Health { get; set; }
 
     void Start()
     {
-        currentHealth = maxHealth;
+        playerMovementScript = GetComponent<PlayerMovement>();
     }
 
     void OnEnable()
@@ -67,8 +64,8 @@ public class Player : MonoBehaviour, IDamageable
     public void Damage(float damage)
     {
         Debug.Log("PlayerHit");
-        currentHealth -= damage;
-        if (currentHealth <= 0)
+        playerMovementScript.currentWeapon.health -= damage;
+        if (playerMovementScript.currentWeapon.health <= 0)
         {
             Die();
         }
