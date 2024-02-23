@@ -7,9 +7,54 @@ public class ItemManager : MonoBehaviour
     public GameObject[] itemCards;
     PlayerMovement playerScript;
 
+    private static System.Random rng = new System.Random();
+    private Dictionary<GameObject, Vector3> initialCardPositions = new Dictionary<GameObject, Vector3>();
+
+    [SerializeField] float cardOffset = 500f;
+
     private void Start()
     {
         playerScript = FindObjectOfType<PlayerMovement>();
+    }
+
+    void Shuffle(List<string> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            string value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
+
+    public void HideItemSelection()
+    {
+        // Check if itemCards array is not null
+        if (itemCards != null)
+        {
+            // Iterate over all item cards and hide each of them if they are not null
+            foreach (var card in itemCards)
+            {
+                if (card != null)
+                {
+                    card.SetActive(false);
+                }
+                else
+                {
+                    Debug.LogWarning("Null item card found in itemCards array.");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("itemCards array is null.");
+        }
+
+        // Hide the entire item selection interface
+        gameObject.SetActive(false);
     }
     public void DisplayItemChoice()
     {
@@ -19,6 +64,8 @@ public class ItemManager : MonoBehaviour
             Debug.LogWarning("No item cards assigned.");
             return;
         }
+
+        ResetCardPositions();
 
         // Check if the current weapon has reached the maximum upgrade for each attribute
         bool cooldownMaxed = playerScript.currentWeapon.cooldown <= playerScript.currentWeapon.minCooldown;
@@ -33,13 +80,13 @@ public class ItemManager : MonoBehaviour
         }
 
         // If all upgrades are maxed, resume the game
-        if (cooldownMaxed && speedMaxed && moveSpeedMaxed)
+        if (cooldownMaxed && speedMaxed && moveSpeedMaxed && healthMaxed)
         {
             Time.timeScale = 1f;
             return;
         }
 
-        // List to store the available cards
+        // List to store the available tags
         List<string> availableTags = new List<string>();
 
         // Add tags for attributes that are not maxed out
@@ -60,24 +107,46 @@ public class ItemManager : MonoBehaviour
             availableTags.Add("Health");
         }
 
-        // Activate a random card from the available tags
-        if (availableTags.Count > 0)
+        // Shuffle the available tags to randomize the selection
+        Shuffle(availableTags);
+
+        // Activate two random cards from the available tags
+        int numCardsToDisplay = Mathf.Min(2, availableTags.Count);
+        for (int i = 0; i < numCardsToDisplay; i++)
         {
-            int randomIndex = Random.Range(0, availableTags.Count);
-            ActivateCardWithTag(availableTags[randomIndex]);
+            ActivateCardWithTag(availableTags[i], i);
         }
     }
 
-    void ActivateCardWithTag(string tag)
+    void ActivateCardWithTag(string tag, int index)
     {
         // Activate the card with the specified tag
         foreach (var card in itemCards)
         {
             if (card.CompareTag(tag))
             {
+                // Stores the initial position of the card if it's not already stored
+                if (!initialCardPositions.ContainsKey(card))
+                {
+                    initialCardPositions.Add(card, card.transform.localPosition);
+                }
+
+                // Calculates the horizontal position for the card based on the index
+                float xOffset = index * cardOffset;
+                card.transform.localPosition = new Vector3(initialCardPositions[card].x + xOffset, initialCardPositions[card].y, initialCardPositions[card].z);
+
                 card.SetActive(true);
                 return;
             }
+        }
+    }
+
+    void ResetCardPositions()
+    {
+        // Resets the positions of all cards to their initial positions
+        foreach (var kvp in initialCardPositions)
+        {
+            kvp.Key.transform.localPosition = kvp.Value;
         }
     }
 }
