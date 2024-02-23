@@ -24,11 +24,6 @@ public class ItemDisplay : MonoBehaviour
         description.text = weaponUpgrade.description;
     }
 
-    public void HideItemSelection()
-    {
-        gameObject.SetActive(false);
-    }
-
     public void ChosenUpgrade(WeaponItem upgrade)
     {
   // Apply modifications based on upgrade attributes to the default weapon
@@ -54,7 +49,6 @@ public class ItemDisplay : MonoBehaviour
 
         }
         Debug.Log("Applied upgrade: " + upgrade.name);
-        HideItemSelection();
     }
 
     public void ResetDefaultRifleUpgrades()
@@ -63,7 +57,7 @@ public class ItemDisplay : MonoBehaviour
         playerScript.currentWeapon.cooldown = playerScript.currentWeapon.baseCooldown;
         playerScript.currentWeapon.speed = playerScript.currentWeapon.baseSpeed;
         playerScript.currentWeapon.moveSpeed = playerScript.currentWeapon.baseMoveSpeed;
-        playerScript.currentWeapon.health = playerScript.currentWeapon.baseHealth;
+        playerScript.currentWeapon.healthMaxValue = playerScript.currentWeapon.baseHealth;
     }
 
 }

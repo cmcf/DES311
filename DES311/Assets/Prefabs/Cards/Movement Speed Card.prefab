@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 0}
+  playerHealth: {fileID: 0}
   description: {fileID: 7152674830160664565}
   cooldownDecrease: {fileID: 4303552555939554149}
   weaponName: {fileID: 1299060605005795708}
@@ -608,7 +609,7 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
