@@ -19,6 +19,7 @@ public class ItemDisplay : MonoBehaviour
 
     void Start()
     {
+        if (currentWeapon ==null) { return; }
         currentWeapon = playerScript.GetDefaultWeapon();
         weaponName.text = weaponUpgrade.itemName;
         description.text = weaponUpgrade.description;
@@ -53,6 +54,7 @@ public class ItemDisplay : MonoBehaviour
 
     public void ResetDefaultRifleUpgrades()
     {
+        if (currentWeapon == null) { return; }
         // Reset default rifle upgrades to their base values
         playerScript.currentWeapon.cooldown = playerScript.currentWeapon.baseCooldown;
         playerScript.currentWeapon.speed = playerScript.currentWeapon.baseSpeed;

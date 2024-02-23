@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgrade: {fileID: 11400000, guid: f9d558a7549302d41a8c1d2f54cae60c, type: 2}
+  itemManager: {fileID: 0}
 --- !u!1 &4474525419364117240
 GameObject:
   m_ObjectHideFlags: 0

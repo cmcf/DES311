@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 60940f42eec475742b3d65b92737b64c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Prefab/woc_pre_bui_pilar_base_01.prefab
+  uploadId: 357048

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 27232919134b8b1488ecb4951fcf3e2f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Materials/woc_bui_door_01.mat
+  uploadId: 357048

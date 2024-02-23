@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8c76e7fa83b2e664a9c7f84dad57bb10
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Prefab/woc_obj_item_part_020.prefab
+  uploadId: 357048

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a22f421ad2e8f34478920a2e277cee1c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Prefab/woc_pre_bui_wallbrick_01.prefab
+  uploadId: 357048

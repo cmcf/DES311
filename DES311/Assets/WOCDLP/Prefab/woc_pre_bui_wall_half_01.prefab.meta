@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fa4a8ec25e13e754c9766ca3ee7d25c5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Prefab/woc_pre_bui_wall_half_01.prefab
+  uploadId: 357048

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b73f5e25e8ef3e84880d1da9bf6e0fe4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Prefab/woc_pre_bui_bigstair_03.prefab
+  uploadId: 357048

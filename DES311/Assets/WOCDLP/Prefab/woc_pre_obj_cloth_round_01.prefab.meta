@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 70039d2fbdabbda40a583aed1e48cc2e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Prefab/woc_pre_obj_cloth_round_01.prefab
+  uploadId: 357048

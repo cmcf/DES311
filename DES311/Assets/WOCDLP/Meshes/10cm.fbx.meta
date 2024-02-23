@@ -1,0 +1,161 @@
+fileFormatVersion: 2
+guid: 33e6d773f6308284e81a5faa06b44882
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: big_stair4
+    100004: door_01
+    100006: pPlane11
+    100008: pPlane12
+    100010: pPlane13
+    100012: pPlane14
+    100014: pPlane15
+    100016: pPlane16
+    100018: pPlane17
+    100020: pPlane18
+    100022: pPlane19
+    100024: pPlane5
+    400000: //RootNode
+    400002: big_stair4
+    400004: door_01
+    400006: pPlane11
+    400008: pPlane12
+    400010: pPlane13
+    400012: pPlane14
+    400014: pPlane15
+    400016: pPlane16
+    400018: pPlane17
+    400020: pPlane18
+    400022: pPlane19
+    400024: pPlane5
+    2100000: lambert2
+    2100002: lambert1
+    2300000: big_stair4
+    2300002: door_01
+    2300004: pPlane11
+    2300006: pPlane12
+    2300008: pPlane13
+    2300010: pPlane14
+    2300012: pPlane15
+    2300014: pPlane16
+    2300016: pPlane17
+    2300018: pPlane18
+    2300020: pPlane19
+    2300022: pPlane5
+    2300024: //RootNode
+    3300000: big_stair4
+    3300002: door_01
+    3300004: pPlane11
+    3300006: pPlane12
+    3300008: pPlane13
+    3300010: pPlane14
+    3300012: pPlane15
+    3300014: pPlane16
+    3300016: pPlane17
+    3300018: pPlane18
+    3300020: pPlane19
+    3300022: pPlane5
+    3300024: //RootNode
+    4300000: pPlane5
+    4300002: pPlane11
+    4300004: pPlane12
+    4300006: pPlane13
+    4300008: pPlane14
+    4300010: pPlane15
+    4300012: pPlane16
+    4300014: pPlane17
+    4300016: pPlane18
+    4300018: pPlane19
+    4300020: big_stair4
+    4300022: door_01
+    4300024: pPlane1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Meshes/10cm.fbx
+  uploadId: 357048
