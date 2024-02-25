@@ -34,11 +34,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        ResetPlayerStats();
         EnableJoystick();
     }
     public WeaponItem GetDefaultWeapon()
     {
         return currentWeapon;
+    }
+
+    void ResetPlayerStats()
+    {
+        // Reset default rifle upgrades to their base values
+        currentWeapon.cooldown = currentWeapon.baseCooldown;
+        currentWeapon.speed = currentWeapon.baseSpeed;
+        currentWeapon.moveSpeed = currentWeapon.baseMoveSpeed;
+        // Reset health
+        currentWeapon.healthMaxValue = currentWeapon.baseHealth;
+        currentWeapon.health = currentWeapon.baseHealth;
     }
     public void EnableJoystick()
     {
