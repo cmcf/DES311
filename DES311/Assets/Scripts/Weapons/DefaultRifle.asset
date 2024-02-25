@@ -20,18 +20,18 @@ MonoBehaviour:
   modifiedAttribute: 3
   baseCooldown: 1
   baseSpeed: 20
-  baseMoveSpeed: 8
+  baseMoveSpeed: 6
   baseHealth: 50
-  cooldown: 1
-  speed: 20
-  moveSpeed: 8
-  health: -50
-  healthMaxValue: 50
+  cooldown: 0.79999995
+  speed: 40
+  moveSpeed: 10
+  health: 30
+  healthMaxValue: 80
   cooldownDecrease: 0
   speedIncrease: 0
   movementSpeedIncrease: 0
   healthIncrease: 0
   minCooldown: 0.8
   maxSpeed: 40
-  maxMoveSpeed: 8.5
+  maxMoveSpeed: 10
   healthUpgradeMax: 90

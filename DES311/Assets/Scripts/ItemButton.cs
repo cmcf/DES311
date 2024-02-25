@@ -8,24 +8,46 @@ public class ItemButton : MonoBehaviour
     public ItemManager itemManager;
 
     ItemDisplay upgradeManager;
+
+    bool hasSelectedCard;
     void Start()
     { 
         upgradeManager = FindObjectOfType<ItemDisplay>();
+        hasSelectedCard = false;
     }
     public void OnUpgradeButtonClick()
     {
-        if (upgradeManager != null)
+        if (!hasSelectedCard)
         {
-            upgradeManager.ChosenUpgrade(upgrade);
-            
-            // Resume the game
-            Time.timeScale = 1f;
-
-            if (itemManager != null)
+            if (upgradeManager != null)
             {
-                itemManager.HideItemSelection();
-            }
+                upgradeManager.ChosenUpgrade(upgrade);
 
+                // Set the flag to true to indicate that an upgrade has been chosen
+                hasSelectedCard = true;
+
+                // Log the upgrade selection
+                Debug.Log("Upgrade chosen: " + upgrade.itemName);
+
+                // Resume the game
+                Time.timeScale = 1f;
+                
+                hasSelectedCard = false;
+
+                // Hides the upgrade cards if the are present
+                if (itemManager != null)
+                {
+                    itemManager.HideItemSelection();
+                }
+               
+            }
+        }
+
+        else
+        {
+            Debug.Log("Upgrade already chosen. Cannot choose another upgrade.");
         }
     }
+
+
 }
