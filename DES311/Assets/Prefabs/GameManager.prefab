@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 284306357560807751}
   - component: {fileID: 6070059570407709162}
   - component: {fileID: 6342199357141119192}
+  - component: {fileID: 23911562370529953}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df4541177bcbe394089ab34939612ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDisplayObject: {fileID: 0}
+  itemDisplayObject: {fileID: 3124977216897480389, guid: 14c66fdf658803445831e408106908d6,
+    type: 3}
 --- !u!114 &6342199357141119192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,3 +66,21 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   cardOffset: 500
+--- !u!114 &23911562370529953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626727303725304443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d49f9d6f89467469e15f46604adab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScript: {fileID: 0}
+  playerHealth: {fileID: 0}
+  description: {fileID: 0}
+  cooldownDecrease: {fileID: 0}
+  weaponName: {fileID: 0}
+  weaponUpgrade: {fileID: 11400000, guid: 7330dc1902b5ede4f8360ff3f39f8623, type: 2}

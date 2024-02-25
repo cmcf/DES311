@@ -7,7 +7,7 @@ using static Damage;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    public Transform playerLocation;
+    Transform playerLocation;
     Player player;
     NavMeshAgent nav;
 

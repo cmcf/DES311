@@ -9,9 +9,9 @@ public class ItemDisplay : MonoBehaviour
 {
     public PlayerMovement playerScript;
     public Player playerHealth;
+
     [Header("Text Components")]
     public TextMeshProUGUI description;
-    public TextMeshProUGUI cooldownDecrease;
     public TextMeshProUGUI weaponName;
 
     public WeaponItem weaponUpgrade;
@@ -19,7 +19,6 @@ public class ItemDisplay : MonoBehaviour
 
     void Start()
     {
-        if (currentWeapon ==null) { return; }
         currentWeapon = playerScript.GetDefaultWeapon();
         weaponName.text = weaponUpgrade.itemName;
         description.text = weaponUpgrade.description;
@@ -54,12 +53,16 @@ public class ItemDisplay : MonoBehaviour
 
     public void ResetDefaultRifleUpgrades()
     {
+        
         if (currentWeapon == null) { return; }
+        Debug.Log("reset");
         // Reset default rifle upgrades to their base values
         playerScript.currentWeapon.cooldown = playerScript.currentWeapon.baseCooldown;
         playerScript.currentWeapon.speed = playerScript.currentWeapon.baseSpeed;
         playerScript.currentWeapon.moveSpeed = playerScript.currentWeapon.baseMoveSpeed;
+        // Reset health
         playerScript.currentWeapon.healthMaxValue = playerScript.currentWeapon.baseHealth;
+        playerScript.currentWeapon.health = playerScript.currentWeapon.baseHealth;
     }
 
 }

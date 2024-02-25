@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
+        Debug.Log("start");
         // Enable the game object temporarily to call the reset function
         itemDisplayObject.SetActive(true);
 

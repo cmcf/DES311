@@ -60,7 +60,7 @@ CapsuleCollider:
   m_Radius: 0.51068205
   m_Height: 1.77
   m_Direction: 1
-  m_Center: {x: -0.012516901, y: 0.81, z: -0.023199134}
+  m_Center: {x: -0.012516901, y: 2, z: -0.023199134}
 --- !u!114 &2031717858816543538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +76,8 @@ MonoBehaviour:
   currentWeapon: {fileID: 11400000, guid: 7330dc1902b5ede4f8360ff3f39f8623, type: 2}
   movementJoystick: {fileID: 0}
   aimJoystick: {fileID: 0}
-  inputCanvas: {fileID: 0}
+  inputCanvas: {fileID: 304140807713554384, guid: b8af4b4ab8e1e1443b06adc642dc6434,
+    type: 3}
   controller: {fileID: 7543318854598395680}
   projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
@@ -109,7 +110,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.56, z: 0}
+  m_Center: {x: 0, y: 1.4, z: 0}
 --- !u!114 &4576724743769377918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,9 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff34e7e80b16b0d409381d1e9354347c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDisplay: {fileID: 0}
   itemManager: {fileID: 0}
-  playerMovementScript: {fileID: 2031717858816543538}
+  playerStats: {fileID: 2031717858816543538}
   currentXP: 0
   requiredXP: 60
   requiredXPIncreaseRate: 60
@@ -250,7 +250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: a5674d01884853d4e8f2386a171e14d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: a5674d01884853d4e8f2386a171e14d9, type: 3}
       propertyPath: m_LocalPosition.z

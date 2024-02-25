@@ -6,9 +6,8 @@ using static Damage;
 
 public class Player : MonoBehaviour, IDamageable
 {
-    public ItemDisplay itemDisplay;
     public ItemManager itemManager;
-    public PlayerMovement playerMovementScript;
+    public PlayerMovement playerStats;
 
     [Header("Stats")]
     public int currentXP;
@@ -21,11 +20,7 @@ public class Player : MonoBehaviour, IDamageable
 
     void Start()
     {
-        playerMovementScript = GetComponent<PlayerMovement>();
-    }
-
-    void OnEnable()
-    {
+        playerStats = GetComponent<PlayerMovement>();
         // Enable the XPEvent
         GameManager.instance.XPEvent += HandleXP;
     }
@@ -64,8 +59,8 @@ public class Player : MonoBehaviour, IDamageable
     public void Damage(float damage)
     {
         Debug.Log("PlayerHit");
-        playerMovementScript.currentWeapon.health -= damage;
-        if (playerMovementScript.currentWeapon.health <= 0)
+        playerStats.currentWeapon.health -= damage;
+        if (playerStats.currentWeapon.health <= 0)
         {
             Die();
         }
@@ -73,6 +68,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        Debug.Log("Dead");
         isDead = true;
     }
    
