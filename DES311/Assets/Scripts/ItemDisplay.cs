@@ -44,10 +44,10 @@ public class ItemDisplay : MonoBehaviour
             case WeaponItem.UpgradeType.Health:
                 currentWeapon.healthMaxValue += upgrade.healthIncrease;
                 currentWeapon.health += upgrade.healthIncrease;
-                break;
-             
+                break; 
 
         }
+
     }
 
 }
