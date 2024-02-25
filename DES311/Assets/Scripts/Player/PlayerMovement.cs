@@ -34,9 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        GetDefaultWeapon();
         EnableJoystick();
-        Debug.Log(currentWeapon.name);
     }
     public WeaponItem GetDefaultWeapon()
     {
