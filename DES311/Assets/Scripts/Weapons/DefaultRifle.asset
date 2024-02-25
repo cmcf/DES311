@@ -20,11 +20,11 @@ MonoBehaviour:
   modifiedAttribute: 3
   baseCooldown: 1
   baseSpeed: 20
-  baseMoveSpeed: 20
+  baseMoveSpeed: 8
   baseHealth: 50
   cooldown: 1
   speed: 20
-  moveSpeed: 20
+  moveSpeed: 8
   health: 20
   healthMaxValue: 50
   cooldownDecrease: 0
