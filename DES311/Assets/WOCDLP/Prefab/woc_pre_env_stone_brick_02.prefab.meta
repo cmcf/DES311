@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2377735b9410b0341837fd5e40fe6f1f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Prefab/woc_pre_env_stone_brick_02.prefab
+  uploadId: 357048

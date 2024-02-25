@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bcc51cc6198e7b648a6e0a61a9c529b3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Materials/woc_pre_obj_book_01_pages.mat
+  uploadId: 357048

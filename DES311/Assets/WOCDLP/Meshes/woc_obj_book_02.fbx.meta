@@ -1,0 +1,252 @@
+fileFormatVersion: 2
+guid: a652cdde874cb3f40a5c5892e2fe92b0
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: group2
+    100004: group3
+    100006: group4
+    100008: group4_group2_pCube2323232
+    100010: group4_group2_pCube2323232 1
+    100012: group5
+    100014: pCube2323232
+    100016: pCube2323245
+    100018: pCube2323245 1
+    100020: pCube2323245 2
+    100022: pCube2323246
+    100024: pCube2323246 1
+    100026: pCube2323246 2
+    100028: pCube9
+    100030: pCube9 1
+    100032: pCube9 2
+    100034: polySurface1
+    100036: polySurface1 1
+    100038: polySurface1 2
+    100040: polySurface14
+    100042: polySurface14 1
+    100044: polySurface14 2
+    100046: polySurface2
+    100048: polySurface2 1
+    100050: polySurface2 2
+    100052: polySurface21
+    100054: polySurface21 1
+    100056: polySurface21 2
+    100058: polySurface3
+    100060: polySurface3 1
+    100062: polySurface3 2
+    100064: polySurface9
+    100066: polySurface9 1
+    100068: polySurface9 2
+    100070: transform1
+    100072: transform1 1
+    100074: transform1 2
+    400000: //RootNode
+    400002: group2
+    400004: group3
+    400006: group4
+    400008: group4_group2_pCube2323232
+    400010: group4_group2_pCube2323232 1
+    400012: group5
+    400014: pCube2323232
+    400016: pCube2323245
+    400018: pCube2323245 1
+    400020: pCube2323245 2
+    400022: pCube2323246
+    400024: pCube2323246 1
+    400026: pCube2323246 2
+    400028: pCube9
+    400030: pCube9 1
+    400032: pCube9 2
+    400034: polySurface1
+    400036: polySurface1 1
+    400038: polySurface1 2
+    400040: polySurface14
+    400042: polySurface14 1
+    400044: polySurface14 2
+    400046: polySurface2
+    400048: polySurface2 1
+    400050: polySurface2 2
+    400052: polySurface21
+    400054: polySurface21 1
+    400056: polySurface21 2
+    400058: polySurface3
+    400060: polySurface3 1
+    400062: polySurface3 2
+    400064: polySurface9
+    400066: polySurface9 1
+    400068: polySurface9 2
+    400070: transform1
+    400072: transform1 1
+    400074: transform1 2
+    2100000: unwrapChekcerShader
+    2300000: group4_group2_pCube2323232
+    2300002: group4_group2_pCube2323232 1
+    2300004: pCube2323232
+    2300006: pCube2323245
+    2300008: pCube2323245 1
+    2300010: pCube2323245 2
+    2300012: pCube9
+    2300014: pCube9 1
+    2300016: pCube9 2
+    2300018: polySurface1
+    2300020: polySurface1 1
+    2300022: polySurface1 2
+    2300024: polySurface14
+    2300026: polySurface14 1
+    2300028: polySurface14 2
+    2300030: polySurface2
+    2300032: polySurface2 1
+    2300034: polySurface2 2
+    2300036: polySurface21
+    2300038: polySurface21 1
+    2300040: polySurface21 2
+    2300042: polySurface3
+    2300044: polySurface3 1
+    2300046: polySurface3 2
+    2300048: polySurface9
+    2300050: polySurface9 1
+    2300052: polySurface9 2
+    3300000: group4_group2_pCube2323232
+    3300002: group4_group2_pCube2323232 1
+    3300004: pCube2323232
+    3300006: pCube2323245
+    3300008: pCube2323245 1
+    3300010: pCube2323245 2
+    3300012: pCube9
+    3300014: pCube9 1
+    3300016: pCube9 2
+    3300018: polySurface1
+    3300020: polySurface1 1
+    3300022: polySurface1 2
+    3300024: polySurface14
+    3300026: polySurface14 1
+    3300028: polySurface14 2
+    3300030: polySurface2
+    3300032: polySurface2 1
+    3300034: polySurface2 2
+    3300036: polySurface21
+    3300038: polySurface21 1
+    3300040: polySurface21 2
+    3300042: polySurface3
+    3300044: polySurface3 1
+    3300046: polySurface3 2
+    3300048: polySurface9
+    3300050: polySurface9 1
+    3300052: polySurface9 2
+    4300000: pCube9
+    4300002: pCube2323245
+    4300004: polySurface1
+    4300006: polySurface2
+    4300008: polySurface14
+    4300010: polySurface3
+    4300012: polySurface9
+    4300014: polySurface21
+    4300016: pCube2323232
+    4300018: polySurface1
+    4300020: polySurface2
+    4300022: polySurface9
+    4300024: pCube9
+    4300026: polySurface3
+    4300028: polySurface21
+    4300030: pCube2323245
+    4300032: polySurface14
+    4300034: group4_group2_pCube2323232
+    4300036: polySurface1
+    4300038: polySurface2
+    4300040: polySurface9
+    4300042: pCube9
+    4300044: polySurface3
+    4300046: polySurface21
+    4300048: pCube2323245
+    4300050: polySurface14
+    4300052: group4_group2_pCube2323232
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Meshes/woc_obj_book_02.fbx
+  uploadId: 357048

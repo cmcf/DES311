@@ -31,18 +31,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
-    {
-        // Enable the game object temporarily to call the reset function
-        itemDisplayObject.SetActive(true);
-
-        // Call the reset weapon function
-        itemDisplayObject.GetComponent<ItemDisplay>().ResetDefaultRifleUpgrades();
-
-        // Disable the game object again if needed
-        itemDisplayObject.SetActive(false);
-    }
-
     public void IncreaseXP (int amount)
     {
         // If not null, increase XP by amoung gained

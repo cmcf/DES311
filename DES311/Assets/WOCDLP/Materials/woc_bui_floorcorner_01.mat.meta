@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 255bd5a5d252ee0429960b4c8e8e9279
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Materials/woc_bui_floorcorner_01.mat
+  uploadId: 357048

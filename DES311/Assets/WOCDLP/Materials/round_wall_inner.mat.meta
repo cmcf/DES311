@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2fb9c59e80c8dd148ab5ef91b302fd4b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Materials/round_wall_inner.mat
+  uploadId: 357048

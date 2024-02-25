@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c8e4203512465cf4e9c4a87f21a33ba2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Prefab/woc_pre_bui_platform_doulbe_01.prefab
+  uploadId: 357048

@@ -228,11 +228,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26abb1086bc1f264b9f50b793e1d3773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLocation: {fileID: 0}
   minMoveSpeed: 1.2
   maxMoveSpeed: 2.5
   rotationSpeed: 0.001
-  stoppingDistance: 2.2
+  stoppingDistance: 3.4
   maxHealth: 25
   attackCooldown: 1
   damageAmount: 10

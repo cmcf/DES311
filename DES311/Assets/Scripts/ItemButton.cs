@@ -8,8 +8,9 @@ public class ItemButton : MonoBehaviour
     public ItemManager itemManager;
 
     ItemDisplay upgradeManager;
-    private void Start()
-    {   upgradeManager = FindObjectOfType<ItemDisplay>();
+    void Start()
+    { 
+        upgradeManager = FindObjectOfType<ItemDisplay>();
     }
     public void OnUpgradeButtonClick()
     {
@@ -23,10 +24,6 @@ public class ItemButton : MonoBehaviour
             if (itemManager != null)
             {
                 itemManager.HideItemSelection();
-            }
-            else
-            {
-                Debug.LogWarning("itemManager is null. Cannot hide item selection.");
             }
 
         }

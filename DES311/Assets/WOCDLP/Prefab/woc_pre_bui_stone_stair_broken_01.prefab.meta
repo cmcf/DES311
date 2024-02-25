@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 89d73a6791b9ba3458fa6d0fe9f2a62f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Prefab/woc_pre_bui_stone_stair_broken_01.prefab
+  uploadId: 357048

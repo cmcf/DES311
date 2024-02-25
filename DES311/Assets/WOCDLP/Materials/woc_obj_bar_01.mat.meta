@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 92f883db379964c4e91e59362325d3c5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Materials/woc_obj_bar_01.mat
+  uploadId: 357048

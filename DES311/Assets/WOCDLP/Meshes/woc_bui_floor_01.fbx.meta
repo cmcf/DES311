@@ -1,0 +1,132 @@
+fileFormatVersion: 2
+guid: dd2729fe953743f47b73c3e009de079c
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: floor_mesh_L01
+    100004: floor_mesh_L02
+    100006: floor_mesh_L03
+    100008: floor_mesh_L04
+    100010: floor_mesh_L07
+    100012: floor_mesh_L08
+    100014: floor_mesh_L09
+    400000: //RootNode
+    400002: floor_mesh_L01
+    400004: floor_mesh_L02
+    400006: floor_mesh_L03
+    400008: floor_mesh_L04
+    400010: floor_mesh_L07
+    400012: floor_mesh_L08
+    400014: floor_mesh_L09
+    2100000: lambert98
+    2300000: floor_mesh_L01
+    2300002: floor_mesh_L02
+    2300004: floor_mesh_L03
+    2300006: floor_mesh_L04
+    2300008: floor_mesh_L07
+    2300010: floor_mesh_L08
+    2300012: floor_mesh_L09
+    3300000: floor_mesh_L01
+    3300002: floor_mesh_L02
+    3300004: floor_mesh_L03
+    3300006: floor_mesh_L04
+    3300008: floor_mesh_L07
+    3300010: floor_mesh_L08
+    3300012: floor_mesh_L09
+    4300000: floor_mesh_L01
+    4300002: floor_mesh_L02
+    4300004: floor_mesh_L03
+    4300006: floor_mesh_L04
+    4300008: floor_mesh_L07
+    4300010: floor_mesh_L08
+    4300012: floor_mesh_L09
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Meshes/woc_bui_floor_01.fbx
+  uploadId: 357048

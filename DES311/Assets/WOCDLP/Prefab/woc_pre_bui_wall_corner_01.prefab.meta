@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4341bc5968c03c44ca91fba0b7ec69f4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Prefab/woc_pre_bui_wall_corner_01.prefab
+  uploadId: 357048

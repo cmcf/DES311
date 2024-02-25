@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e2e313a5e47166c41be89a18d73ac56d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Materials/woc_obj_torch_01.mat
+  uploadId: 357048

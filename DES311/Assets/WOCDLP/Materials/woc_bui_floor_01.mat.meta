@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 657c7fb6da639e74c901335cf7b874b7
+timeCreated: 1532975143
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Materials/woc_bui_floor_01.mat
+  uploadId: 357048

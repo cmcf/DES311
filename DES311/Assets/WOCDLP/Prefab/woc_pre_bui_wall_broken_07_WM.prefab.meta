@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: abaa5ba4d0e4c7f4cbd73977449e3917
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154331
+  packageName: Dungeon Lite Pack
+  packageVersion: 1
+  assetPath: Assets/WOCDLP/Prefab/woc_pre_bui_wall_broken_07_WM.prefab
+  uploadId: 357048

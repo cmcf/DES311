@@ -230,7 +230,6 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   playerHealth: {fileID: 0}
   description: {fileID: 8482087538409509147}
-  cooldownDecrease: {fileID: 1489177050454635661}
   weaponName: {fileID: 3940976593791883916}
   weaponUpgrade: {fileID: 11400000, guid: f9d558a7549302d41a8c1d2f54cae60c, type: 2}
 --- !u!114 &-6471992876063719197
@@ -246,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgrade: {fileID: 11400000, guid: f9d558a7549302d41a8c1d2f54cae60c, type: 2}
+  itemManager: {fileID: 0}
 --- !u!1 &4474525419364117240
 GameObject:
   m_ObjectHideFlags: 0
