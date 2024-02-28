@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, IDamageable
     Transform playerLocation;
     Player player;
     NavMeshAgent nav;
+    EnemyManager enemyManager;
 
     [Header("Movement")]
     float moveSpeed;
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] float maxMoveSpeed = 5f;
     [SerializeField] float rotationSpeed = 2f;
     [SerializeField] float stoppingDistance = 2.2f;
+    [SerializeField] float levelUpStatIncrease = 0.5f;
 
     [Header("Health")]
     [SerializeField] float maxHealth = 100f;
@@ -31,6 +33,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     bool hit = false;
     bool reachedPlayer = false;
+    private IEnumerable<Enemy> allEnemies;
 
     // Gets the Position property from IDamageable interface
     public float Health { get; set; }
@@ -38,6 +41,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Start()
     {
+        enemyManager = FindObjectOfType<EnemyManager>();
+        if (enemyManager != null)
+        {
+            enemyManager.RegisterEnemy(this);
+        }
         moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
         currentHealth = maxHealth;
         nav = GetComponent<NavMeshAgent>();
@@ -142,6 +150,22 @@ public class Enemy : MonoBehaviour, IDamageable
             // Update the last attack time to the current time
             lastAttackTime = Time.time;
         }
+    }
+
+    public void IncreaseEnemyStats()
+    {
+        Debug.Log("Enemy levelled up");
+
+        // Increase minMoveSpeed
+        minMoveSpeed += levelUpStatIncrease;
+
+        // Cap minMoveSpeed at 5
+        minMoveSpeed = Mathf.Min(minMoveSpeed, 5);
+
+        // Set moveSpeed within the new range
+        moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
+
+        Debug.Log(moveSpeed);
     }
 }
 

@@ -9,17 +9,20 @@ public class Player : MonoBehaviour, IDamageable
     public ItemManager itemManager;
     public PlayerMovement playerStats;
     public HUD playerHUD;
+    EnemyManager enemyManager;
+
     [Header("Stats")]
     public int currentXP;
     public int requiredXP;
     [SerializeField] int requiredXPIncreaseRate = 150;
-    [SerializeField] int currentLevel = 1;
+    public int currentLevel = 1;
 
     public bool isDead = false;
     public float Health { get; set; }
 
     void Start()
     {
+        enemyManager = FindObjectOfType<EnemyManager>();
         playerStats = GetComponent<PlayerMovement>();
         // Enable the XPEvent
         GameManager.instance.XPEvent += HandleXP;
@@ -50,6 +53,10 @@ public class Player : MonoBehaviour, IDamageable
         itemManager.DisplayItemChoice();
         // Players current level increases
         currentLevel++;
+        if (enemyManager != null)
+        {
+            enemyManager.LevelUpEnemies();
+        }
         // XP is reset
         currentXP = 0;
         // The amount of XP required to reach the next level is increased each level by the increase rate
