@@ -22,11 +22,11 @@ MonoBehaviour:
   baseSpeed: 20
   baseMoveSpeed: 6
   baseHealth: 50
-  cooldown: 0.79999995
-  speed: 40
-  moveSpeed: 10
-  health: 30
-  healthMaxValue: 80
+  cooldown: 1
+  speed: 20
+  moveSpeed: 6
+  health: 0
+  healthMaxValue: 50
   cooldownDecrease: 0
   speedIncrease: 0
   movementSpeedIncrease: 0

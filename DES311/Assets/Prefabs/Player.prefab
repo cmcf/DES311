@@ -76,8 +76,7 @@ MonoBehaviour:
   currentWeapon: {fileID: 11400000, guid: 7330dc1902b5ede4f8360ff3f39f8623, type: 2}
   movementJoystick: {fileID: 0}
   aimJoystick: {fileID: 0}
-  inputCanvas: {fileID: 304140807713554384, guid: b8af4b4ab8e1e1443b06adc642dc6434,
-    type: 3}
+  inputCanvas: {fileID: 0}
   controller: {fileID: 7543318854598395680}
   projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
@@ -126,8 +125,8 @@ MonoBehaviour:
   itemManager: {fileID: 0}
   playerStats: {fileID: 2031717858816543538}
   currentXP: 0
-  requiredXP: 60
-  requiredXPIncreaseRate: 60
+  requiredXP: 100
+  requiredXPIncreaseRate: 95
   currentLevel: 1
   isDead: 0
 --- !u!95 &3591363647149444670

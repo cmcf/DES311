@@ -8,7 +8,7 @@ public class Player : MonoBehaviour, IDamageable
 {
     public ItemManager itemManager;
     public PlayerMovement playerStats;
-
+    public HUD playerHUD;
     [Header("Stats")]
     public int currentXP;
     public int requiredXP;
@@ -59,7 +59,9 @@ public class Player : MonoBehaviour, IDamageable
     public void Damage(float damage)
     {
         Debug.Log("PlayerHit");
+        
         playerStats.currentWeapon.health -= damage;
+        playerHUD.UpdateHealthBar();
         if (playerStats.currentWeapon.health <= 0)
         {
             Die();

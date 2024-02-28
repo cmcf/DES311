@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
     public Slider levelSlider;
+    public Slider healthSlider;
     public Player player;
+    public PlayerMovement playerHealth;
     void Start()
     {
         if (levelSlider == null)
@@ -33,6 +35,7 @@ public class HUD : MonoBehaviour
 
         // Update the Slider value
         UpdateLevelProgressBar();
+        UpdateHealthBar();
     }
 
     void UpdateLevelProgressBar()
@@ -48,4 +51,11 @@ public class HUD : MonoBehaviour
             levelSlider.maxValue = 1f;
         }
     }
+
+    public void UpdateHealthBar()
+    {
+        float currentHealth = playerHealth.currentWeapon.health / playerHealth.currentWeapon.healthMaxValue;
+        healthSlider.value = currentHealth * playerHealth.currentWeapon.healthMaxValue;
+        healthSlider.maxValue = playerHealth.currentWeapon.healthMaxValue;
+    } 
 }
