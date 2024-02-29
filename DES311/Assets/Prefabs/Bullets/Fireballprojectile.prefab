@@ -75,7 +75,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 0.3
-  m_PreviewTimeScale: 1
+  m_PreviewTimeScale: 0
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -187,6 +187,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 15
   destroyDelay: 3
+  hitEffect: {fileID: 3911334593277181048, guid: 252e45bbff96e814b8cc8641fe650525,
+    type: 3}
 --- !u!54 &2234245870724255171
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -418,3 +420,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 15
   destroyDelay: 3
+  hitEffect: {fileID: 0}
