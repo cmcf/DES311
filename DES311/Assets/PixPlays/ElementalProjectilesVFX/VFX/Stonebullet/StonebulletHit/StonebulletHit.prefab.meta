@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c3e084fe7f2622843a30f9871b1c01ca
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264441
+  packageName: Elemental Projectiles VFX
+  packageVersion: 1.0.0
+  assetPath: Assets/PixPlays/ElementalProjectilesVFX/VFX/Stonebullet/StonebulletHit/StonebulletHit.prefab
+  uploadId: 610584

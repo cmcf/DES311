@@ -31,7 +31,8 @@ public class WeaponItem : ScriptableObject
     public float baseCooldown = 1f;
     public float baseSpeed = 20f;
     public float baseMoveSpeed = 3.5f;
-    public float baseHealth = 50f; 
+    public float baseHealth = 50f;
+    public GameObject defaultProjectile;
 
     [Header("Current Values")]
     public float cooldown;

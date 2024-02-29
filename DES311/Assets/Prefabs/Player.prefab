@@ -73,13 +73,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699ef00f835effc4985aaec01eb59e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 11400000, guid: 7330dc1902b5ede4f8360ff3f39f8623, type: 2}
+  currentLoadout: {fileID: 11400000, guid: 7330dc1902b5ede4f8360ff3f39f8623, type: 2}
   movementJoystick: {fileID: 0}
   aimJoystick: {fileID: 0}
   inputCanvas: {fileID: 0}
   controller: {fileID: 7543318854598395680}
-  projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
-    type: 3}
   spawnPoint: {fileID: 8930375505085652025}
   isAiming: 0
   isFiring: 0
@@ -124,9 +122,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemManager: {fileID: 0}
   playerStats: {fileID: 2031717858816543538}
+  playerHUD: {fileID: 0}
+  currentLevelText: {fileID: 0}
   currentXP: 0
   requiredXP: 100
-  requiredXPIncreaseRate: 95
+  requiredXPIncreaseRate: 50
   currentLevel: 1
   isDead: 0
 --- !u!95 &3591363647149444670

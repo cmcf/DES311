@@ -59,12 +59,12 @@ public class HUD : MonoBehaviour
     public void UpdateHealthBar()
     {
         // Updates health slider values
-        float currentHealth = playerHealth.currentStats.health / playerHealth.currentStats.healthMaxValue;
-        healthSlider.value = currentHealth * playerHealth.currentStats.healthMaxValue;
-        healthSlider.maxValue = playerHealth.currentStats.healthMaxValue;
+        float currentHealth = playerHealth.currentLoadout.health / playerHealth.currentLoadout.healthMaxValue;
+        healthSlider.value = currentHealth * playerHealth.currentLoadout.healthMaxValue;
+        healthSlider.maxValue = playerHealth.currentLoadout.healthMaxValue;
         // Update health text values
-        currentHealthText.text = playerHealth.currentStats.health.ToString() + "/";
-        maxHealthText.text = playerHealth.currentStats.healthMaxValue.ToString();
+        currentHealthText.text = playerHealth.currentLoadout.health.ToString() + "/";
+        maxHealthText.text = playerHealth.currentLoadout.healthMaxValue.ToString();
         
     } 
 }

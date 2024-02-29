@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b83f734407bb41f4eb091735c81f1565
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264441
+  packageName: Elemental Projectiles VFX
+  packageVersion: 1.0.0
+  assetPath: Assets/PixPlays/ElementalProjectilesVFX/SharedVFXComponents/Flash/Flash.prefab
+  uploadId: 610584

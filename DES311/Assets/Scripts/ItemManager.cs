@@ -6,15 +6,17 @@ public class ItemManager : MonoBehaviour
 {
     public GameObject[] itemCards;
     PlayerMovement playerScript;
+    Player playerStats;
 
     private static System.Random rng = new System.Random();
     private Dictionary<GameObject, Vector3> initialCardPositions = new Dictionary<GameObject, Vector3>();
 
     [SerializeField] float cardOffset = 500f;
 
-    private void Start()
+    void Start()
     {
         playerScript = FindObjectOfType<PlayerMovement>();
+        playerStats = FindObjectOfType<Player>();
     }
 
     void Shuffle(List<string> list)
@@ -68,10 +70,14 @@ public class ItemManager : MonoBehaviour
         ResetCardPositions();
 
         // Check if the current weapon has reached the maximum upgrade for each attribute
-        bool cooldownMaxed = playerScript.currentStats.cooldown <= playerScript.currentStats.minCooldown;
-        bool speedMaxed = playerScript.currentStats.speed >= playerScript.currentStats.maxSpeed;
-        bool moveSpeedMaxed = playerScript.currentStats.moveSpeed >= playerScript.currentStats.maxMoveSpeed;
-        bool healthMaxed = playerScript.currentStats.healthMaxValue >= playerScript.currentStats.healthUpgradeMax;
+        bool cooldownMaxed = playerScript.currentLoadout.cooldown <= playerScript.currentLoadout.minCooldown;
+        bool speedMaxed = playerScript.currentLoadout.speed >= playerScript.currentLoadout.maxSpeed;
+        bool moveSpeedMaxed = playerScript.currentLoadout.moveSpeed >= playerScript.currentLoadout.maxMoveSpeed;
+        bool healthMaxed = playerScript.currentLoadout.healthMaxValue >= playerScript.currentLoadout.healthUpgradeMax;
+
+        // Check if "FireCard" is already equipped and player's level is above 3
+        bool fireCardEquipped = CheckIfFireCardEquipped();
+        bool playerAboveLevel3 = CheckIfPlayerAboveLevel3();
 
         // Deactivate all item cards
         foreach (var card in itemCards)
@@ -107,6 +113,12 @@ public class ItemManager : MonoBehaviour
             availableTags.Add("Health");
         }
 
+        // Add fire card if not already equipped and player is above level 3
+        if (!fireCardEquipped && playerAboveLevel3)
+        {
+            availableTags.Add("FireCard");
+        }
+
         // Shuffle the available tags to randomize the selection
         Shuffle(availableTags);
 
@@ -139,6 +151,25 @@ public class ItemManager : MonoBehaviour
                 return;
             }
         }
+    }
+
+    bool CheckIfFireCardEquipped()
+    {
+        if (playerScript.HasProjectileWithTag("FireProjectile"))
+        {
+            return true;
+        }
+            // Return true if equipped, false otherwise
+            return false; // Placeholder, replace with actual logic
+    }
+
+    bool CheckIfPlayerAboveLevel3()
+    {
+       if (playerStats.currentLevel >= 0)
+        {
+            return true;
+        }
+        return false; // Placeholder, replace with actual logic
     }
 
     void ResetCardPositions()

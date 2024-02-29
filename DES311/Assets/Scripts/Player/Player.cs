@@ -73,9 +73,9 @@ public class Player : MonoBehaviour, IDamageable
     {
         Debug.Log("PlayerHit");
         
-        playerStats.currentStats.health -= damage;
+        playerStats.currentLoadout.health -= damage;
         playerHUD.UpdateHealthBar();
-        if (playerStats.currentStats.health <= 0)
+        if (playerStats.currentLoadout.health <= 0)
         {
             Die();
         }

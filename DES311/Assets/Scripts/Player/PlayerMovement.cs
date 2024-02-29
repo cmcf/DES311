@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     Animator animator;
-    public WeaponItem currentStats;
+    public WeaponItem currentLoadout;
 
     [Header("Joystick")]
     public VariableJoystick movementJoystick;
@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
 
     [Header("Projectile")]
-    [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform spawnPoint;
 
     public bool isAiming;
@@ -39,18 +38,19 @@ public class PlayerMovement : MonoBehaviour
     }
     public WeaponItem GetDefaultWeapon()
     {
-        return currentStats;
+        return currentLoadout;
     }
 
     void ResetPlayerStats()
     {
         // Reset default rifle upgrades to their base values
-        currentStats.cooldown = currentStats.baseCooldown;
-        currentStats.speed = currentStats.baseSpeed;
-        currentStats.moveSpeed = currentStats.baseMoveSpeed;
+        currentLoadout.cooldown = currentLoadout.baseCooldown;
+        currentLoadout.speed = currentLoadout.baseSpeed;
+        currentLoadout.moveSpeed = currentLoadout.baseMoveSpeed;
+        currentLoadout.projectilePrefab = currentLoadout.defaultProjectile;
         // Reset health
-        currentStats.healthMaxValue = currentStats.baseHealth;
-        currentStats.health = currentStats.baseHealth;
+        currentLoadout.healthMaxValue = currentLoadout.baseHealth;
+        currentLoadout.health = currentLoadout.baseHealth;
     }
     public void EnableJoystick()
     {
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
             var movementDirection = new Vector3(movementJoystick.Direction.x, 0f, movementJoystick.Direction.y);
             
             // Moves the character using the SimpleMove method with speed
-            controller.Move(movementDirection * Time.deltaTime * currentStats.moveSpeed);
+            controller.Move(movementDirection * Time.deltaTime * currentLoadout.moveSpeed);
 
             // Calculate the forward and right speed based on movement direction and player position
             float forward = Vector3.Dot(movementDirection, transform.forward);
@@ -138,22 +138,36 @@ public class PlayerMovement : MonoBehaviour
     void FireProjectile()
     {
 
-        if (Time.time - lastFireTime >= currentStats.cooldown)
+        if (Time.time - lastFireTime >= currentLoadout.cooldown)
         {
-            if (currentStats.projectilePrefab == null || spawnPoint == null)
+            if (currentLoadout.projectilePrefab == null || spawnPoint == null)
             {
                 return;
             }
 
             // Spawn a single projectile
-            GameObject projectile = Instantiate(currentStats.projectilePrefab, spawnPoint.position, spawnPoint.rotation);
+            GameObject projectile = Instantiate(currentLoadout.projectilePrefab, spawnPoint.position, spawnPoint.rotation);
             Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
-            projectileRb.velocity = projectile.transform.forward * currentStats.speed;
+            projectileRb.velocity = projectile.transform.forward * currentLoadout.speed;
 
 
             // Update last fire time and call StopFiring
             lastFireTime = Time.time;
-            StartCoroutine(StopFiring(currentStats.cooldown));
+            StartCoroutine(StopFiring(currentLoadout.cooldown));
+        }
+    }
+
+    // Example method to check if the player has a specific projectile equipped using a tag
+    public bool HasProjectileWithTag(string tag)
+    {
+        // Check if the player has a projectile equipped and if its tag matches the desired tag
+        if (currentLoadout.projectilePrefab != null && currentLoadout.projectilePrefab.CompareTag(tag))
+        {
+            return true; // Player has the projectile with the desired tag equipped
+        }
+        else
+        {
+            return false; // Player does not have the projectile with the desired tag equipped
         }
     }
 
@@ -166,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
     bool CanFire()
     {
         // Check if enough time has passed since the last firing
-        return Time.time - lastFireTime >= currentStats.cooldown;
+        return Time.time - lastFireTime >= currentLoadout.cooldown;
     }
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Vector3 initialPosition;
-    float damageAmount = 15f;
+    [SerializeField] float damageAmount = 15f;
     Enemy enemy;
     [SerializeField] float destroyDelay = 3f;
     void Start()
@@ -21,7 +21,6 @@ public class Bullet : MonoBehaviour
         {
             // Apply damage to the enemy
             other.GetComponent<Enemy>().Damage(damageAmount);
-            // Destroy the bullet
             Destroy(gameObject);
         }
     }

@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour, IDamageable
     // Reset flags when enemy is hit by a new bullet
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("FireProjectile"))
         {
             hit = false;
         }

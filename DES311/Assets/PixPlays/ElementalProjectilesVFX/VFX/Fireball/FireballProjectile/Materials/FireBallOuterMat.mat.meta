@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fc90e0032adc10f428185db072cf6ddd
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264441
+  packageName: Elemental Projectiles VFX
+  packageVersion: 1.0.0
+  assetPath: Assets/PixPlays/ElementalProjectilesVFX/VFX/Fireball/FireballProjectile/Materials/FireBallOuterMat.mat
+  uploadId: 610584

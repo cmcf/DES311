@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: afd9423e0344bc34ebfac6de045f83b4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264441
+  packageName: Elemental Projectiles VFX
+  packageVersion: 1.0.0
+  assetPath: Assets/PixPlays/ElementalProjectilesVFX/VFX/Windbullet/WindbulletProjectile/WindBulletProjectile.prefab
+  uploadId: 610584

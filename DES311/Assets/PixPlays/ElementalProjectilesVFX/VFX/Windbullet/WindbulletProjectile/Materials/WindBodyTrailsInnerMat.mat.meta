@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ebf5a3349fe4ce546ae58028072a9670
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264441
+  packageName: Elemental Projectiles VFX
+  packageVersion: 1.0.0
+  assetPath: Assets/PixPlays/ElementalProjectilesVFX/VFX/Windbullet/WindbulletProjectile/Materials/WindBodyTrailsInnerMat.mat
+  uploadId: 610584

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 302238a5781c62f4b830025817b4d9c1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264441
+  packageName: Elemental Projectiles VFX
+  packageVersion: 1.0.0
+  assetPath: Assets/PixPlays/ElementalProjectilesVFX/VFX/Windbullet/WindbulletHit/Materials/WindBlastShockwaveMat.mat
+  uploadId: 610584

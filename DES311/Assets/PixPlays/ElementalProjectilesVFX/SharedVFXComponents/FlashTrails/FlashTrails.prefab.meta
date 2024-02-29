@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6f35ea8780290fb44b95be092910a793
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264441
+  packageName: Elemental Projectiles VFX
+  packageVersion: 1.0.0
+  assetPath: Assets/PixPlays/ElementalProjectilesVFX/SharedVFXComponents/FlashTrails/FlashTrails.prefab
+  uploadId: 610584

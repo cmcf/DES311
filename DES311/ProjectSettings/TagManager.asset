@@ -11,6 +11,9 @@ TagManager:
   - Speed
   - MoveSpeed
   - Health
+  - Projectile
+  - FireCard
+  - FireProjectile
   layers:
   - Default
   - TransparentFX
