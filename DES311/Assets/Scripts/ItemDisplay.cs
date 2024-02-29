@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using static WeaponItem;
+using NUnit.Framework.Internal;
 
 public class ItemDisplay : MonoBehaviour
 {
@@ -44,7 +45,10 @@ public class ItemDisplay : MonoBehaviour
             case WeaponItem.UpgradeType.Health:
                 currentWeapon.healthMaxValue += upgrade.healthIncrease;
                 currentWeapon.health += upgrade.healthIncrease;
-                break; 
+                break;
+            case WeaponItem.UpgradeType.Bullet:
+                currentWeapon.projectilePrefab = upgrade.projectileUpgrade;
+                break;
 
         }
 

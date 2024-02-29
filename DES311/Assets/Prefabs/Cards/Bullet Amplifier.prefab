@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 8120056484132913398}
   - component: {fileID: 7789180724541004422}
   m_Layer: 5
-  m_Name: Speed Card
+  m_Name: Bullet Amplifier
   m_TagString: Speed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -631,7 +631,6 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   playerHealth: {fileID: 0}
   description: {fileID: 8771671971901274979}
-  cooldownDecrease: {fileID: 9000004490625200445}
   weaponName: {fileID: 1538483024026987562}
   weaponUpgrade: {fileID: 11400000, guid: 8074004727335fe40b292f3865f83bc3, type: 2}
 --- !u!114 &7789180724541004422
@@ -647,6 +646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgrade: {fileID: 11400000, guid: 8074004727335fe40b292f3865f83bc3, type: 2}
+  itemManager: {fileID: 0}
 --- !u!1 &9019643477579509935
 GameObject:
   m_ObjectHideFlags: 0

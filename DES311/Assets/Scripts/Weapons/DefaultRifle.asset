@@ -17,6 +17,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
+  projectileUpgrade: {fileID: 0}
   modifiedAttribute: 3
   baseCooldown: 1
   baseSpeed: 20
@@ -24,7 +25,7 @@ MonoBehaviour:
   baseHealth: 50
   cooldown: 1
   speed: 20
-  moveSpeed: 6
+  moveSpeed: 8
   health: 0
   healthMaxValue: 50
   cooldownDecrease: 0

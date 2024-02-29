@@ -23,6 +23,7 @@ public class WeaponItem : ScriptableObject
 
     public Sprite icon;
     public GameObject projectilePrefab;
+    public GameObject projectileUpgrade;
 
     public UpgradeType modifiedAttribute;
 
