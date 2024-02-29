@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,9 @@ public class HUD : MonoBehaviour
     public Slider healthSlider;
     public Player player;
     public PlayerMovement playerHealth;
+
+    public TextMeshProUGUI currentHealthText;
+    public TextMeshProUGUI maxHealthText;
     void Start()
     {
         if (levelSlider == null)
@@ -54,8 +58,13 @@ public class HUD : MonoBehaviour
 
     public void UpdateHealthBar()
     {
-        float currentHealth = playerHealth.currentWeapon.health / playerHealth.currentWeapon.healthMaxValue;
-        healthSlider.value = currentHealth * playerHealth.currentWeapon.healthMaxValue;
-        healthSlider.maxValue = playerHealth.currentWeapon.healthMaxValue;
+        // Updates health slider values
+        float currentHealth = playerHealth.currentStats.health / playerHealth.currentStats.healthMaxValue;
+        healthSlider.value = currentHealth * playerHealth.currentStats.healthMaxValue;
+        healthSlider.maxValue = playerHealth.currentStats.healthMaxValue;
+        // Update health text values
+        currentHealthText.text = playerHealth.currentStats.health.ToString() + "/";
+        maxHealthText.text = playerHealth.currentStats.healthMaxValue.ToString();
+        
     } 
 }

@@ -68,10 +68,10 @@ public class ItemManager : MonoBehaviour
         ResetCardPositions();
 
         // Check if the current weapon has reached the maximum upgrade for each attribute
-        bool cooldownMaxed = playerScript.currentWeapon.cooldown <= playerScript.currentWeapon.minCooldown;
-        bool speedMaxed = playerScript.currentWeapon.speed >= playerScript.currentWeapon.maxSpeed;
-        bool moveSpeedMaxed = playerScript.currentWeapon.moveSpeed >= playerScript.currentWeapon.maxMoveSpeed;
-        bool healthMaxed = playerScript.currentWeapon.healthMaxValue >= playerScript.currentWeapon.healthUpgradeMax;
+        bool cooldownMaxed = playerScript.currentStats.cooldown <= playerScript.currentStats.minCooldown;
+        bool speedMaxed = playerScript.currentStats.speed >= playerScript.currentStats.maxSpeed;
+        bool moveSpeedMaxed = playerScript.currentStats.moveSpeed >= playerScript.currentStats.maxMoveSpeed;
+        bool healthMaxed = playerScript.currentStats.healthMaxValue >= playerScript.currentStats.healthUpgradeMax;
 
         // Deactivate all item cards
         foreach (var card in itemCards)

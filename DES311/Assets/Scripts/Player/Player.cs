@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static Cinemachine.DocumentationSortingAttribute;
 using static Damage;
@@ -8,8 +9,11 @@ public class Player : MonoBehaviour, IDamageable
 {
     public ItemManager itemManager;
     public PlayerMovement playerStats;
-    public HUD playerHUD;
     EnemyManager enemyManager;
+    public HUD playerHUD;
+    [Header("Text Components")]
+    public TextMeshProUGUI currentLevelText;
+  
 
     [Header("Stats")]
     public int currentXP;
@@ -26,6 +30,7 @@ public class Player : MonoBehaviour, IDamageable
         playerStats = GetComponent<PlayerMovement>();
         // Enable the XPEvent
         GameManager.instance.XPEvent += HandleXP;
+        currentLevelText.text = "Level: " + currentLevel.ToString();    
     }
 
     void OnDisable()
@@ -59,6 +64,7 @@ public class Player : MonoBehaviour, IDamageable
         }
         // XP is reset
         currentXP = 0;
+        currentLevelText.text = "Level: " + currentLevel.ToString();
         // The amount of XP required to reach the next level is increased each level by the increase rate
         requiredXP += requiredXPIncreaseRate;
     }
@@ -67,9 +73,9 @@ public class Player : MonoBehaviour, IDamageable
     {
         Debug.Log("PlayerHit");
         
-        playerStats.currentWeapon.health -= damage;
+        playerStats.currentStats.health -= damage;
         playerHUD.UpdateHealthBar();
-        if (playerStats.currentWeapon.health <= 0)
+        if (playerStats.currentStats.health <= 0)
         {
             Die();
         }

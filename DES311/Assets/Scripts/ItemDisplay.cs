@@ -31,15 +31,15 @@ public class ItemDisplay : MonoBehaviour
     {
         case WeaponItem.UpgradeType.Cooldown:
             currentWeapon.cooldown -= upgrade.cooldownDecrease;
-            Debug.Log(playerScript.currentWeapon.baseCooldown);
+            Debug.Log(playerScript.currentStats.baseCooldown);
             break;
         case WeaponItem.UpgradeType.Speed:
             currentWeapon.speed += upgrade.speedIncrease;
-            Debug.Log(playerScript.currentWeapon.baseSpeed);
+            Debug.Log(playerScript.currentStats.baseSpeed);
             break;
          case WeaponItem.UpgradeType.MoveSpeed:
               currentWeapon.moveSpeed += upgrade.movementSpeedIncrease;
-              Debug.Log(playerScript.currentWeapon.baseMoveSpeed);
+              Debug.Log(playerScript.currentStats.baseMoveSpeed);
               break;
             case WeaponItem.UpgradeType.Health:
                 currentWeapon.healthMaxValue += upgrade.healthIncrease;

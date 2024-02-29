@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     Animator animator;
-    public WeaponItem currentWeapon;
+    public WeaponItem currentStats;
 
     [Header("Joystick")]
     public VariableJoystick movementJoystick;
@@ -39,18 +39,18 @@ public class PlayerMovement : MonoBehaviour
     }
     public WeaponItem GetDefaultWeapon()
     {
-        return currentWeapon;
+        return currentStats;
     }
 
     void ResetPlayerStats()
     {
         // Reset default rifle upgrades to their base values
-        currentWeapon.cooldown = currentWeapon.baseCooldown;
-        currentWeapon.speed = currentWeapon.baseSpeed;
-        currentWeapon.moveSpeed = currentWeapon.baseMoveSpeed;
+        currentStats.cooldown = currentStats.baseCooldown;
+        currentStats.speed = currentStats.baseSpeed;
+        currentStats.moveSpeed = currentStats.baseMoveSpeed;
         // Reset health
-        currentWeapon.healthMaxValue = currentWeapon.baseHealth;
-        currentWeapon.health = currentWeapon.baseHealth;
+        currentStats.healthMaxValue = currentStats.baseHealth;
+        currentStats.health = currentStats.baseHealth;
     }
     public void EnableJoystick()
     {
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
             var movementDirection = new Vector3(movementJoystick.Direction.x, 0f, movementJoystick.Direction.y);
             
             // Moves the character using the SimpleMove method with speed
-            controller.Move(movementDirection * Time.deltaTime * currentWeapon.moveSpeed);
+            controller.Move(movementDirection * Time.deltaTime * currentStats.moveSpeed);
 
             // Calculate the forward and right speed based on movement direction and player position
             float forward = Vector3.Dot(movementDirection, transform.forward);
@@ -138,22 +138,22 @@ public class PlayerMovement : MonoBehaviour
     void FireProjectile()
     {
 
-        if (Time.time - lastFireTime >= currentWeapon.cooldown)
+        if (Time.time - lastFireTime >= currentStats.cooldown)
         {
-            if (currentWeapon.projectilePrefab == null || spawnPoint == null)
+            if (currentStats.projectilePrefab == null || spawnPoint == null)
             {
                 return;
             }
 
             // Spawn a single projectile
-            GameObject projectile = Instantiate(currentWeapon.projectilePrefab, spawnPoint.position, spawnPoint.rotation);
+            GameObject projectile = Instantiate(currentStats.projectilePrefab, spawnPoint.position, spawnPoint.rotation);
             Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
-            projectileRb.velocity = projectile.transform.forward * currentWeapon.speed;
+            projectileRb.velocity = projectile.transform.forward * currentStats.speed;
 
 
             // Update last fire time and call StopFiring
             lastFireTime = Time.time;
-            StartCoroutine(StopFiring(currentWeapon.cooldown));
+            StartCoroutine(StopFiring(currentStats.cooldown));
         }
     }
 
@@ -166,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
     bool CanFire()
     {
         // Check if enough time has passed since the last firing
-        return Time.time - lastFireTime >= currentWeapon.cooldown;
+        return Time.time - lastFireTime >= currentStats.cooldown;
     }
 
 }
