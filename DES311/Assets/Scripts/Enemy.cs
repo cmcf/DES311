@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour, IDamageable
     Player player;
     NavMeshAgent nav;
     EnemyManager enemyManager;
+    Animator anim;
 
     [Header("Movement")]
     float moveSpeed;
@@ -33,7 +34,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     bool hit = false;
     bool reachedPlayer = false;
-    private IEnumerable<Enemy> allEnemies;
 
     // Gets the Position property from IDamageable interface
     public float Health { get; set; }
@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         enemyManager = FindObjectOfType<EnemyManager>();
         if (enemyManager != null)
         {
@@ -101,8 +102,12 @@ public class Enemy : MonoBehaviour, IDamageable
         // Check if the enemy is near the player
         if (distanceToPlayer < stoppingDistance)
         {
-            // Stop moving and attack player
+            // Stop moving
             nav.isStopped = true;
+
+            // Play attack animation
+            anim.SetBool("HasStopped", true);
+
             AttackPlayer();
 
             // Rotate towards the player only if not reached player yet
@@ -115,6 +120,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
             // Set flag indicating that the enemy has reached the player
             reachedPlayer = true;
+
         }
         else
         {
@@ -122,11 +128,14 @@ public class Enemy : MonoBehaviour, IDamageable
             if (!reachedPlayer)
             {
                 nav.SetDestination(playerLocation.position);
+                anim.SetBool("HasStopped", false);
             }
             else
             {
                 // Resume moving
                 nav.isStopped = false;
+                // Play attack animation
+                anim.SetBool("HasStopped", false);
 
                 // Reset reachedPlayer flag
                 reachedPlayer = false;
@@ -134,22 +143,32 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    void AttackPlayer()
+    public void AttackPlayer()
     {
-        // Enemy only attacks if the player is alive
-        if (player.isDead)
-        {
-            return;
-        }
-        // Check if enough time has passed since the last attack
-        if (Time.time - lastAttackTime >= attackCooldown)
-        {
-            // Perform the attack
-            player.Damage(damageAmount);
+        if (player.isDead) { return; }
+        // Play attack animation
+        anim.SetBool("IsAttacking", true);
 
-            // Update the last attack time to the current time
-            lastAttackTime = Time.time;
-        }
+        // Update the last attack time to the current time
+        lastAttackTime = Time.time;
+
+        // Assuming attackAnimationDuration is the duration of the attack animation
+        StartCoroutine(ResetIsAttackingAfterDelay(attackCooldown));
+
+    }
+
+    public void DamagePlayer()
+    {
+        Debug.Log("Damaged Player");
+        // Perform the attack by dealing damage to the player
+        player.Damage(damageAmount);
+    }
+
+    IEnumerator ResetIsAttackingAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        // Reset IsAttacking after the delay
+        anim.SetBool("IsAttacking", false);
     }
 
     public void IncreaseEnemyStats()
