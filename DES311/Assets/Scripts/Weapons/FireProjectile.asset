@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ab8061e3fed8e4b8843cf49e5c5513, type: 3}
   m_Name: FireProjectile
   m_EditorClassIdentifier: 
-  itemName: Fire projectile
-  description: Deals more damage
+  itemName: Fire Blast
+  description: +5 damage
   icon: {fileID: 0}
   projectilePrefab: {fileID: 0}
   projectileUpgrade: {fileID: 6487987637173855206, guid: 29a9704bef55c3240bfe88bfc33c71cc,
@@ -23,6 +23,7 @@ MonoBehaviour:
   baseSpeed: 20
   baseMoveSpeed: 3.5
   baseHealth: 50
+  defaultProjectile: {fileID: 0}
   cooldown: 0
   speed: 0
   moveSpeed: 0

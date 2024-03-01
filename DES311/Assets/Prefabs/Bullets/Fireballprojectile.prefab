@@ -185,10 +185,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a84dece07c61b3459eec5d85c24b8db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 15
+  damageAmount: 20
   destroyDelay: 3
   hitEffect: {fileID: 3911334593277181048, guid: 252e45bbff96e814b8cc8641fe650525,
     type: 3}
+  destroyDelayAfterCollision: 0.2
 --- !u!54 &2234245870724255171
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -421,3 +422,4 @@ MonoBehaviour:
   damageAmount: 15
   destroyDelay: 3
   hitEffect: {fileID: 0}
+  destroyDelayAfterCollision: 0.2
