@@ -159,17 +159,16 @@ public class ItemManager : MonoBehaviour
         {
             return true;
         }
-            // Return true if equipped, false otherwise
-            return false; // Placeholder, replace with actual logic
+        return false;
     }
 
     bool CheckIfPlayerAboveLevel3()
     {
        if (playerStats.currentLevel >= 0)
-        {
-            return true;
-        }
-        return false; // Placeholder, replace with actual logic
+       {
+           return true;
+       }
+        return false;
     }
 
     void ResetCardPositions()

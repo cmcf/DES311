@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemManager: {fileID: 0}
-  playerLoadout: {fileID: 0}
+  playerLoadout: {fileID: 2031717858816543538}
   playerHUD: {fileID: 0}
   endSceneLoadDelay: 5
   currentLevelText: {fileID: 0}

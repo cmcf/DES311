@@ -18,4 +18,17 @@ public class EnemyManager : MonoBehaviour
             enemy.IncreaseEnemyStats();
         }
     }
+
+    // Method to wipe out all enemies
+    public void WipeOutEnemies()
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            // You might want to play a wipeout animation or effect here if needed
+            Destroy(enemy.gameObject);
+        }
+
+        // Clear the list of enemies
+        enemies.Clear();
+    }
 }
