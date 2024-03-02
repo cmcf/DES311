@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickupManager : MonoBehaviour
 {
     // Reference to the particle effect for the wipeout effect
-    public GameObject wipeoutEffect;
+    public GameObject pickupEffect;
     // Array of card prefabs to display
     public GameObject[] powerupCardPrefabs;
     // Reference to the EnemyManager
@@ -19,8 +19,32 @@ public class PickupManager : MonoBehaviour
 
     [SerializeField] int XPIncreaseAmount = 500;
     [SerializeField] int healthIncreaseAmount = 10;
+    [SerializeField] float decreaseSpeedAmount = 0.5f;
 
-    // Method to activate the power-up
+    // Singleton instance
+    private static PickupManager instance;
+
+    // Public method to access the singleton instance
+    public static PickupManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                // Find the instance in the scene if it hasn't been set
+                instance = FindObjectOfType<PickupManager>();
+
+                // If still not found, log an error
+                if (instance == null)
+                {
+                    Debug.LogError("No instance of PickupManager found in the scene.");
+                }
+            }
+            return instance;
+        }
+    }
+
+    // Method to select and activate a power-up card at random
     public void ActivatePowerUp()
     {
         // Check if there are any card prefabs available
@@ -29,6 +53,7 @@ public class PickupManager : MonoBehaviour
             Debug.LogWarning("No card prefabs assigned!");
             return;
         }
+        // Game is pause while card is active
         Time.timeScale = 0f;
 
         // Generate a random index to select a card prefab
@@ -47,50 +72,40 @@ public class PickupManager : MonoBehaviour
             }
         }
 
-        // Instantiate the wipeout effect at the location of the power-up
-        Instantiate(wipeoutEffect, transform.position, Quaternion.identity);
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        // Triggers the powerup when picked up. 
-        ActivatePowerUp();
+        // Instantiate the pick-up effect at the location of the power-up
+        Instantiate(pickupEffect, transform.position, Quaternion.identity);
     }
 
     public void WipeoutEnemies()
     {
         Time.timeScale = 1f;
-        // Wipe out all current enemies in the scene
+        // Removes all current enemies spawned in the level
         enemyManager.WipeOutEnemies();
-        // Disable the activated card GameObject associated with this power-up
-        if (activatedCard != null)
-        {
-            activatedCard.SetActive(false);
-        }
-        // Removes pickup
-        gameObject.SetActive(false);
-
+        DeactivateCard();
     }
 
     public void IncreaseXP()
     {
         Time.timeScale = 1f;
+        // Increases the players current XP
         playerStats.currentXP += XPIncreaseAmount;
         GameManager.instance.IncreaseXP(XPIncreaseAmount);
-        // Disable the activated card GameObject associated with this power-up
-        if (activatedCard != null)
-        {
-            activatedCard.SetActive(false);
-        }
-        // Removes pickup
-        gameObject.SetActive(false);
+        DeactivateCard();
     }
 
     public void IncreaseHealth()
     {
         Time.timeScale = 1f;
+        // Increases the players current health
         playerLoadout.currentLoadout.health += healthIncreaseAmount;
-        // Disable the activated card GameObject associated with this power-up
+        // Decreases movement speed
+        playerLoadout.currentLoadout.moveSpeed -= decreaseSpeedAmount;
+        DeactivateCard();  
+    }
+
+    void DeactivateCard()
+    {
+        // Disables the activated card
         if (activatedCard != null)
         {
             activatedCard.SetActive(false);

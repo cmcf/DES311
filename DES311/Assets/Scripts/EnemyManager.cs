@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    private List<Enemy> enemies = new List<Enemy>();
+    List<Enemy> enemies = new List<Enemy>();
 
     public void RegisterEnemy(Enemy enemy)
     {
@@ -24,10 +24,12 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (Enemy enemy in enemies)
         {
-            // You might want to play a wipeout animation or effect here if needed
-            Destroy(enemy.gameObject);
+            // Check if the enemy has been destroyed before accessing it
+            if (enemy != null && !enemy.IsDestroyed())
+            {
+                Destroy(enemy.gameObject);
+            }
         }
-
         // Clear the list of enemies
         enemies.Clear();
     }

@@ -15,7 +15,6 @@ public class ItemManager : MonoBehaviour
 
     void Start()
     {
-        playerScript = FindObjectOfType<PlayerMovement>();
         playerStats = FindObjectOfType<Player>();
     }
 
@@ -68,6 +67,8 @@ public class ItemManager : MonoBehaviour
         }
 
         ResetCardPositions();
+
+        playerScript = FindObjectOfType<PlayerMovement>();
 
         // Check if the current weapon has reached the maximum upgrade for each attribute
         bool cooldownMaxed = playerScript.currentLoadout.cooldown <= playerScript.currentLoadout.minCooldown;

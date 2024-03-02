@@ -12,6 +12,10 @@ public class Enemy : MonoBehaviour, IDamageable
     NavMeshAgent nav;
     EnemyManager enemyManager;
     Animator anim;
+    [SerializeField] GameObject powerUpPrefab;
+
+    // Chance of pickup spawning 
+    [SerializeField] float spawnProbability = 0.2f;
 
     [Header("Movement")]
     float moveSpeed;
@@ -34,6 +38,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     bool hit = false;
     bool reachedPlayer = false;
+    // Flag to indicate whether the enemy has been destroyed
+    bool isDestroyed = false;
 
     // Gets the Position property from IDamageable interface
     public float Health { get; set; }
@@ -90,8 +96,22 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
+
+    public bool IsDestroyed()
+    {
+        return isDestroyed;
+    }
+
     void Die()
     {
+        // Checks if the pickup should spawn based on the probability
+        if (Random.value < spawnProbability)
+        {
+            // Instantiates the pickup at the enemy's position
+            Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
+        }
+        isDestroyed = true;
+        // Destroy the enemy gameObject
         Destroy(gameObject);
     }
     void MoveAndRotateTowardsPlayer()
