@@ -168,9 +168,15 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void DamagePlayer()
     {
-        Debug.Log("Damaged Player");
-        // Perform the attack by dealing damage to the player
-        player.Damage(damageAmount);
+        // Calculate distance between enemy and player
+        float distanceToPlayer = Vector3.Distance(transform.position, playerLocation.position);
+
+        // Check if the player is within the attack range
+        if (distanceToPlayer <= stoppingDistance)
+        {
+            // Perform the attack by dealing damage to the player
+            player.Damage(damageAmount);
+        }
     }
 
     IEnumerator ResetIsAttackingAfterDelay(float delay)
