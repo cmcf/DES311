@@ -11,6 +11,7 @@ public class Player : MonoBehaviour, IDamageable
     EnemyManager enemyManager;
     public HUD playerHUD;
     Animator animator;
+    CharacterController controller;
 
     [SerializeField] float endSceneLoadDelay = 1f;
     [Header("Text Components")]
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour, IDamageable
 
     void Start()
     {
+        controller= GetComponent<CharacterController>();
         animator = GetComponent<Animator>();    
         enemyManager = FindObjectOfType<EnemyManager>();
         playerLoadout = GetComponent<PlayerMovement>();
@@ -89,7 +91,10 @@ public class Player : MonoBehaviour, IDamageable
         if (isDead) { return; }
         Debug.Log("Dead");
         isDead = true;
+        // Disable the character controller
+        controller.enabled = false;
         animator.SetTrigger("Dead");
+        // load end scene after a delay
         Invoke(nameof(LoadEndLevel), endSceneLoadDelay);
     }
 
