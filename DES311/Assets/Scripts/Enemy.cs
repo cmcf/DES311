@@ -27,10 +27,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("Damage")]
     [SerializeField] float attackCooldown = 1f;
-    float lastAttackTime = -Mathf.Infinity;
     [SerializeField] float damageAmount = 10f;
     [SerializeField] int XPAmount = 25;
-   
+
+    private Vector3 lastPlayerPosition;
 
     bool hit = false;
     bool reachedPlayer = false;
@@ -104,11 +104,8 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             // Stop moving
             nav.isStopped = true;
-
-            // Play attack animation
+            // Play idle animation
             anim.SetBool("HasStopped", true);
-
-            AttackPlayer();
 
             // Rotate towards the player only if not reached player yet
             if (!reachedPlayer)
@@ -121,6 +118,11 @@ public class Enemy : MonoBehaviour, IDamageable
             // Set flag indicating that the enemy has reached the player
             reachedPlayer = true;
 
+            // Attack the player
+            AttackPlayer();
+
+            // Store the player's current position
+            lastPlayerPosition = playerLocation.position;
         }
         else
         {
@@ -132,32 +134,39 @@ public class Enemy : MonoBehaviour, IDamageable
             }
             else
             {
-                // Resume moving
-                nav.isStopped = false;
-                // Play attack animation
-                anim.SetBool("HasStopped", false);
+                // Check if the player has moved away
+                if (Vector3.Distance(lastPlayerPosition, playerLocation.position) > stoppingDistance)
+                {
+                    // Stop the attack
+                    StopAttack();
 
-                // Reset reachedPlayer flag
-                reachedPlayer = false;
+                    // Resume moving
+                    nav.isStopped = false;
+                    // Play attack animation
+                    anim.SetBool("HasStopped", false);
+                    // Reset reachedPlayer flag
+                    reachedPlayer = false;
+                }
             }
         }
     }
 
-    public void AttackPlayer()
+    void AttackPlayer()
     {
         if (player.isDead) { return; }
         // Play attack animation
         anim.SetBool("IsAttacking", true);
-
-        // Update the last attack time to the current time
-        lastAttackTime = Time.time;
-
-        // Assuming attackAnimationDuration is the duration of the attack animation
+        // Reset attack animation
         StartCoroutine(ResetIsAttackingAfterDelay(attackCooldown));
-
     }
 
-    public void DamagePlayer()
+    void StopAttack()
+    {
+        // Stop the attack animation
+        anim.SetBool("IsAttacking", false);
+    }
+
+    void DamagePlayer()
     {
         Debug.Log("Damaged Player");
         // Perform the attack by dealing damage to the player

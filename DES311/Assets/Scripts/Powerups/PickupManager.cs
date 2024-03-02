@@ -76,6 +76,7 @@ public class PickupManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         playerStats.currentXP += XPIncreaseAmount;
+        GameManager.instance.IncreaseXP(XPIncreaseAmount);
         // Disable the activated card GameObject associated with this power-up
         if (activatedCard != null)
         {
