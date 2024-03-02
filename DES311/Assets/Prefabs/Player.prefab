@@ -58,9 +58,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.51068205
-  m_Height: 1.77
+  m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: -0.012516901, y: 2, z: -0.023199134}
+  m_Center: {x: -0.012516901, y: 1.7, z: -0.023199134}
 --- !u!114 &2031717858816543538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.4, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &4576724743769377918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,8 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemManager: {fileID: 0}
-  playerStats: {fileID: 2031717858816543538}
+  playerLoadout: {fileID: 0}
   playerHUD: {fileID: 0}
+  endSceneLoadDelay: 5
   currentLevelText: {fileID: 0}
   currentXP: 0
   requiredXP: 100

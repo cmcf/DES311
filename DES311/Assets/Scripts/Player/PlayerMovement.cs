@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 {
     Animator animator;
     public WeaponItem currentLoadout;
+    Player playerStats;
 
     [Header("Joystick")]
     public VariableJoystick movementJoystick;
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         ResetPlayerStats();
         EnableJoystick();
+        playerStats = GetComponent<Player>();
     }
     public WeaponItem GetDefaultWeapon()
     {
@@ -68,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
+        if (playerStats.isDead) return;
         // Checks if the joystick is enabled
         if (isMoving)
         { 
@@ -108,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Aim()
     {
+        if (playerStats.isDead) return;
         if (aimJoystick == null)
         {
             return;
@@ -137,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FireProjectile()
     {
-
+        if (playerStats.isDead) return;
         if (Time.time - lastFireTime >= currentLoadout.cooldown)
         {
             if (currentLoadout.projectilePrefab == null || spawnPoint == null)

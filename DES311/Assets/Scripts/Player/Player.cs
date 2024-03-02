@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using static Cinemachine.DocumentationSortingAttribute;
 using static Damage;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamageable
 {
     public ItemManager itemManager;
-    public PlayerMovement playerStats;
+    public PlayerMovement playerLoadout;
     EnemyManager enemyManager;
     public HUD playerHUD;
+    Animator animator;
+
+    [SerializeField] float endSceneLoadDelay = 1f;
     [Header("Text Components")]
     public TextMeshProUGUI currentLevelText;
   
@@ -26,8 +28,9 @@ public class Player : MonoBehaviour, IDamageable
 
     void Start()
     {
+        animator = GetComponent<Animator>();    
         enemyManager = FindObjectOfType<EnemyManager>();
-        playerStats = GetComponent<PlayerMovement>();
+        playerLoadout = GetComponent<PlayerMovement>();
         // Enable the XPEvent
         GameManager.instance.XPEvent += HandleXP;
         currentLevelText.text = "Level: " + currentLevel.ToString();    
@@ -73,9 +76,9 @@ public class Player : MonoBehaviour, IDamageable
     {
         Debug.Log("PlayerHit");
         
-        playerStats.currentLoadout.health -= damage;
+        playerLoadout.currentLoadout.health -= damage;
         playerHUD.UpdateHealthBar();
-        if (playerStats.currentLoadout.health <= 0)
+        if (playerLoadout.currentLoadout.health <= 0)
         {
             Die();
         }
@@ -83,8 +86,16 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        if (isDead) { return; }
         Debug.Log("Dead");
         isDead = true;
+        animator.SetTrigger("Dead");
+        Invoke(nameof(LoadEndLevel), endSceneLoadDelay);
+    }
+
+    void LoadEndLevel()
+    {
+        SceneManager.LoadScene(2);
     }
    
 }
