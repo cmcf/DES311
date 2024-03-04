@@ -3,6 +3,7 @@ using UnityEngine;
 public class Rifle : Weapon
 {
     PlayerMovement playerScript;
+    Player playerStats;
     public GameObject muzzle;
 
     bool playMuzzle;
@@ -12,6 +13,7 @@ public class Rifle : Weapon
     {
         // Find and store the PlayerMovement script in the scene
         playerScript = FindObjectOfType<PlayerMovement>();
+        playerStats = FindObjectOfType<Player>();
     }
 
     void Update()
@@ -19,6 +21,7 @@ public class Rifle : Weapon
         // Check if the playerScript is assigned
         if (playerScript != null)
         {
+            if (playerStats.isDead) { return; }
             // Activate the muzzle flash GameObject if the player is aiming and it's not already active
             if (playerScript.isFiring)
             {

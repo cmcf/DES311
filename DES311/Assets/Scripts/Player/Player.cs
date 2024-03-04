@@ -56,6 +56,11 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
+
     void LevelUp()
     {
         // Pauses the game
