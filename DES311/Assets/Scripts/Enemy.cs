@@ -104,10 +104,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Die()
     {
-        // Checks if the pickup should spawn based on the probability
+        // Checks if the pickup should spawn based on the probability value
         if (Random.value < spawnProbability)
         {
-            // Instantiates the pickup at the enemy's position
+            // Spawns the pickup at the enemy's position
             Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
         }
         isDestroyed = true;

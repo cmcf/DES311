@@ -20,7 +20,7 @@ public class Rifle : Weapon
         if (playerScript != null)
         {
             // Activate the muzzle flash GameObject if the player is aiming and it's not already active
-            if (playerScript.isAiming)
+            if (playerScript.isFiring)
             {
                 muzzle.SetActive(true);
             }

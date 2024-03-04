@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     
     float lastFireTime;
-
+    [SerializeField] float muzzleDelay = 0.1f;
     bool isMoving;
 
     void Start()
@@ -108,6 +108,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    bool CanFire()
+    {
+        // Check if enough time has passed since the last firing
+        return Time.time - lastFireTime >= currentLoadout.cooldown;
+    }
 
     void Aim()
     {
@@ -116,12 +121,12 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        
 
         var rotationDirection = new Vector3(aimJoystick.Direction.x, 0f, aimJoystick.Direction.y);
         if (rotationDirection.sqrMagnitude <= 0f)
         {
             isAiming = false;
+            isFiring = false; // Player is not aiming, so they can't fire
             return;
         }
 
@@ -130,22 +135,29 @@ public class PlayerMovement : MonoBehaviour
         var targetDirection = Vector3.RotateTowards(controller.transform.forward, rotationDirection, rotationSpeed * Time.deltaTime, 0f);
         controller.transform.rotation = Quaternion.LookRotation(targetDirection);
 
-        // Fire projectile when the aim joystick is pressed and cooldown has passed
-        if (aimJoystick.Direction.magnitude > 0.01f && CanFire())
+        // Check if the player can fire
+        if (CanFire())
         {
+            // Player is aiming and can fire
             isFiring = true;
-            FireProjectile();
+
+            // Fire projectile when the aim joystick is pressed
+            if (aimJoystick.Direction.magnitude > 0.01f)
+            {
+                FireProjectile();
+            }
         }
-      
     }
 
     void FireProjectile()
     {
         if (playerStats.isDead) return;
-        if (Time.time - lastFireTime >= currentLoadout.cooldown)
+
+        if (CanFire())
         {
             if (currentLoadout.projectilePrefab == null || spawnPoint == null)
             {
+                isFiring = false; // Player can't fire without a projectile or spawn point
                 return;
             }
 
@@ -154,14 +166,22 @@ public class PlayerMovement : MonoBehaviour
             Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
             projectileRb.velocity = projectile.transform.forward * currentLoadout.speed;
 
-
             // Update last fire time and call StopFiring
             lastFireTime = Time.time;
+            
             StartCoroutine(StopFiring(currentLoadout.cooldown));
+
+            // Set isFiring to true for this fire
+            Invoke("ResetFiring", muzzleDelay);
+
         }
     }
 
-    // Example method to check if the player has a specific projectile equipped using a tag
+    void ResetFiring()
+    {
+        isFiring = true;
+    }
+
     public bool HasProjectileWithTag(string tag)
     {
         // Check if the player has a projectile equipped and if its tag matches the desired tag
@@ -179,12 +199,7 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         isFiring = false;
-    }
-
-    bool CanFire()
-    {
-        // Check if enough time has passed since the last firing
-        return Time.time - lastFireTime >= currentLoadout.cooldown;
+        Invoke("ResetFiring", 0.4f);
     }
 
 }

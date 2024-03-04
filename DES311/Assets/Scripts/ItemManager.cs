@@ -165,7 +165,7 @@ public class ItemManager : MonoBehaviour
 
     bool CheckIfPlayerAboveLevel3()
     {
-       if (playerStats.currentLevel >= 0)
+       if (playerStats.currentLevel >= 3)
        {
            return true;
        }

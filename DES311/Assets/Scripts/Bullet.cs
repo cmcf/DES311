@@ -10,8 +10,13 @@ public class Bullet : MonoBehaviour
     [SerializeField] float destroyDelay = 3f;
     [SerializeField] GameObject hitEffect;
     [SerializeField] float destroyDelayAfterCollision = 0.2f;
+    [SerializeField] AudioClip bulletSFX;
     void Start()
     {
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.clip = bulletSFX;
+        audio.Play();
+        
         initialPosition = transform.position;
         // Call the DestroyActor method after a delay
         Invoke(nameof(DestroyBullet), destroyDelay);
@@ -30,7 +35,7 @@ public class Bullet : MonoBehaviour
                 Instantiate(hitEffect, transform.position, Quaternion.identity);
             }
 
-            Destroy(gameObject);
+            Invoke(nameof(DestroyBullet), destroyDelay);
         }
         else
         {
