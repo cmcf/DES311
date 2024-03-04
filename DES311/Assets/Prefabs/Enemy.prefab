@@ -65,10 +65,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6337385
-  m_Height: 2.5
+  m_Radius: 0.99099016
+  m_Height: 2.9369202
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.059178114, y: 0.21846008, z: -0.0522722}
 --- !u!114 &8855579179144299166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
-  spawnProbability: 1
+  spawnProbability: 0.1
   minMoveSpeed: 1.2
   maxMoveSpeed: 2.5
   rotationSpeed: 0.001
