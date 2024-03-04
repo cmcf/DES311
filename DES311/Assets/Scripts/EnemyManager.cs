@@ -22,15 +22,28 @@ public class EnemyManager : MonoBehaviour
     // Method to wipe out all enemies
     public void WipeOutEnemies()
     {
-        foreach (Enemy enemy in enemies)
+        // Create a copy of the enemies list
+        List<Enemy> enemiesCopy = new List<Enemy>(enemies);
+
+        // Iterate over the copy of the enemies list
+        foreach (Enemy enemy in enemiesCopy)
         {
-            // Check if the enemy has been destroyed before accessing it
-            if (enemy != null && !enemy.IsDestroyed())
+            // Check if the enemy is null or its game object is null
+            if (enemy == null || enemy.gameObject == null)
             {
+                // Remove the null or destroyed enemy from the original list
+                enemies.Remove(enemy);
+                continue;
+            }
+
+            // Check if the enemy's game object is active
+            if (enemy.gameObject.activeSelf)
+            {
+                // If the enemy is active, destroy it
                 Destroy(enemy.gameObject);
+                // Remove the destroyed enemy from the original list
+                enemies.Remove(enemy);
             }
         }
-        // Clear the list of enemies
-        enemies.Clear();
     }
 }
