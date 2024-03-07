@@ -103,8 +103,8 @@ public class PickupManager : MonoBehaviour
         DeactivateCard();  
     }
 
-    void DeactivateCard()
-    {
+     void DeactivateCard()
+     {
         // Disables the activated card
         if (activatedCard != null)
         {
@@ -112,5 +112,11 @@ public class PickupManager : MonoBehaviour
         }
         // Removes pickup
         gameObject.SetActive(false);
+     }
+
+    public void DeclineCard()
+    {
+        Time.timeScale = 1f;
+        DeactivateCard();
     }
 }
