@@ -29,6 +29,7 @@ public class VariableJoystick : Joystick
         base.Start();
         fixedPosition = background.anchoredPosition;
         SetMode(joystickType);
+        background.gameObject.SetActive(true);
     }
 
     public override void OnPointerDown(PointerEventData eventData)

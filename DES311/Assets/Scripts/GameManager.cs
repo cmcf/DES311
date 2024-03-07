@@ -36,4 +36,9 @@ public class GameManager : MonoBehaviour
         // If not null, increase XP by amoung gained
         XPEvent?.Invoke(amount);
     }
+
+    public void ResetGame()
+    {
+        Destroy(gameObject);
+    }
 }
