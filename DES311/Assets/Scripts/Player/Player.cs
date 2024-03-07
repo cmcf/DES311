@@ -99,12 +99,14 @@ public class Player : MonoBehaviour, IDamageable
         // Disable the character controller
         controller.enabled = false;
         animator.SetTrigger("Dead");
+        
         // load end scene after a delay
         Invoke(nameof(LoadEndLevel), endSceneLoadDelay);
     }
 
     void LoadEndLevel()
     {
+        GameManager.instance.ResetGame();
         SceneManager.LoadScene(2);
     }
    
