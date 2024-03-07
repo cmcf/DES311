@@ -116,7 +116,6 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-
     public bool IsDestroyed()
     {
         return isDestroyed;

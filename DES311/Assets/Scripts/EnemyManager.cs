@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -23,7 +24,7 @@ public class EnemyManager : MonoBehaviour
     public void WipeOutEnemies()
     {
         // Create a copy of the enemies list
-        List<Enemy> enemiesCopy = new List<Enemy>(enemies);
+    List<Enemy> enemiesCopy = new List<Enemy>(enemies);
 
         // Iterate over the copy of the enemies list
         foreach (Enemy enemy in enemiesCopy)
