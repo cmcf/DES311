@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] GameObject[] enemyPrefabs;
     [SerializeField] Transform[] spawnPoints;
+    [SerializeField] EnemyManager enemyManager;
 
     [SerializeField] int initialEnemyAmount = 5;
     [SerializeField] int enemiesPerWaveIncrease = 2;
@@ -41,7 +42,9 @@ public class Spawner : MonoBehaviour
 
                     if (Random.value < spawnProbability)
                     {
-                        Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+                        GameObject enemyObject = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+                        // Register the spawned enemy with the EnemyManager
+                        enemyManager.RegisterEnemy(enemyObject.GetComponent<Enemy>());
                         break;
                     }
                 }
@@ -52,7 +55,7 @@ public class Spawner : MonoBehaviour
             currentWave++;
             currentEnemyAmount += enemiesPerWaveIncrease;
         }
-      
+
     }
 
     void CheckCurrentWave()
