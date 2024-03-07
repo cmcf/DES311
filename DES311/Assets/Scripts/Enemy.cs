@@ -14,6 +14,11 @@ public class Enemy : MonoBehaviour, IDamageable
     Animator anim;
     [SerializeField] GameObject powerUpPrefab;
 
+    public Color flashColour = Color.green;
+
+    Renderer enemyRenderer;
+    Color originalColor;
+
     // Chance of pickup spawning 
     [SerializeField] float spawnProbability = 0.2f;
 
@@ -48,6 +53,8 @@ public class Enemy : MonoBehaviour, IDamageable
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        enemyRenderer = GetComponentInChildren<Renderer>();
+        originalColor = enemyRenderer.material.color;
         enemyManager = FindObjectOfType<EnemyManager>();
         if (enemyManager != null)
         {
@@ -82,10 +89,23 @@ public class Enemy : MonoBehaviour, IDamageable
             {
                 Die();
             }
-
+            // Change colour of enemy 
+            StartCoroutine(HitEffect());
             hit = true;
         }
     }
+
+     IEnumerator HitEffect()
+     {
+        // Change enemy colour to the set flash colour
+        enemyRenderer.material.color = flashColour;
+
+        // Wait until delay has ended
+        yield return new WaitForSeconds(0.1f);
+
+        // Revert enemy colour back to original
+        enemyRenderer.material.color = Color.white;
+     }
 
     // Reset flags when enemy is hit by a new bullet
     void OnTriggerEnter(Collider collision)
