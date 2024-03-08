@@ -30,28 +30,35 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        while (true) // Infinite loop for spawning waves indefinitely
+        while (true)
         {
+            // Spawns new wave of enemies after a delay
             yield return new WaitForSeconds(initialDelayBetweenWaves + (currentWave * delayIncreasePerWave));
 
+            // Iterates through each enemy to be spawned in the current wave
             for (int i = 0; i < currentEnemyAmount; i++)
             {
+                // Iterates through each spawn point in the scene
                 foreach (Transform spawnPoint in spawnPoints)
                 {
+                    // Selects a random enemy prefab from the array
                     GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
+                    // Checks a random value for spawning at a spawn point
                     if (Random.value < spawnProbability)
                     {
+                        // Spawns an enemy at a spawn point with no rotation
                         GameObject enemyObject = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
                         // Register the spawned enemy with the EnemyManager
                         enemyManager.RegisterEnemy(enemyObject.GetComponent<Enemy>());
+                        // Break after spawning one enemy per spawn point
                         break;
                     }
                 }
-
+                // Controls the spawn rate
                 yield return new WaitForSeconds(spawnRate);
             }
-
+            // Increase difficulty by spawning more enemies each wave
             currentWave++;
             currentEnemyAmount += enemiesPerWaveIncrease;
         }

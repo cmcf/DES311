@@ -80,11 +80,14 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     public void Damage(float damage)
-    {
-        Debug.Log("PlayerHit");
-        
+    { 
+        // Current health is decreased by the damage received
         playerLoadout.currentLoadout.health -= damage;
+        // Enable vibration
+        Handheld.Vibrate();
+        // Health bar is updated with the current health amount
         playerHUD.UpdateHealthBar();
+
         if (playerLoadout.currentLoadout.health <= 0)
         {
             Die();
