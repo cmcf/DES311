@@ -13,12 +13,17 @@ public class PickupManager : MonoBehaviour
     // Reference to the card that is activated
     private GameObject activatedCard;
 
+    // Reference to the Enemy script
+    public Enemy enemyScript;
+
     public Player playerStats;
+
+    float amount = 20f;
 
     public PlayerMovement playerLoadout;
 
     [SerializeField] int XPIncreaseAmount = 500;
-    [SerializeField] int healthIncreaseAmount = 10;
+    [SerializeField] int playerHealthIncreaseAmount = 10;
     [SerializeField] float decreaseSpeedAmount = 0.5f;
 
     // Singleton instance
@@ -90,6 +95,8 @@ public class PickupManager : MonoBehaviour
         // Increases the players current XP
         playerStats.currentXP += XPIncreaseAmount;
         GameManager.instance.IncreaseXP(XPIncreaseAmount);
+        // Increases current enemies health
+        enemyManager.IncreaseEnemyHealth(amount);
         DeactivateCard();
     }
 
@@ -97,7 +104,7 @@ public class PickupManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         // Increases the players current health
-        playerLoadout.currentLoadout.health += healthIncreaseAmount;
+        playerLoadout.currentLoadout.health += playerHealthIncreaseAmount;
         // Decreases movement speed
         playerLoadout.currentLoadout.moveSpeed -= decreaseSpeedAmount;
         DeactivateCard();  

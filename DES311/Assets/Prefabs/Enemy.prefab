@@ -90,7 +90,9 @@ MonoBehaviour:
   rotationSpeed: 0.001
   stoppingDistance: 3
   levelUpStatIncrease: 0.5
-  maxHealth: 25
+  defaultHealth: 30
+  increaseHealthAmount: 5
+  currentHealth: 0
   attackCooldown: 0.5
   damageAmount: 10
   XPAmount: 25

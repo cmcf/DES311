@@ -6,17 +6,16 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     List<Enemy> enemies = new List<Enemy>();
-
     public void RegisterEnemy(Enemy enemy)
-    {
+     {
         enemies.Add(enemy);
     }
-
     public void LevelUpEnemies()
     {
         foreach (Enemy enemy in enemies)
         {
             enemy.IncreaseEnemyStats();
+
         }
     }
 
@@ -44,6 +43,18 @@ public class EnemyManager : MonoBehaviour
                 Destroy(enemy.gameObject);
                 // Remove the destroyed enemy from the original list
                 enemies.Remove(enemy);
+            }
+        }
+    }
+
+    public void IncreaseEnemyHealth(float amount)
+    {
+        Debug.Log("Increasing enemy health by: " + amount);
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                enemy.IncreaseHealth(amount);
             }
         }
     }

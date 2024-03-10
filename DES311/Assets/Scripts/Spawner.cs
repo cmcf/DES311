@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] float initialDelayBetweenWaves = 2f;
     [SerializeField] float delayIncreasePerWave = 1f;
+    [SerializeField] float initialEnemyHealth = 30;
 
     int currentWave = 0;
     int currentEnemyAmount;
@@ -49,8 +50,26 @@ public class Spawner : MonoBehaviour
                     {
                         // Spawns an enemy at a spawn point with no rotation
                         GameObject enemyObject = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+          
                         // Register the spawned enemy with the EnemyManager
                         enemyManager.RegisterEnemy(enemyObject.GetComponent<Enemy>());
+
+                        // Get the Enemy component from the instantiated enemy object
+                        Enemy enemy = enemyObject.GetComponent<Enemy>();
+
+                        // Check if the enemy component exists
+                        if (enemy != null)
+                        {
+                            // Set the default health of the enemy
+                            enemy.currentHealth = enemy.defaultHealth;
+                            // Register the spawned enemy with the EnemyManager
+                            enemyManager.RegisterEnemy(enemy);
+                        }
+                        else
+                        {
+                            Debug.LogError("Enemy script not found on the instantiated object.");
+                        }
+
                         // Break after spawning one enemy per spawn point
                         break;
                     }

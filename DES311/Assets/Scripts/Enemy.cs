@@ -7,6 +7,8 @@ using static Damage;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
+    private static List<Enemy> allEnemies = new List<Enemy>();
+
     Transform playerLocation;
     Player player;
     NavMeshAgent nav;
@@ -31,8 +33,9 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] float levelUpStatIncrease = 0.5f;
 
     [Header("Health")]
-    [SerializeField] float maxHealth = 100f;
-    float currentHealth;
+    public float defaultHealth = 30f;
+    [SerializeField] float increaseHealthAmount = 5f;
+    public float currentHealth;
 
     [Header("Damage")]
     [SerializeField] float attackCooldown = 1f;
@@ -43,13 +46,17 @@ public class Enemy : MonoBehaviour, IDamageable
 
     bool hit = false;
     bool reachedPlayer = false;
+    bool hasIncreasedHealth = false;
     // Flag to indicate whether the enemy has been destroyed
     bool isDestroyed = false;
 
     // Gets the Position property from IDamageable interface
     public float Health { get; set; }
 
-
+    void Awake()
+    {
+        allEnemies.Add(this);
+    }
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -61,9 +68,10 @@ public class Enemy : MonoBehaviour, IDamageable
             enemyManager.RegisterEnemy(this);
         }
         moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
-        currentHealth = maxHealth;
         nav = GetComponent<NavMeshAgent>();
         nav.speed = moveSpeed;
+        currentHealth = defaultHealth;
+
         // Find the player GameObject and get its transform component
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
         player = FindObjectOfType<Player>();
@@ -74,7 +82,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (playerLocation != null)
         {
             MoveAndRotateTowardsPlayer();
-        }  
+        }
     }
 
     public void Damage(float damage)
@@ -82,7 +90,6 @@ public class Enemy : MonoBehaviour, IDamageable
         // Only deals damage if damage has not already been dealt
         if (!hit)
         {
-            GameManager.instance.IncreaseXP(XPAmount);
  
             currentHealth -= damage;
             if (currentHealth <= 0)
@@ -123,8 +130,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Die()
     {
+        // Increases player XP
+        GameManager.instance.IncreaseXP(XPAmount);
         // Checks if the pickup should spawn based on the probability value
-        if (Random.value < spawnProbability)
+        if (Random.value < spawnProbability && player.currentLevel >= 3)
         {
             // Spawns the pickup at the enemy's position
             Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
@@ -237,9 +246,18 @@ public class Enemy : MonoBehaviour, IDamageable
 
         // Set moveSpeed within the new range
         moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
-
-        Debug.Log(moveSpeed);
     }
+
+    public void IncreaseHealth(float amount)
+    {
+        if (!hasIncreasedHealth)
+        {
+            currentHealth += amount;
+            hasIncreasedHealth = true;
+        }
+       
+    }
+
 }
 
 
