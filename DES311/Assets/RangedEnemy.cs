@@ -38,10 +38,11 @@ public class RangedEnemy : MonoBehaviour, IDamageable
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
-        nav.stoppingDistance = stoppingDistance; // Set the stopping distance
-        currentHealth = maxHealth;
+        nav.speed = moveSpeed;
 
+        // Find the player GameObject and get its transform component
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
+        player = FindObjectOfType<Player>();
         //StartCoroutine(AttackPlayerRepeatedly());
     }
 
@@ -58,25 +59,17 @@ public class RangedEnemy : MonoBehaviour, IDamageable
         // Calculate distance between enemy and player
         float distanceToPlayer = Vector3.Distance(transform.position, playerLocation.position);
 
+        // Rotate towards the player's position
+        Rotate();
+
         // Check if the enemy is near the player
         if (distanceToPlayer < stoppingDistance)
         {
+            // Stop moving
             nav.isStopped = true;
-
-
-            // Rotate towards the player only if not reached player yet
-            if (!reachedPlayer)
-            {
-                Vector3 direction = (playerLocation.position - transform.position).normalized;
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
-            }
 
             // Set flag indicating that the enemy has reached the player
             reachedPlayer = true;
-
-            // Store the player's current position
-            lastPlayerPosition = playerLocation.position;
         }
         else
         {
@@ -90,30 +83,35 @@ public class RangedEnemy : MonoBehaviour, IDamageable
                 // Check if the player has moved away
                 if (Vector3.Distance(lastPlayerPosition, playerLocation.position) > stoppingDistance)
                 {
-
                     // Resume moving
                     nav.isStopped = false;
-    
+
                     // Reset reachedPlayer flag
                     reachedPlayer = false;
                 }
             }
         }
-
     }
-  
 
-        IEnumerator AttackPlayerRepeatedly()
+    void Rotate()
     {
-        while (true)
-        {
-            if (canAttack && playerLocation != null && Vector3.Distance(transform.position, playerLocation.position) <= stoppingDistance)
-            {
-                AttackPlayer();
-            }
-            yield return new WaitForSeconds(attackCooldown);
-        }
+        // Rotate towards the player's position
+        Vector3 direction = (playerLocation.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
     }
+
+    IEnumerator AttackPlayerRepeatedly()
+        {
+            while (true)
+            {
+                if (canAttack && playerLocation != null && Vector3.Distance(transform.position, playerLocation.position) <= stoppingDistance)
+                {
+                    AttackPlayer();
+                }
+                yield return new WaitForSeconds(attackCooldown);
+            }
+        }
 
     void AttackPlayer()
     {
