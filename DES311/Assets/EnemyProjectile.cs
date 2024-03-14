@@ -16,14 +16,14 @@ public class EnemyProjectile : MonoBehaviour
         float halfFlightTime = Mathf.Sqrt(projectileHeight * 2) / gravity;
 
         // Calculate the direction towards the destination
-        Vector3 DestinationVector = Destination - transform.position;
-        DestinationVector.y = 0; // Disregard the vertical component
+        Vector3 projectileDestination = Destination - transform.position;
+        projectileDestination.y = 0; // Disregard the vertical component
 
-        // Calculate the horizontal distance
-        float horizontalDistance = DestinationVector.magnitude;
+        // Calculate the horizontal distances
+        float horizontalDistance = projectileDestination.magnitude;
 
-        // Calculate the forward direction (normalized)
-        Vector3 forwardDirection = DestinationVector.normalized;
+        // Calculate the forward direction
+        Vector3 forwardDirection = projectileDestination.normalized;
 
         // Calculate the up speed
         float upSpeed = halfFlightTime * gravity;
@@ -48,6 +48,11 @@ public class EnemyProjectile : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             DealDamage(other.transform);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);    
         }
         
     }

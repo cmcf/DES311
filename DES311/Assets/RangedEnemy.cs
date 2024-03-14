@@ -11,6 +11,9 @@ public class RangedEnemy : MonoBehaviour, IDamageable
     NavMeshAgent nav;
     Animator anim;
 
+    public Color flashColour;
+    Renderer enemyRenderer;
+
     [SerializeField] Transform projectileSpawnPoint;
     [SerializeField] EnemyProjectile projectilePrefab;
 
@@ -21,7 +24,7 @@ public class RangedEnemy : MonoBehaviour, IDamageable
 
     [Header("Health")]
     [SerializeField] float maxHealth = 30f;
-    float currentHealth;
+    float currentHealth = 50;
 
     [Header("Damage")]
     [SerializeField] float attackCooldown = 2f;
@@ -43,6 +46,7 @@ public class RangedEnemy : MonoBehaviour, IDamageable
         // Find the player GameObject and get its transform component
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
         player = FindObjectOfType<Player>();
+        enemyRenderer = GetComponentInChildren<Renderer>();
         //StartCoroutine(AttackPlayerRepeatedly());
     }
 
@@ -121,7 +125,6 @@ public class RangedEnemy : MonoBehaviour, IDamageable
         EnemyProjectile projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
         projectile.Launch(playerLocation.position);
         
-        // Optionally set projectile properties like direction and damage
         // Wait for the attack cooldown
         yield return new WaitForSeconds(attackCooldown);
         // Reset the flag to allow the enemy to attack again
@@ -131,10 +134,23 @@ public class RangedEnemy : MonoBehaviour, IDamageable
     public void Damage(float damage)
     {
         currentHealth -= damage;
+        StartCoroutine(HitEffect());
         if (currentHealth <= 0 && !isDestroyed)
         {
             Die();
         }
+    }
+
+    IEnumerator HitEffect()
+    {
+        // Change enemy colour to the set flash colour
+        enemyRenderer.material.color = flashColour;
+
+        // Wait until delay has ended
+        yield return new WaitForSeconds(0.1f);
+
+        // Revert enemy colour back to original
+        enemyRenderer.material.color = Color.white;
     }
 
     void Die()
