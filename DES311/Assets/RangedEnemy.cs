@@ -12,7 +12,7 @@ public class RangedEnemy : MonoBehaviour, IDamageable
     Animator anim;
 
     [SerializeField] Transform projectileSpawnPoint;
-    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] EnemyProjectile projectilePrefab;
 
     [Header("Movement")]
     [SerializeField] float moveSpeed = 3f;
@@ -70,6 +70,9 @@ public class RangedEnemy : MonoBehaviour, IDamageable
 
             // Set flag indicating that the enemy has reached the player
             reachedPlayer = true;
+
+            // Attack the player when range
+            AttackPlayer();
         }
         else
         {
@@ -101,31 +104,24 @@ public class RangedEnemy : MonoBehaviour, IDamageable
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
     }
 
-    IEnumerator AttackPlayerRepeatedly()
-        {
-            while (true)
-            {
-                if (canAttack && playerLocation != null && Vector3.Distance(transform.position, playerLocation.position) <= stoppingDistance)
-                {
-                    AttackPlayer();
-                }
-                yield return new WaitForSeconds(attackCooldown);
-            }
-        }
-
     void AttackPlayer()
     {
-        canAttack = false; // Set the flag to prevent further attacks until cooldown is over
-        StartCoroutine(ShootProjectileAfterDelay(0.5f)); // Adjust the delay as needed
+        if (canAttack && projectilePrefab != null)
+        {
+            // Shoot projectile
+            StartCoroutine(ShootProjectileAfterDelay(1f));
+        }
     }
 
     IEnumerator ShootProjectileAfterDelay(float delay)
     {
+        canAttack = false;
         yield return new WaitForSeconds(delay);
-        if (projectilePrefab != null)
-        {
-            GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-        }
+   
+        EnemyProjectile projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        projectile.Launch(playerLocation.position);
+        
+        // Optionally set projectile properties like direction and damage
         // Wait for the attack cooldown
         yield return new WaitForSeconds(attackCooldown);
         // Reset the flag to allow the enemy to attack again

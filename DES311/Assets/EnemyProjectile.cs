@@ -5,45 +5,54 @@ using static Damage;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    Transform target;
-    float damageAmount;
+    [SerializeField] Rigidbody rb;
+    float damageAmount = 15f;
     [SerializeField] float moveSpeed = 5f;
-    public void SetTarget(Transform newTarget)
+    [SerializeField] float projectileHeight;
+
+    public void Launch(Vector3 Destination)
     {
-        target = newTarget;
+        float gravity = Physics.gravity.magnitude;
+        float halfFlightTime = Mathf.Sqrt(projectileHeight * 2) / gravity;
+
+        // Calculate the direction towards the destination
+        Vector3 DestinationVector = Destination - transform.position;
+        DestinationVector.y = 0; // Disregard the vertical component
+
+        // Calculate the horizontal distance
+        float horizontalDistance = DestinationVector.magnitude;
+
+        // Calculate the forward direction (normalized)
+        Vector3 forwardDirection = DestinationVector.normalized;
+
+        // Calculate the up speed
+        float upSpeed = halfFlightTime * gravity;
+
+        // Calculate the forward speed
+        float forwardSpeed = horizontalDistance / (2 * halfFlightTime);
+
+        // Scale down the forward speed to control the distance
+        float projectileDistance = 5;
+        float distanceScaleFactor = projectileDistance / horizontalDistance;
+        forwardSpeed *= distanceScaleFactor;
+
+        // Calculate the total flight velocity
+        Vector3 flightVelocity = forwardDirection * forwardSpeed + Vector3.up * upSpeed;
+
+        // Apply the flight velocity to the rigidbody
+        rb.velocity = flightVelocity;
     }
 
-    public void SetDamage(float amount)
+    void OnTriggerEnter(Collider other)
     {
-        damageAmount = amount;
-    }
-
-    void Update()
-    {
-        if (target != null)
+        if (other.CompareTag("Player"))
         {
-            // Move towards the target
-            Vector3 direction = (target.position - transform.position).normalized;
-            float distanceThisFrame = Time.deltaTime * moveSpeed;
-            if (distanceThisFrame >= Vector3.Distance(transform.position, target.position))
-            {
-                // If the projectile has reached the target, deal damage and destroy the projectile
-                DealDamage();
-                Destroy(gameObject);
-            }
-            else
-            {
-                transform.Translate(direction * distanceThisFrame, Space.World);
-            }
+            DealDamage(other.transform);
         }
-        else
-        {
-            // If the target is null, just move the projectile forward
-            transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
-        }
+        
     }
 
-    void DealDamage()
+    void DealDamage(Transform target)
     {
         // Check if the target has a damageable component
         IDamageable damageable = target.GetComponent<IDamageable>();

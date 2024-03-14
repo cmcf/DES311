@@ -729,11 +729,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawnPoint: {fileID: 8800851095730719974}
-  projectilePrefab: {fileID: 1772244383996334, guid: 294784d1e17ec8b45bed8a0790b0369b,
+  projectilePrefab: {fileID: 6466061993219102987, guid: dc607c448b811a645ab735323bce8ef9,
     type: 3}
   moveSpeed: 2.5
-  stoppingDistance: 15
-  rotationSpeed: 0.001
+  stoppingDistance: 25
+  rotationSpeed: 2
   maxHealth: 30
   attackCooldown: 1
   damageAmount: 10
@@ -2157,13 +2157,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5718381088750310627}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.065, y: -1, z: 0.76}
+  m_LocalRotation: {x: -0, y: -0.23105691, z: -0, w: 0.97294027}
+  m_LocalPosition: {x: -0.471, y: 0.203, z: 1.575}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3583149558887671901}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -26.719, z: 0}
 --- !u!1 &5961387145060032359
 GameObject:
   m_ObjectHideFlags: 0
