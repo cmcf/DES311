@@ -130,7 +130,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Die()
     {
-        // Increases player XP
+        // Increase player XP
         GameManager.instance.IncreaseXP(XPAmount);
         // Checks if the pickup should spawn based on the probability value
         if (Random.value < spawnProbability && player.currentLevel >= 3)

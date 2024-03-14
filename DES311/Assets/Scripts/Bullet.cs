@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Damage;
 
 public class Bullet : MonoBehaviour
 {
@@ -27,7 +28,15 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             // Apply damage to the enemy
-            other.GetComponent<Enemy>().Damage(damageAmount);
+            //other.GetComponent<Enemy>().Damage(damageAmount);
+
+            // Check if the target has a damageable component
+            IDamageable damageable = other.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                // Deal damage to the target
+                damageable.Damage(damageAmount);
+            }
 
             if (hitEffect!= null)
             {
