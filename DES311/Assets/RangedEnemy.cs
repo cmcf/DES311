@@ -4,15 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 using static Damage;
 
-public class RangedEnemy : MonoBehaviour, IDamageable
+public class RangedEnemy : Enemy
 {
     Transform playerLocation;
     Player player;
     NavMeshAgent nav;
     Animator anim;
-
-    public Color flashColour;
-    Renderer enemyRenderer;
 
     [SerializeField] Transform projectileSpawnPoint;
     [SerializeField] EnemyProjectile projectilePrefab;
@@ -22,22 +19,16 @@ public class RangedEnemy : MonoBehaviour, IDamageable
     [SerializeField] float stoppingDistance = 10f;
     [SerializeField] float rotationSpeed = 2f;
 
-    [Header("Health")]
-    [SerializeField] float maxHealth = 30f;
-    float currentHealth = 50;
 
     [Header("Damage")]
     [SerializeField] float attackCooldown = 2f;
     [SerializeField] float damageAmount = 10f;
     private Vector3 lastPlayerPosition;
 
-    bool isDestroyed = false;
     public  bool reachedPlayer = false;
     bool canAttack = true;
 
-    // Gets the Position property from IDamageable interface
-    public float Health { get; set; }
-
+   
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
@@ -46,7 +37,7 @@ public class RangedEnemy : MonoBehaviour, IDamageable
         // Find the player GameObject and get its transform component
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
         player = FindObjectOfType<Player>();
-        enemyRenderer = GetComponentInChildren<Renderer>();
+        
         //StartCoroutine(AttackPlayerRepeatedly());
     }
 
@@ -129,33 +120,5 @@ public class RangedEnemy : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(attackCooldown);
         // Reset the flag to allow the enemy to attack again
         canAttack = true;
-    }
-
-    public void Damage(float damage)
-    {
-        currentHealth -= damage;
-        StartCoroutine(HitEffect());
-        if (currentHealth <= 0 && !isDestroyed)
-        {
-            Die();
-        }
-    }
-
-    IEnumerator HitEffect()
-    {
-        // Change enemy colour to the set flash colour
-        enemyRenderer.material.color = flashColour;
-
-        // Wait until delay has ended
-        yield return new WaitForSeconds(0.1f);
-
-        // Revert enemy colour back to original
-        enemyRenderer.material.color = Color.white;
-    }
-
-    void Die()
-    {
-        isDestroyed = true;
-        Destroy(gameObject);
     }
 }

@@ -52,10 +52,10 @@ public class Spawner : MonoBehaviour
                         GameObject enemyObject = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
           
                         // Register the spawned enemy with the EnemyManager
-                        enemyManager.RegisterEnemy(enemyObject.GetComponent<Enemy>());
+                        enemyManager.RegisterEnemy(enemyObject.GetComponent<MeleeEnemy>());
 
                         // Get the Enemy component from the instantiated enemy object
-                        Enemy enemy = enemyObject.GetComponent<Enemy>();
+                        MeleeEnemy enemy = enemyObject.GetComponent<MeleeEnemy>();
 
                         // Check if the enemy component exists
                         if (enemy != null)
