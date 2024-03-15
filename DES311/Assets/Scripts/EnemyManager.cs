@@ -5,28 +5,24 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    List<MeleeEnemy> enemies = new List<MeleeEnemy>();
-    public void RegisterEnemy(MeleeEnemy enemy)
+    List<Enemy> enemies = new List<Enemy>();
+    public void RegisterEnemy(Enemy enemy)
      {
         enemies.Add(enemy);
     }
     public void LevelUpEnemies()
     {
-        foreach (MeleeEnemy enemy in enemies)
-        {
-            enemy.IncreaseEnemyStats();
-
-        }
+     
     }
 
     // Method to wipe out all enemies
     public void WipeOutEnemies()
     {
         // Create a copy of the enemies list
-        List<MeleeEnemy> enemiesCopy = new List<MeleeEnemy>(enemies);
+        List<Enemy> enemiesCopy = new List<Enemy>(enemies);
 
         // Iterate over the copy of the enemies list
-        foreach (MeleeEnemy enemy in enemiesCopy)
+        foreach (Enemy enemy in enemiesCopy)
         {
             // Check if the enemy is null or its game object is null
             if (enemy == null || enemy.gameObject == null)
@@ -50,7 +46,7 @@ public class EnemyManager : MonoBehaviour
     public void IncreaseEnemyHealth(float amount)
     {
         Debug.Log("Increasing enemy health by: " + amount);
-        foreach (MeleeEnemy enemy in enemies)
+        foreach (Enemy enemy in enemies)
         {
             if (enemy != null)
             {

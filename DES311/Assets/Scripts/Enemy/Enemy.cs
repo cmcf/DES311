@@ -6,7 +6,7 @@ using static Damage;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    Player player;
+    public Player player;
     public Color flashColour;
     public Renderer enemyRenderer;
 
@@ -14,17 +14,18 @@ public class Enemy : MonoBehaviour, IDamageable
     // Gets the Position property from IDamageable interface
     public float Health { get; set; }
 
-    public float maxHealth = 30f;
+    public float defaultHealth = 30f;
     public float currentHealth = 35f;
 
     public int XPAmount = 25;
     // Chance of pickup spawning 
-    public float spawnProbability = 0.2f;
+    public float spawnProbability = 0.01f;
 
     bool isDestroyed = false;
+    bool hasIncreasedHealth = false;
     bool hit = false;
 
-    void Start()
+    void Awake()
     {
         player = FindObjectOfType<Player>();
     }
@@ -68,19 +69,25 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         // Increase player XP
         GameManager.instance.IncreaseXP(XPAmount);
-        // Check if player reference is not null
+        // Spawn powerup by chance and only if player is above level 3
         if (player != null && Random.value < spawnProbability && player.currentLevel >= 3)
         {
             // Spawns the pickup at the enemy's position
             Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
         }
-        else
-        {
-            Debug.LogWarning("Player or player.currentLevel is null, or spawn probability condition not met. Pickup spawn skipped.");
-        }
         isDestroyed = true;
         // Destroy the enemy gameObject
         Destroy(gameObject);
+    }
+
+    public void IncreaseHealth(float amount)
+    {
+        if (!hasIncreasedHealth)
+        {
+            currentHealth += amount;
+            hasIncreasedHealth = true;
+        }
+
     }
 
 }

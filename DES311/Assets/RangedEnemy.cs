@@ -7,7 +7,6 @@ using static Damage;
 public class RangedEnemy : Enemy
 {
     Transform playerLocation;
-    Player player;
     NavMeshAgent nav;
     Animator anim;
 
@@ -36,7 +35,6 @@ public class RangedEnemy : Enemy
 
         // Find the player GameObject and get its transform component
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
-        player = FindObjectOfType<Player>();
         
         //StartCoroutine(AttackPlayerRepeatedly());
     }

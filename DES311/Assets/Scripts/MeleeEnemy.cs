@@ -14,7 +14,6 @@ public class MeleeEnemy :  Enemy
     NavMeshAgent nav;
     EnemyManager enemyManager;
     Animator anim;
-    Player player;
 
     [Header("Movement")]
     float moveSpeed;
@@ -25,7 +24,6 @@ public class MeleeEnemy :  Enemy
     [SerializeField] float levelUpStatIncrease = 0.5f;
 
     [Header("Health")]
-    public float defaultHealth = 30f;
     [SerializeField] float increaseHealthAmount = 5f;
 
     [Header("Damage")]
@@ -34,14 +32,8 @@ public class MeleeEnemy :  Enemy
 
     private Vector3 lastPlayerPosition;
 
-   
     bool reachedPlayer = false;
-    bool hasIncreasedHealth = false;
 
-    void Awake()
-    {
-        allEnemies.Add(this);
-    }
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -54,10 +46,10 @@ public class MeleeEnemy :  Enemy
         nav = GetComponent<NavMeshAgent>();
         nav.speed = moveSpeed;
         currentHealth = defaultHealth;
-
         // Find the player GameObject and get its transform component
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
-        player = FindObjectOfType<Player>();
+
+        allEnemies.Add(this);
     }
 
     void Update()
@@ -128,7 +120,7 @@ public class MeleeEnemy :  Enemy
 
     void AttackPlayer()
     {
-        if (player.isDead) { return; }
+        if (base.player.isDead) { return; }
         // Play attack animation
         anim.SetBool("IsAttacking", true);
         // Reset attack animation
@@ -150,7 +142,7 @@ public class MeleeEnemy :  Enemy
         if (distanceToPlayer <= stoppingDistance)
         {
             // Perform the attack by dealing damage to the player
-            player.Damage(damageAmount);
+            base.player.Damage(damageAmount);
         }
     }
 
@@ -159,30 +151,6 @@ public class MeleeEnemy :  Enemy
         yield return new WaitForSeconds(delay);
         // Reset IsAttacking after the delay
         anim.SetBool("IsAttacking", false);
-    }
-
-    public void IncreaseEnemyStats()
-    {
-        Debug.Log("Enemy levelled up");
-
-        // Increase minMoveSpeed
-        minMoveSpeed += levelUpStatIncrease;
-
-        // Cap minMoveSpeed at 5
-        minMoveSpeed = Mathf.Min(minMoveSpeed, 5);
-
-        // Set moveSpeed within the new range
-        moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
-    }
-
-    public void IncreaseHealth(float amount)
-    {
-        if (!hasIncreasedHealth)
-        {
-            currentHealth += amount;
-            hasIncreasedHealth = true;
-        }
-       
     }
 
 }

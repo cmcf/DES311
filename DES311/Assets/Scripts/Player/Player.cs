@@ -97,7 +97,6 @@ public class Player : MonoBehaviour, IDamageable
     public void Die()
     {
         if (isDead) { return; }
-        Debug.Log("Dead");
         isDead = true;
         // Disable the character controller
         controller.enabled = false;
