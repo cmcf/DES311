@@ -6,8 +6,10 @@ using static Damage;
 public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
-    [SerializeField] float damageAmount = 15;
+    [SerializeField] float damageAmount = 10;
     [SerializeField] float projectileHeight;
+
+    bool hitPlayer = false;
 
     private void Start()
     {
@@ -51,8 +53,9 @@ public class EnemyProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hitPlayer)
         {
+            hitPlayer = true;
             DealDamage(other.transform);
             Destroy(gameObject);
         }
@@ -62,6 +65,10 @@ public class EnemyProjectile : MonoBehaviour
             Destroy(gameObject);    
         }
         
+    }
+     void OnTriggerExit(Collider other)
+    {
+        hitPlayer = false;
     }
 
     void DealDamage(Transform target)

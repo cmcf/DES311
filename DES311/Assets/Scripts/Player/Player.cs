@@ -83,12 +83,13 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Damage(float damage)
     { 
+        if (isDead) { return ; }    
         // Current health is decreased by the damage received
         playerLoadout.currentLoadout.health -= damage;
         // Enable vibration
         Handheld.Vibrate();
         // Play the sound when player is hit
-        FindObjectOfType<AudioManager>().Play("PlayerHit");
+        FindObjectOfType<AudioManager>().Play("Spit");
         // Health bar is updated with the current health amount
         playerHUD.UpdateHealthBar();
 
