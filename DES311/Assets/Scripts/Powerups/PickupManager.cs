@@ -14,7 +14,7 @@ public class PickupManager : MonoBehaviour
     private GameObject activatedCard;
 
     // Reference to the Enemy script
-    public Enemy enemyScript;
+    public MeleeEnemy enemyScript;
 
     public Player playerStats;
 

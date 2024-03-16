@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 {
     private Vector3 initialPosition;
     [SerializeField] float damageAmount = 15f;
-    Enemy enemy;
+    MeleeEnemy enemy;
     [SerializeField] float destroyDelay = 3f;
     [SerializeField] GameObject hitEffect;
     [SerializeField] float destroyDelayAfterCollision = 0.2f;

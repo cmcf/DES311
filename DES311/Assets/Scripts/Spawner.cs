@@ -10,13 +10,14 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] int initialEnemyAmount = 5;
     [SerializeField] int enemiesPerWaveIncrease = 2;
-    [SerializeField] float delayBetweenWaves = 2f;
+
     [SerializeField] float spawnRate = 1f;
     [SerializeField] float spawnProbability = 0.8f;
 
-    [SerializeField] float initialDelayBetweenWaves = 2f;
+    [SerializeField] float delayBetweenWaves = 2f;
     [SerializeField] float delayIncreasePerWave = 1f;
-    [SerializeField] float initialEnemyHealth = 30;
+
+    [SerializeField] int spawnFromIndex1AfterWave = 2;
 
     int currentWave = 0;
     int currentEnemyAmount;
@@ -31,52 +32,67 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        while (true)
+        while (canSpawn)
         {
             // Spawns new wave of enemies after a delay
-            yield return new WaitForSeconds(initialDelayBetweenWaves + (currentWave * delayIncreasePerWave));
+            yield return new WaitForSeconds(delayBetweenWaves + (currentWave * delayIncreasePerWave));
+
+            Debug.Log("Starting spawn wave.");
+
+            // Counter to track the number of index 1 enemies spawned in this wave
+            int rangedEnemyCount = 0;
 
             // Iterates through each enemy to be spawned in the current wave
             for (int i = 0; i < currentEnemyAmount; i++)
             {
-                // Iterates through each spawn point in the scene
-                foreach (Transform spawnPoint in spawnPoints)
+                // Determine the spawn point for this enemy
+                Transform spawnPoint = spawnPoints[i % spawnPoints.Length]; // Alternates between the spawn points
+
+                // Selects a random enemy prefab from the array
+                int prefabIndex;
+
+                // Check if index 1 should be spawned
+                if (currentWave >= spawnFromIndex1AfterWave && rangedEnemyCount < 2)
                 {
-                    // Selects a random enemy prefab from the array
-                    GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+                    prefabIndex = 1;
+                    rangedEnemyCount++;
+                }
+                else
+                {
+                    prefabIndex = 0;
+                }
 
-                    // Checks a random value for spawning at a spawn point
-                    if (Random.value < spawnProbability)
+                GameObject enemyPrefab = enemyPrefabs[prefabIndex];
+
+                // Checks a random value for spawning at a spawn point
+                if (Random.value < spawnProbability)
+                {
+                    // Spawns an enemy at the selected spawn point with no rotation
+                    GameObject enemyObject = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+
+                    // Register the spawned enemy with the EnemyManager
+                    enemyManager.RegisterEnemy(enemyObject.GetComponent<Enemy>());
+
+                    // Get the Enemy component from the instantiated enemy object
+                    Enemy enemy = enemyObject.GetComponent<Enemy>();
+
+                    // Check if the enemy component exists
+                    if (enemy != null)
                     {
-                        // Spawns an enemy at a spawn point with no rotation
-                        GameObject enemyObject = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
-          
+                        // Set the default health of the enemy
+                        enemy.currentHealth = enemy.defaultHealth;
                         // Register the spawned enemy with the EnemyManager
-                        enemyManager.RegisterEnemy(enemyObject.GetComponent<Enemy>());
-
-                        // Get the Enemy component from the instantiated enemy object
-                        Enemy enemy = enemyObject.GetComponent<Enemy>();
-
-                        // Check if the enemy component exists
-                        if (enemy != null)
-                        {
-                            // Set the default health of the enemy
-                            enemy.currentHealth = enemy.defaultHealth;
-                            // Register the spawned enemy with the EnemyManager
-                            enemyManager.RegisterEnemy(enemy);
-                        }
-                        else
-                        {
-                            Debug.LogError("Enemy script not found on the instantiated object.");
-                        }
-
-                        // Break after spawning one enemy per spawn point
-                        break;
+                        enemyManager.RegisterEnemy(enemy);
+                    }
+                    else
+                    {
+                        Debug.LogError("Enemy script not found on the instantiated object.");
                     }
                 }
                 // Controls the spawn rate
                 yield return new WaitForSeconds(spawnRate);
             }
+
             // Increase difficulty by spawning more enemies each wave
             currentWave++;
             currentEnemyAmount += enemiesPerWaveIncrease;
@@ -84,6 +100,7 @@ public class Spawner : MonoBehaviour
 
     }
 
+    
     void CheckCurrentWave()
     {
         // Stop spawning waves after wave 10 is reached
@@ -93,3 +110,4 @@ public class Spawner : MonoBehaviour
         }
     }
 }
+

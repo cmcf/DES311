@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 259423588877292760}
   - component: {fileID: 3964317141802958594}
   - component: {fileID: 593451532327718221}
-  m_Layer: 28
+  m_Layer: 3
   m_Name: AcidTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4854,7 +4854,7 @@ GameObject:
   - component: {fileID: 8300526348366611644}
   - component: {fileID: 9217456865496321807}
   - component: {fileID: 2308169832292628706}
-  m_Layer: 28
+  m_Layer: 3
   m_Name: Spit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
