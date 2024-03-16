@@ -9,14 +9,21 @@ public class EnemyProjectile : MonoBehaviour
     [SerializeField] float damageAmount = 15;
     [SerializeField] float projectileHeight;
 
+    private void Start()
+    {
+        // Play the sound when spit is fired
+        FindObjectOfType<AudioManager>().Play("Spit");
+    }
+
     public void Launch(Vector3 Destination)
     {
+
         float gravity = Physics.gravity.magnitude;
         float halfFlightTime = Mathf.Sqrt(projectileHeight * 2) / gravity;
 
         // Calculate the direction towards the destination
         Vector3 projectileDestination = Destination - transform.position;
-        projectileDestination.y = 0; // Disregard the vertical component
+        projectileDestination.y = 0;
 
         // Calculate the horizontal distances
         float horizontalDistance = projectileDestination.magnitude;
@@ -49,6 +56,7 @@ public class EnemyProjectile : MonoBehaviour
             DealDamage(other.transform);
             Destroy(gameObject);
         }
+        // Does not destroy if enemy is hit
         else if (!other.CompareTag("Enemy"))
         {
             Destroy(gameObject);    

@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEngine.Audio;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -12,6 +10,7 @@ public class AudioManager : MonoBehaviour
      {
         foreach (Sound s in sounds)
         {
+            // Adds audio source to game object with sound
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
@@ -28,6 +27,7 @@ public class AudioManager : MonoBehaviour
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
+        // Plays audio clip
         s.source.Play();
     }
 }

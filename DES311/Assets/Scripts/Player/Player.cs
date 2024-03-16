@@ -87,6 +87,8 @@ public class Player : MonoBehaviour, IDamageable
         playerLoadout.currentLoadout.health -= damage;
         // Enable vibration
         Handheld.Vibrate();
+        // Play the sound when player is hit
+        FindObjectOfType<AudioManager>().Play("PlayerHit");
         // Health bar is updated with the current health amount
         playerHUD.UpdateHealthBar();
 
@@ -102,8 +104,12 @@ public class Player : MonoBehaviour, IDamageable
         isDead = true;
         // Disable the character controller
         controller.enabled = false;
+
+        //Play death SFX
+        FindObjectOfType<AudioManager>().Play("PlayerDeath");
+
         animator.SetTrigger("Dead");
-        
+       
         // load end scene after a delay
         Invoke(nameof(LoadEndLevel), endSceneLoadDelay);
     }

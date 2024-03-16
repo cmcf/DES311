@@ -55,6 +55,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     IEnumerator HitEffect()
     {
+        // Play the sound when enemy is hit
+        FindObjectOfType<AudioManager>().Play("EnemyHit");
         // Change enemy colour to the set flash colour
         enemyRenderer.material.color = flashColour;
 

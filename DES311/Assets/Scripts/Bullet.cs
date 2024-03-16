@@ -11,13 +11,12 @@ public class Bullet : MonoBehaviour
     [SerializeField] float destroyDelay = 3f;
     [SerializeField] GameObject hitEffect;
     [SerializeField] float destroyDelayAfterCollision = 0.2f;
-    [SerializeField] AudioClip bulletSFX;
+    public string soundName;
     void Start()
     {
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.clip = bulletSFX;
-        audio.Play();
-        
+        // Play the sound when the bullet is fired
+        FindObjectOfType<AudioManager>().Play(soundName);
+
         initialPosition = transform.position;
         // Call the DestroyActor method after a delay
         Invoke(nameof(DestroyBullet), destroyDelay);
