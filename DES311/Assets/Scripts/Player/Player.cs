@@ -74,6 +74,8 @@ public class Player : MonoBehaviour, IDamageable
         }
         // XP is reset
         currentXP = 0;
+        // Updates current level text
+        currentLevelText.text = "Level: " + currentLevel.ToString();
 
         // The amount of XP required to reach the next level is increased each level by the increase rate
         requiredXP += requiredXPIncreaseRate;
