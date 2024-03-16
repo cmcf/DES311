@@ -647,6 +647,7 @@ GameObject:
   - component: {fileID: 8082736770139845148}
   - component: {fileID: 1337600735065898548}
   - component: {fileID: -8464521690373140425}
+  - component: {fileID: 2419008712768529568}
   m_Layer: 6
   m_Name: Spitter
   m_TagString: Enemy
@@ -768,6 +769,28 @@ MonoBehaviour:
   currentHealth: 40
   XPAmount: 25
   spawnProbability: 0.1
+--- !u!95 &2419008712768529568
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838775398178675248}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: df55d60a30f2f7f43950c28d3167bdb4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1881568792601031355
 GameObject:
   m_ObjectHideFlags: 0

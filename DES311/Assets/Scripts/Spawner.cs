@@ -10,13 +10,12 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] int initialEnemyAmount = 5;
     [SerializeField] int enemiesPerWaveIncrease = 2;
-    [SerializeField] float delayBetweenWaves = 2f;
+
     [SerializeField] float spawnRate = 1f;
     [SerializeField] float spawnProbability = 0.8f;
 
-    [SerializeField] float initialDelayBetweenWaves = 2f;
+    [SerializeField] float delayBetweenWaves = 2f;
     [SerializeField] float delayIncreasePerWave = 1f;
-    [SerializeField] float initialEnemyHealth = 30;
 
     [SerializeField] int spawnFromIndex1AfterWave = 2;
 
@@ -36,12 +35,12 @@ public class Spawner : MonoBehaviour
         while (canSpawn)
         {
             // Spawns new wave of enemies after a delay
-            yield return new WaitForSeconds(initialDelayBetweenWaves + (currentWave * delayIncreasePerWave));
+            yield return new WaitForSeconds(delayBetweenWaves + (currentWave * delayIncreasePerWave));
 
             Debug.Log("Starting spawn wave.");
 
             // Counter to track the number of index 1 enemies spawned in this wave
-            int index1PrefabSpawnedCount = 0;
+            int rangedEnemyCount = 0;
 
             // Iterates through each enemy to be spawned in the current wave
             for (int i = 0; i < currentEnemyAmount; i++)
@@ -53,10 +52,10 @@ public class Spawner : MonoBehaviour
                 int prefabIndex;
 
                 // Check if index 1 should be spawned
-                if (currentWave >= spawnFromIndex1AfterWave && index1PrefabSpawnedCount < 2)
+                if (currentWave >= spawnFromIndex1AfterWave && rangedEnemyCount < 2)
                 {
                     prefabIndex = 1;
-                    index1PrefabSpawnedCount++;
+                    rangedEnemyCount++;
                 }
                 else
                 {
