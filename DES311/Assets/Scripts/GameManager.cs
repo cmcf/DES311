@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public delegate void XPHandler(int amount);
     // Event is triggered when called from another script
     public event XPHandler XPEvent;
-    public MeleeEnemy enemy;
 
     public GameObject itemDisplayObject; // Reference to the game object with the ItemDisplay script
 

@@ -7,7 +7,6 @@ public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
     [SerializeField] float damageAmount = 15;
-    [SerializeField] float moveSpeed = 5f;
     [SerializeField] float projectileHeight;
 
     public void Launch(Vector3 Destination)

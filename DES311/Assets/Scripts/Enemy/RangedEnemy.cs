@@ -19,9 +19,8 @@ public class RangedEnemy : Enemy
     [SerializeField] float rotationSpeed = 2f;
 
 
-    [Header("Damage")]
+    [Header("Attack")]
     [SerializeField] float attackCooldown = 2f;
-    [SerializeField] float damageAmount = 10f;
     private Vector3 lastPlayerPosition;
 
     public  bool reachedPlayer = false;

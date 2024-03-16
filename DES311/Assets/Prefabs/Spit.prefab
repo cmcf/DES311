@@ -4988,5 +4988,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8300526348366611644}
+  damageAmount: 10
   moveSpeed: 100
   projectileHeight: 1

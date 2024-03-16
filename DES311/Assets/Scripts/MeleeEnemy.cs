@@ -23,9 +23,6 @@ public class MeleeEnemy :  Enemy
     [SerializeField] float stoppingDistance = 2.2f;
     [SerializeField] float levelUpStatIncrease = 0.5f;
 
-    [Header("Health")]
-    [SerializeField] float increaseHealthAmount = 5f;
-
     [Header("Damage")]
     [SerializeField] float attackCooldown = 1f;
     [SerializeField] float damageAmount = 10f;
