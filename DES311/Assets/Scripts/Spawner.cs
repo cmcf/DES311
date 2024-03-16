@@ -37,21 +37,19 @@ public class Spawner : MonoBehaviour
             // Spawns new wave of enemies after a delay
             yield return new WaitForSeconds(delayBetweenWaves + (currentWave * delayIncreasePerWave));
 
-            Debug.Log("Starting spawn wave.");
-
-            // Counter to track the number of index 1 enemies spawned in this wave
+            // Counter to track the number of ranged enemies spawned in current wave
             int rangedEnemyCount = 0;
 
             // Iterates through each enemy to be spawned in the current wave
             for (int i = 0; i < currentEnemyAmount; i++)
             {
                 // Determine the spawn point for this enemy
-                Transform spawnPoint = spawnPoints[i % spawnPoints.Length]; // Alternates between the spawn points
+                Transform spawnPoint = spawnPoints[i % spawnPoints.Length];
 
                 // Selects a random enemy prefab from the array
                 int prefabIndex;
 
-                // Check if index 1 should be spawned
+                // Checks if ranged enemy can be spawned
                 if (currentWave >= spawnFromIndex1AfterWave && rangedEnemyCount < 2)
                 {
                     prefabIndex = 1;
@@ -84,10 +82,6 @@ public class Spawner : MonoBehaviour
                         // Register the spawned enemy with the EnemyManager
                         enemyManager.RegisterEnemy(enemy);
                     }
-                    else
-                    {
-                        Debug.LogError("Enemy script not found on the instantiated object.");
-                    }
                 }
                 // Controls the spawn rate
                 yield return new WaitForSeconds(spawnRate);
@@ -99,8 +93,7 @@ public class Spawner : MonoBehaviour
         }
 
     }
-
-    
+  
     void CheckCurrentWave()
     {
         // Stop spawning waves after wave 10 is reached

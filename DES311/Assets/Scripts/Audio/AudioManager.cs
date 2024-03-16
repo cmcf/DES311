@@ -18,11 +18,6 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
         }
      }
-     void Start()
-     {
-        //Play("Main Theme");
-        //Play("Ambient");
-     }
 
     public void Play(string name)
     {

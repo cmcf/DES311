@@ -11,15 +11,15 @@ public class EnemyProjectile : MonoBehaviour
 
     bool hitPlayer = false;
 
-    private void Start()
-    {
+     void Start()
+     {
         // Play the sound when spit is fired
         FindObjectOfType<AudioManager>().Play("Spit");
-    }
+     }
 
     public void Launch(Vector3 Destination)
     {
-
+        // Calculates gravity magnitude in the scene
         float gravity = Physics.gravity.magnitude;
         float halfFlightTime = Mathf.Sqrt(projectileHeight * 2) / gravity;
 
@@ -55,6 +55,7 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (other.CompareTag("Player") && !hitPlayer)
         {
+            // Deals damage to player is hit
             hitPlayer = true;
             DealDamage(other.transform);
             Destroy(gameObject);

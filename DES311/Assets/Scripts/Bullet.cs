@@ -26,9 +26,6 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            // Apply damage to the enemy
-            //other.GetComponent<Enemy>().Damage(damageAmount);
-
             // Check if the target has a damageable component
             IDamageable damageable = other.GetComponent<IDamageable>();
             if (damageable != null)
