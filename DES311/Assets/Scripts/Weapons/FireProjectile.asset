@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireProjectile
   m_EditorClassIdentifier: 
   itemName: Fire Laser
-  description: Upgrade bullet to a fire laser! +5 damage
+  description: Fire bullets that pierce through enemies!
   icon: {fileID: 0}
   projectilePrefab: {fileID: 0}
   projectileUpgrade: {fileID: 6487987637173855206, guid: 29a9704bef55c3240bfe88bfc33c71cc,

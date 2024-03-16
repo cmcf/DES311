@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 {
     private Vector3 initialPosition;
     [SerializeField] float damageAmount = 15f;
+    [SerializeField] bool isLaser = false;
     MeleeEnemy enemy;
     [SerializeField] float destroyDelay = 3f;
     [SerializeField] GameObject hitEffect;
@@ -39,10 +40,12 @@ public class Bullet : MonoBehaviour
                 // Instantiate the hit effect at the position of the collision
                 Instantiate(hitEffect, transform.position, Quaternion.identity);
             }
-
-            // Disable the bullet's collider to prevent it from hitting multiple enemies
-            GetComponent<Collider>().enabled = false;
-
+            if (!isLaser)
+            {
+                // Disable the bullet's collider to prevent it from hitting multiple enemies
+                GetComponent<Collider>().enabled = false;
+            }
+           
             // Destroy the bullet after a delay
             Invoke(nameof(DestroyBullet), destroyDelay);
         }
