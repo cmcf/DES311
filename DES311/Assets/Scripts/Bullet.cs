@@ -34,16 +34,21 @@ public class Bullet : MonoBehaviour
                 damageable.Damage(damageAmount);
             }
 
-            if (hitEffect!= null)
+            if (hitEffect != null)
             {
                 // Instantiate the hit effect at the position of the collision
                 Instantiate(hitEffect, transform.position, Quaternion.identity);
             }
 
+            // Disable the bullet's collider to prevent it from hitting multiple enemies
+            GetComponent<Collider>().enabled = false;
+
+            // Destroy the bullet after a delay
             Invoke(nameof(DestroyBullet), destroyDelay);
         }
         else
         {
+            // Destroy the bullet immediately if it hits something other than an enemy
             Invoke(nameof(DestroyBullet), destroyDelayAfterCollision);
         }
     }
