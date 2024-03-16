@@ -6,7 +6,7 @@ using static Damage;
 public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
-    float damageAmount = 15f;
+    [SerializeField] float damageAmount = 15;
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float projectileHeight;
 
