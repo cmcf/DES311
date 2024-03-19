@@ -84,19 +84,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   flashColour: {r: 0.56981134, g: 1, b: 0.56981134, a: 1}
+  originalColour: {r: 1, g: 1, b: 1, a: 1}
   enemyRenderer: {fileID: 5649607759006477213}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   defaultHealth: 30
   currentHealth: 0
-  XPAmount: 25
+  XPAmount: 40
   spawnProbability: 0.02
   minMoveSpeed: 1.6
   maxMoveSpeed: 2.5
   rotationSpeed: 0.001
   stoppingDistance: 3.1
   levelUpStatIncrease: 0.5
-  increaseHealthAmount: 5
   attackCooldown: 0.5
   damageAmount: 10
 --- !u!195 &5326410920341968992
@@ -157,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   flashColour: {r: 0.5686275, g: 1, b: 0.5686275, a: 1}
+  originalColour: {r: 1, g: 1, b: 1, a: 1}
   enemyRenderer: {fileID: 5649607759006477213}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}

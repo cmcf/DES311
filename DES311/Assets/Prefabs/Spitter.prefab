@@ -738,7 +738,7 @@ MonoBehaviour:
     type: 3}
   defaultHealth: 30
   currentHealth: 45
-  XPAmount: 25
+  XPAmount: 50
   spawnProbability: 0.2
   projectileSpawnPoint: {fileID: 8800851095730719974}
   projectilePrefab: {fileID: 2308169832292628706, guid: dc607c448b811a645ab735323bce8ef9,
