@@ -22,6 +22,7 @@ public class Spawner : MonoBehaviour
     int currentWave = 0;
     int currentEnemyAmount;
     bool canSpawn = true;
+    bool bossSpawned = false;
 
     void Start()
     {
@@ -32,75 +33,93 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        while (canSpawn)
+        while (canSpawn && !bossSpawned)
         {
             // Spawns new wave of enemies after a delay
             yield return new WaitForSeconds(delayBetweenWaves + (currentWave * delayIncreasePerWave));
 
-            // Counter to track the number of ranged enemies spawned in current wave
-            int rangedEnemyCount = 0;
-
-            // Iterates through each enemy to be spawned in the current wave
-            for (int i = 0; i < currentEnemyAmount; i++)
+            // Check if it's the last wave
+            if (currentWave == 6)
             {
-                // Determine the spawn point for this enemy
-                Transform spawnPoint = spawnPoints[i % spawnPoints.Length];
-
-                // Selects a random enemy prefab from the array
-                int prefabIndex;
-
-                // Checks if ranged enemy can be spawned
-                if (currentWave >= spawnFromIndex1AfterWave && rangedEnemyCount < 2)
+                // Ensure that the enemyPrefabs array has enough elements
+                if (enemyPrefabs.Length > 2)
                 {
-                    prefabIndex = 1;
-                    rangedEnemyCount++;
-                }
-                else
-                {
-                    prefabIndex = 0;
+                    // Spawn the boss
+                    GameObject bossPrefab = enemyPrefabs[2];
+                    Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                    GameObject bossObject = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
+                    bossSpawned = true;
+                    enemyManager.RegisterEnemy(bossObject.GetComponent<Enemy>());
                 }
 
-                GameObject enemyPrefab = enemyPrefabs[prefabIndex];
+            }
+            else
+            {
+                if (bossSpawned) { break; }
+                // Counter to track the number of ranged enemies spawned in current wave
+                int rangedEnemyCount = 0;
 
-                // Checks a random value for spawning at a spawn point
-                if (Random.value < spawnProbability)
+                // Iterates through each enemy to be spawned in the current wave
+                for (int i = 0; i < currentEnemyAmount; i++)
                 {
-                    // Spawns an enemy at the selected spawn point with no rotation
-                    GameObject enemyObject = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+                    // Determine the spawn point for this enemy
+                    Transform spawnPoint = spawnPoints[i % spawnPoints.Length];
 
-                    // Register the spawned enemy with the EnemyManager
-                    enemyManager.RegisterEnemy(enemyObject.GetComponent<Enemy>());
+                    // Selects a random enemy prefab from the array
+                    int prefabIndex;
 
-                    // Get the Enemy component from the instantiated enemy object
-                    Enemy enemy = enemyObject.GetComponent<Enemy>();
-
-                    // Check if the enemy component exists
-                    if (enemy != null)
+                    // Checks if ranged enemy can be spawned
+                    if (currentWave >= spawnFromIndex1AfterWave && rangedEnemyCount < 2)
                     {
-                        // Set the default health of the enemy
-                        enemy.currentHealth = enemy.defaultHealth;
-                        // Register the spawned enemy with the EnemyManager
-                        enemyManager.RegisterEnemy(enemy);
+                        prefabIndex = 1;
+                        rangedEnemyCount++;
                     }
+                    else
+                    {
+                        prefabIndex = 0;
+                    }
+
+                    GameObject enemyPrefab = enemyPrefabs[prefabIndex];
+
+                    // Checks a random value for spawning at a spawn point
+                    if (Random.value < spawnProbability)
+                    {
+                        // Spawns an enemy at the selected spawn point with no rotation
+                        GameObject enemyObject = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+
+                        // Register the spawned enemy with the EnemyManager
+                        enemyManager.RegisterEnemy(enemyObject.GetComponent<Enemy>());
+
+                        // Get the Enemy component from the instantiated enemy object
+                        Enemy enemy = enemyObject.GetComponent<Enemy>();
+
+                        // Check if the enemy component exists
+                        if (enemy != null)
+                        {
+                            // Set the default health of the enemy
+                            enemy.currentHealth = enemy.defaultHealth;
+                            // Register the spawned enemy with the EnemyManager
+                            enemyManager.RegisterEnemy(enemy);
+                        }
+                    }
+                    // Controls the spawn rate
+                    yield return new WaitForSeconds(spawnRate);
                 }
-                // Controls the spawn rate
-                yield return new WaitForSeconds(spawnRate);
             }
 
             // Increase difficulty by spawning more enemies each wave
             currentWave++;
             currentEnemyAmount += enemiesPerWaveIncrease;
         }
+    }
 
-    }
-  
-    void CheckCurrentWave()
-    {
-        // Stop spawning waves after wave 10 is reached
-        if (currentWave == 10)
+        void CheckCurrentWave()
         {
-            canSpawn = false;
+            // Stop spawning waves after wave 10 is reached
+            if (currentWave == 5)
+            {
+                canSpawn = false;
+            }
         }
-    }
 }
 

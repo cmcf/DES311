@@ -731,13 +731,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  flashColour: {r: 0.7640785, g: 1, b: 0.7396226, a: 0}
+  flashColour: {r: 1, g: 0.67358494, b: 0.83164924, a: 0}
+  originalColour: {r: 1, g: 1, b: 1, a: 1}
   enemyRenderer: {fileID: 6045560917180699333}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   defaultHealth: 30
   currentHealth: 45
-  XPAmount: 25
+  XPAmount: 50
   spawnProbability: 0.2
   projectileSpawnPoint: {fileID: 8800851095730719974}
   projectilePrefab: {fileID: 2308169832292628706, guid: dc607c448b811a645ab735323bce8ef9,
@@ -746,7 +747,6 @@ MonoBehaviour:
   stoppingDistance: 15
   rotationSpeed: 2
   attackCooldown: 1
-  damageAmount: 10
   reachedPlayer: 0
 --- !u!114 &-8464521690373140425
 MonoBehaviour:
@@ -762,6 +762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   flashColour: {r: 0.7647059, g: 1, b: 0.7411765, a: 0}
+  originalColour: {r: 1, g: 1, b: 1, a: 1}
   enemyRenderer: {fileID: 6045560917180699333}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}

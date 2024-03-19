@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     public Player player;
     public Color flashColour;
+    public Color originalColour = Color.white;
     public Renderer enemyRenderer;
 
     public GameObject powerUpPrefab;
@@ -64,7 +65,7 @@ public class Enemy : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(0.1f);
 
         // Revert enemy colour back to original
-        enemyRenderer.material.color = Color.white;
+        enemyRenderer.material.color = originalColour;
     }
 
     public virtual void Die()
