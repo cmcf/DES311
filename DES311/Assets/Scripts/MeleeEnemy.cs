@@ -42,7 +42,7 @@ public class MeleeEnemy :  Enemy
         moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
         nav = GetComponent<NavMeshAgent>();
         nav.speed = moveSpeed;
-        currentHealth = defaultHealth;
+        currentHealth = maxHealth;
         // Find the player GameObject and get its transform component
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
 

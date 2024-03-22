@@ -97,7 +97,7 @@ public class Spawner : MonoBehaviour
                         if (enemy != null)
                         {
                             // Set the default health of the enemy
-                            enemy.currentHealth = enemy.defaultHealth;
+                            enemy.currentHealth = enemy.maxHealth;
                             // Register the spawned enemy with the EnemyManager
                             enemyManager.RegisterEnemy(enemy);
                         }

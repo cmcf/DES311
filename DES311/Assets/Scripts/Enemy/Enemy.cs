@@ -10,13 +10,14 @@ public class Enemy : MonoBehaviour, IDamageable
     public Color flashColour;
     public Color originalColour = Color.white;
     public Renderer enemyRenderer;
+    [SerializeField] HealthBar healthBar;
 
     public GameObject powerUpPrefab;
     // Gets the Position property from IDamageable interface
     public float Health { get; set; }
 
-    public float defaultHealth = 30f;
-    public float currentHealth = 35f;
+    public float maxHealth = 35f;
+    public float currentHealth;
 
     public int XPAmount = 25;
     // Chance of pickup spawning 
@@ -28,7 +29,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Awake()
     {
+        currentHealth = maxHealth;
+        healthBar = GetComponentInChildren<HealthBar>();
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
         player = FindObjectOfType<Player>();
+          
     }
     public void Damage(float damage)
     {
@@ -36,6 +41,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (!hit)
         {
             currentHealth -= damage;
+            healthBar.UpdateHealthBar(currentHealth, maxHealth);
             if (currentHealth <= 0)
             {
                 Die();
