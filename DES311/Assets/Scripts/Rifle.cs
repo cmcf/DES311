@@ -4,7 +4,9 @@ public class Rifle : Weapon
 {
     PlayerMovement playerScript;
     Player playerStats;
+
     public GameObject muzzle;
+    public GameObject crosshair;
 
     bool playMuzzle;
     
@@ -17,6 +19,12 @@ public class Rifle : Weapon
     }
 
     void Update()
+    {
+        PlayMuzzleFlash();
+        EnableCrosshair();
+    }
+
+    void PlayMuzzleFlash()
     {
         // Check if the playerScript is assigned
         if (playerScript != null)
@@ -35,5 +43,21 @@ public class Rifle : Weapon
         }
     }
 
+    void EnableCrosshair()
+    {
+        // Enables crosshair when the player is aiming
+        if (playerScript != null)
+        {
+            if (playerScript.isAiming && crosshair != null)
+            {
+                crosshair.SetActive(true);
+            }
+            // Disables the crosshair when the player is not aiming
+            else if (crosshair != null)
+            {
+                crosshair.SetActive(false);
+            }
+        }
+    }
 }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultRifle
   m_EditorClassIdentifier: 
   itemName: Rifle
-  description: Starting weapon
+  description: Starting loadout
   icon: {fileID: 0}
   projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
@@ -21,15 +21,15 @@ MonoBehaviour:
   modifiedAttribute: 3
   baseCooldown: 1
   baseSpeed: 20
-  baseMoveSpeed: 6
+  baseMoveSpeed: 5
   baseHealth: 50
   defaultProjectile: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
   cooldown: 1
-  speed: 40
-  moveSpeed: 7
-  health: 10
-  healthMaxValue: 60
+  speed: 20
+  moveSpeed: 5
+  health: 50
+  healthMaxValue: 50
   cooldownDecrease: 0
   speedIncrease: 0
   movementSpeedIncrease: 0

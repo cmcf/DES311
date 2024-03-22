@@ -81,7 +81,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 8930375505085652025}
   isAiming: 0
   isFiring: 0
-  rotationSpeed: 8
+  rotationSpeed: 5
   muzzleDelay: 0.1
 --- !u!143 &7543318854598395680
 CharacterController:
@@ -127,8 +127,8 @@ MonoBehaviour:
   endSceneLoadDelay: 5
   currentLevelText: {fileID: 0}
   currentXP: 0
-  requiredXP: 200
-  requiredXPIncreaseRate: 50
+  requiredXP: 150
+  requiredXPIncreaseRate: 65
   currentLevel: 1
   isDead: 0
 --- !u!95 &3591363647149444670
@@ -283,6 +283,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: a5674d01884853d4e8f2386a171e14d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700002, guid: a5674d01884853d4e8f2386a171e14d9, type: 3}
+      propertyPath: m_StaticShadowCaster
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
