@@ -742,6 +742,7 @@ MonoBehaviour:
   currentHealth: 100
   XPAmount: 25
   spawnProbability: 0.2
+  isBoss: 1
   projectileSpawnPoint: {fileID: 8800851095730719974}
   projectilePrefab: {fileID: 2308169832292628706, guid: dc607c448b811a645ab735323bce8ef9,
     type: 3}
@@ -773,6 +774,7 @@ MonoBehaviour:
   currentHealth: 40
   XPAmount: 25
   spawnProbability: 0.1
+  isBoss: 0
 --- !u!95 &2419008712768529568
 Animator:
   serializedVersion: 7

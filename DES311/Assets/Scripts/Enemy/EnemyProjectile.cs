@@ -11,6 +11,7 @@ public class EnemyProjectile : MonoBehaviour
     [SerializeField] GameObject splatPrefab;
 
     bool hitPlayer = false;
+    bool splatSpawned = false;
 
     void Start()
      {
@@ -56,17 +57,20 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (other.CompareTag("Player") && !hitPlayer)
         {
-            // Deals damage to player is hit
+            // Deals damage to player if hit
             hitPlayer = true;
             DealDamage(other.transform);
             Destroy(gameObject);
         }
-        // Does not destroy if enemy is hit
-        else if (!other.CompareTag("Enemy"))
+        else if (other.CompareTag("Enemy"))
+        {
+            return;
+        }
+        else if (!splatSpawned)
         {
             StartCoroutine(SpawnSplat());
+            splatSpawned = true;
         }
-        
     }
 
     IEnumerator SpawnSplat()
@@ -76,7 +80,7 @@ public class EnemyProjectile : MonoBehaviour
         // Instantiate the splat prefab at the position where the projectile landed
         Instantiate(splatPrefab, transform.position, Quaternion.identity);
 
-        // Wait for a short delay before destroying the projectile
+        // Wait for a short delay before destroying splat
         yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
     }

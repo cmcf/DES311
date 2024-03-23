@@ -10,6 +10,13 @@ public class Splat : MonoBehaviour
     bool canDealDamage = true; 
     float damageCooldown = 0.5f;
     float lastDamageTime = -Mathf.Infinity;
+    float destroyDelay = 4f;
+
+    void Start()
+    {
+        // Call the DestroyActor method after a delay
+        Invoke(nameof(DestroySplat), destroyDelay);
+    }
 
     void OnTriggerStay(Collider other)
     {
@@ -33,5 +40,10 @@ public class Splat : MonoBehaviour
             // Deal damage to the player
             damageable.Damage(damageAmount);
         }
+    }
+
+    void DestroySplat()
+    {
+        Destroy(gameObject);
     }
 }

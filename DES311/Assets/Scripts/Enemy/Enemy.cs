@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Damage;
 
 public class Enemy : MonoBehaviour, IDamageable
@@ -22,6 +23,8 @@ public class Enemy : MonoBehaviour, IDamageable
     public int XPAmount = 25;
     // Chance of pickup spawning 
     public float spawnProbability = 0.01f;
+
+    [SerializeField] bool isBoss = false;
 
     bool isDestroyed = false;
     bool hasIncreasedHealth = false;
@@ -74,19 +77,37 @@ public class Enemy : MonoBehaviour, IDamageable
         enemyRenderer.material.color = originalColour;
     }
 
+    IEnumerator LoadWinScene(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Destroy the enemy object
+        Destroy(gameObject);
+
+        // Load the win screen scene
+        SceneManager.LoadScene("WinScreen");
+    }
+
     public virtual void Die()
     {
-        // Increase player XP
-        GameManager.instance.IncreaseXP(XPAmount);
-        // Spawn powerup by chance and only if player is above level 3
-        if (player != null && Random.value < spawnProbability && player.currentLevel >= 3)
+        if (isBoss)
         {
-            // Spawns the pickup at the enemy's position
-            Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
+            StartCoroutine(LoadWinScene(1f));
         }
-        isDestroyed = true;
-        // Destroy the enemy gameObject
-        Destroy(gameObject);
+        else
+        {
+            // Increase player XP
+            GameManager.instance.IncreaseXP(XPAmount);
+            // Spawn powerup by chance and only if player is above level 3
+            if (player != null && Random.value < spawnProbability && player.currentLevel >= 3)
+            {
+                // Spawns the pickup at the enemy's position
+                Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
+            }
+            isDestroyed = true;
+            // Destroy the enemy gameObject
+            Destroy(gameObject);
+        }
     }
 
     public void IncreaseHealth(float amount)
