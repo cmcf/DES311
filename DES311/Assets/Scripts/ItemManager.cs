@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,10 +50,6 @@ public class ItemManager : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Debug.LogWarning("itemCards array is null.");
-        }
 
         // Hide the entire item selection interface
         gameObject.SetActive(false);
@@ -78,7 +75,8 @@ public class ItemManager : MonoBehaviour
 
         // Check if "FireCard" is already equipped and player's level is above 3
         bool fireCardEquipped = CheckIfFireCardEquipped();
-        bool playerAboveLevel3 = CheckIfPlayerAboveLevel3();
+        bool stoneCardEquipped = CheckIfStoneCardEquipped();
+        bool playerAboveRequiredLevel = CheckIfPlayerIsAboveRequiredLevel();
 
         // Deactivate all item cards
         foreach (var card in itemCards)
@@ -114,10 +112,16 @@ public class ItemManager : MonoBehaviour
             availableTags.Add("Health");
         }
 
-        // Add fire card if not already equipped and player is above level 3
-        if (!fireCardEquipped && playerAboveLevel3)
+        // Add fire card if not already equipped and player is above the required level
+        if (!fireCardEquipped && playerAboveRequiredLevel)
         {
             availableTags.Add("FireCard");
+        }
+
+        // Add fire card if not already equipped and player is above the required level
+        if (!stoneCardEquipped && playerAboveRequiredLevel)
+        {
+            availableTags.Add("StoneCard");
         }
 
         // Shuffle the available tags to randomize the selection
@@ -129,6 +133,15 @@ public class ItemManager : MonoBehaviour
         {
             ActivateCardWithTag(availableTags[i], i);
         }
+    }
+
+    bool CheckIfStoneCardEquipped()
+    {
+        if (playerScript.HasProjectileWithTag("StoneProjectile"))
+        {
+            return true;
+        }
+        return false;
     }
 
     void ActivateCardWithTag(string tag, int index)
@@ -163,9 +176,9 @@ public class ItemManager : MonoBehaviour
         return false;
     }
 
-    bool CheckIfPlayerAboveLevel3()
+    bool CheckIfPlayerIsAboveRequiredLevel()
     {
-        if (playerStats.GetCurrentLevel() >= 3)
+        if (playerStats.GetCurrentLevel() >= 2)
         {
            return true;
         }

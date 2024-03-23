@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 15
+  isLaser: 0
   destroyDelay: 3
   hitEffect: {fileID: 0}
   destroyDelayAfterCollision: 0.2
