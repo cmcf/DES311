@@ -8,14 +8,15 @@ public class EnemyProjectile : MonoBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] float damageAmount = 10;
     [SerializeField] float projectileHeight;
+    [SerializeField] GameObject splatPrefab;
 
     bool hitPlayer = false;
 
-     void Start()
+    void Start()
      {
         // Play the sound when spit is fired
         FindObjectOfType<AudioManager>().Play("Spit");
-     }
+    }
 
     public void Launch(Vector3 Destination)
     {
@@ -63,14 +64,27 @@ public class EnemyProjectile : MonoBehaviour
         // Does not destroy if enemy is hit
         else if (!other.CompareTag("Enemy"))
         {
-            Destroy(gameObject);    
+            StartCoroutine(SpawnSplat());
         }
         
     }
-     void OnTriggerExit(Collider other)
+
+    IEnumerator SpawnSplat()
     {
-        hitPlayer = false;
+        // Instantiate the splat prefab at a position with an offset
+        Vector3 offsetPosition = transform.position - new Vector3(0, 4f, 0);
+        // Instantiate the splat prefab at the position where the projectile landed
+        Instantiate(splatPrefab, transform.position, Quaternion.identity);
+
+        // Wait for a short delay before destroying the projectile
+        yield return new WaitForSeconds(0.2f);
+        Destroy(gameObject);
     }
+
+    void OnTriggerExit(Collider other)
+    {
+       hitPlayer = false;
+    } 
 
     void DealDamage(Transform target)
     {

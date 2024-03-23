@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  flashColour: {r: 0.56981134, g: 1, b: 0.56981134, a: 1}
+  flashColour: {r: 0.7075472, g: 0.124631844, b: 0.08276964, a: 1}
   originalColour: {r: 1, g: 1, b: 1, a: 1}
   enemyRenderer: {fileID: 5649607759006477213}
   healthBar: {fileID: 3662013121125926989}

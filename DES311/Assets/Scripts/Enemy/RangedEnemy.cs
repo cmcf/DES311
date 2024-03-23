@@ -35,7 +35,6 @@ public class RangedEnemy : Enemy
         // Find the player GameObject and get its transform component
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
         
-        //StartCoroutine(AttackPlayerRepeatedly());
     }
 
     void Update()
@@ -121,4 +120,5 @@ public class RangedEnemy : Enemy
         // Reset the flag to allow the enemy to attack again
         canAttack = true;
     }
+
 }

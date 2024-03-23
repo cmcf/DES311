@@ -4989,5 +4989,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8300526348366611644}
   damageAmount: 10
-  moveSpeed: 100
   projectileHeight: 1
+  splatPrefab: {fileID: 1753891732919528, guid: 99731a89786bacc43823bf11048687f4,
+    type: 3}
