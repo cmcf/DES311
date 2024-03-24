@@ -87,8 +87,14 @@ public class Player : MonoBehaviour, IDamageable
         FindObjectOfType<AudioManager>().Play("PlayerHit");
         // Current health is decreased by the damage received
         playerLoadout.currentLoadout.health -= damage;
-        // Enable vibration
-        Handheld.Vibrate();
+
+        // Check if vibration setting is enabled
+        if (Settings.instance.vibrationOn)
+        {
+            // Enable vibration
+            Handheld.Vibrate();
+        }
+
         // Health bar is updated with the current health amount
         playerHUD.UpdateHealthBar();
 
