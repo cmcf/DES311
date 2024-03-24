@@ -736,6 +736,8 @@ MonoBehaviour:
   originalColour: {r: 1, g: 1, b: 1, a: 1}
   enemyRenderer: {fileID: 6045560917180699333}
   healthBar: {fileID: 5273094992474477014}
+  deathVFX: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d,
+    type: 3}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   maxHealth: 35
@@ -768,6 +770,7 @@ MonoBehaviour:
   originalColour: {r: 1, g: 1, b: 1, a: 1}
   enemyRenderer: {fileID: 6045560917180699333}
   healthBar: {fileID: 0}
+  deathVFX: {fileID: 0}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   maxHealth: 35

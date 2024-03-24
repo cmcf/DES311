@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public Color originalColour = Color.white;
     public Renderer enemyRenderer;
     [SerializeField] HealthBar healthBar;
+    [SerializeField] GameObject deathVFX;
 
     public GameObject powerUpPrefab;
     // Gets the Position property from IDamageable interface
@@ -92,6 +93,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (isBoss)
         {
+            Instantiate(deathVFX, transform.position, Quaternion.identity);
             StartCoroutine(LoadWinScene(1f));
         }
         else
@@ -105,8 +107,9 @@ public class Enemy : MonoBehaviour, IDamageable
                 Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
             }
             isDestroyed = true;
+            Instantiate(deathVFX, transform.position, Quaternion.identity);
             // Destroy the enemy gameObject
-            Destroy(gameObject);
+            DestroyEnemy();
         }
     }
 
@@ -118,6 +121,11 @@ public class Enemy : MonoBehaviour, IDamageable
             hasIncreasedHealth = true;
         }
 
+    }
+
+    void DestroyEnemy()
+    {
+        Destroy(gameObject);
     }
 
 }

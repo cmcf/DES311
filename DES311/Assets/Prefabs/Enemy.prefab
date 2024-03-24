@@ -379,12 +379,16 @@ MonoBehaviour:
   originalColour: {r: 1, g: 1, b: 1, a: 1}
   enemyRenderer: {fileID: 5649607759006477213}
   healthBar: {fileID: 3662013121125926989}
+  deathVFX: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d,
+    type: 3}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   maxHealth: 30
   currentHealth: 0
+  destroyDelay: 0.3
   XPAmount: 40
-  spawnProbability: 0.02
+  spawnProbability: -0.14
+  isBoss: 0
   minMoveSpeed: 1.6
   maxMoveSpeed: 2.5
   rotationSpeed: 0.001
@@ -453,12 +457,16 @@ MonoBehaviour:
   originalColour: {r: 1, g: 1, b: 1, a: 1}
   enemyRenderer: {fileID: 5649607759006477213}
   healthBar: {fileID: 3662013121125926989}
+  deathVFX: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d,
+    type: 3}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   maxHealth: 30
   currentHealth: 35
+  destroyDelay: 0.8
   XPAmount: 25
   spawnProbability: 0.2
+  isBoss: 0
 --- !u!1 &7139442759110744767
 GameObject:
   m_ObjectHideFlags: 0

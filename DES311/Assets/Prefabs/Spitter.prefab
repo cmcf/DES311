@@ -811,12 +811,14 @@ MonoBehaviour:
   originalColour: {r: 1, g: 1, b: 1, a: 1}
   enemyRenderer: {fileID: 6045560917180699333}
   healthBar: {fileID: 0}
-  powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
+  deathVFX: {fileID: 0}
+  powerUpPrefab: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d,
     type: 3}
   maxHealth: 35
   currentHealth: 45
   XPAmount: 50
   spawnProbability: 0.2
+  isBoss: 0
   projectileSpawnPoint: {fileID: 8800851095730719974}
   projectilePrefab: {fileID: 2308169832292628706, guid: dc607c448b811a645ab735323bce8ef9,
     type: 3}
@@ -842,12 +844,14 @@ MonoBehaviour:
   originalColour: {r: 1, g: 1, b: 1, a: 1}
   enemyRenderer: {fileID: 6045560917180699333}
   healthBar: {fileID: 0}
+  deathVFX: {fileID: 0}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   maxHealth: 35
   currentHealth: 40
   XPAmount: 25
   spawnProbability: 0.1
+  isBoss: 0
 --- !u!95 &2419008712768529568
 Animator:
   serializedVersion: 7
