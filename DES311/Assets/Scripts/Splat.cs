@@ -14,7 +14,6 @@ public class Splat : MonoBehaviour
 
     void Start()
     {
-        // Call the DestroyActor method after a delay
         Invoke(nameof(DestroySplat), destroyDelay);
     }
 

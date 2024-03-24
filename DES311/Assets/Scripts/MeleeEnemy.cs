@@ -28,6 +28,7 @@ public class MeleeEnemy :  Enemy
     [SerializeField] float damageAmount = 10f;
 
     private Vector3 lastPlayerPosition;
+    float chaseDistance = 1f;
 
     bool reachedPlayer = false;
 
@@ -57,7 +58,7 @@ public class MeleeEnemy :  Enemy
         }
     }
 
-  
+
     void MoveAndRotateTowardsPlayer()
     {
         // Calculate distance between enemy and player
@@ -99,7 +100,7 @@ public class MeleeEnemy :  Enemy
             else
             {
                 // Check if the player has moved away
-                if (Vector3.Distance(lastPlayerPosition, playerLocation.position) > stoppingDistance)
+                if (Vector3.Distance(lastPlayerPosition, playerLocation.position) < stoppingDistance)
                 {
                     // Stop the attack
                     StopAttack();
@@ -118,8 +119,10 @@ public class MeleeEnemy :  Enemy
     void AttackPlayer()
     {
         if (base.player.isDead) { return; }
+
         // Play attack animation
         anim.SetBool("IsAttacking", true);
+
         // Reset attack animation
         StartCoroutine(ResetIsAttackingAfterDelay(attackCooldown));
     }
@@ -132,6 +135,9 @@ public class MeleeEnemy :  Enemy
 
     void DamagePlayer()
     {
+        // Play bite attack sound
+        FindObjectOfType<AudioManager>().Play("BiteAttack");
+
         // Calculate distance between enemy and player
         float distanceToPlayer = Vector3.Distance(transform.position, playerLocation.position);
 
@@ -140,6 +146,7 @@ public class MeleeEnemy :  Enemy
         {
             // Perform the attack by dealing damage to the player
             base.player.Damage(damageAmount);
+            
         }
     }
 
