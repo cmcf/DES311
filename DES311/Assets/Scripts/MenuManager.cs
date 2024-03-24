@@ -17,6 +17,11 @@ public class MenuManager : MonoBehaviour
 
     public void SettingsButton()
     {
+        SceneManager.LoadScene("Settings");
+    }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
