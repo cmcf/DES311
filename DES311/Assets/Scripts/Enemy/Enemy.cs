@@ -106,6 +106,7 @@ public class Enemy : MonoBehaviour, IDamageable
                 // Spawns the pickup at the enemy's position
                 Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
             }
+            FindObjectOfType<AudioManager>().Play("EnemyDeath");
             isDestroyed = true;
             Instantiate(deathVFX, transform.position, Quaternion.identity);
             // Destroy the enemy gameObject
