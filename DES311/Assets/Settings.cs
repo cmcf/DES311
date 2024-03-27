@@ -8,6 +8,8 @@ public class Settings : MonoBehaviour
     private const string VibrationKey = "VibrationEnabled";
     public bool vibrationOn;
 
+    [SerializeField] AudioClip buttonSFX;
+
     void Start()
     {
         // Load the saved vibration setting on start
@@ -34,12 +36,14 @@ public class Settings : MonoBehaviour
 
     public void ApplyVibration()
     {
+        PlayButtonSFX();
         vibrationOn = true;
         SaveVibrationSetting();
     }
 
     public void DisableVibration()
     {
+        PlayButtonSFX();
         vibrationOn = false;
         SaveVibrationSetting();
     }
@@ -57,6 +61,11 @@ public class Settings : MonoBehaviour
         }
         PlayerPrefs.SetInt(VibrationKey, vibrationValue);
         PlayerPrefs.Save();
+    }
+
+    void PlayButtonSFX()
+    {
+        AudioSource.PlayClipAtPoint(buttonSFX, transform.position);
     }
 
 }
