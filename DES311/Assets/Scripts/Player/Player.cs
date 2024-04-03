@@ -88,13 +88,11 @@ public class Player : MonoBehaviour, IDamageable
         // Current health is decreased by the damage received
         playerLoadout.currentLoadout.health -= damage;
 
-        // Check if vibration setting is enabled
-        if (Settings.instance.vibrationOn)
+        if (Settings.instance != null && Settings.instance.vibrationOn)
         {
             // Enable vibration
             Handheld.Vibrate();
         }
-
         // Health bar is updated with the current health amount
         playerHUD.UpdateHealthBar();
 
@@ -123,7 +121,7 @@ public class Player : MonoBehaviour, IDamageable
     void LoadEndLevel()
     {
         GameManager.instance.ResetGame();
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("EndScreen");
     }
    
 }

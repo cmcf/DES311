@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] AudioClip buttonSFX;
     public void PlayGameButton()
     {
+        Debug.Log("Play button pressed");
         PlayButtonSFX();
         SceneManager.LoadScene(1);
     }
