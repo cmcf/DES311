@@ -6,6 +6,21 @@ using UnityEngine.SceneManagement;
 public class SettingsFunctions : MonoBehaviour
 {
     [SerializeField] AudioClip buttonSFX;
+    [SerializeField] Canvas settingsCanvas;
+    [SerializeField] Canvas deathCanvas;
+
+    void Start()
+    {
+        if (settingsCanvas != null && deathCanvas != null)
+        {
+            settingsCanvas.enabled = false;
+            deathCanvas.enabled = false;
+        }
+        else
+        {
+            return;
+        }
+    }
     public void ApplyButton()
     {
         PlayButtonSFX();
@@ -37,6 +52,19 @@ public class SettingsFunctions : MonoBehaviour
     void PlayButtonSFX()
     {
         AudioSource.PlayClipAtPoint(buttonSFX, transform.position);
+    }
+    public void PauseSettingsButton()
+    {
+        PlayButtonSFX();
+        settingsCanvas.enabled = true;
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGameButton()
+    {
+        PlayButtonSFX();
+        settingsCanvas.enabled = false;
+        Time.timeScale = 1f;
     }
 
 

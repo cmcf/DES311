@@ -124,12 +124,15 @@ MonoBehaviour:
   itemManager: {fileID: 0}
   playerLoadout: {fileID: 2031717858816543538}
   playerHUD: {fileID: 0}
+  deathCanvas: {fileID: 0}
+  settingsButton: {fileID: 0}
   endSceneLoadDelay: 5
   currentLevelText: {fileID: 0}
   currentXP: 0
-  requiredXP: 150
-  requiredXPIncreaseRate: 65
+  requiredXP: 100
+  requiredXPIncreaseRate: 50
   currentLevel: 1
+  pointsAmount: 10
   isDead: 0
 --- !u!95 &3591363647149444670
 Animator:

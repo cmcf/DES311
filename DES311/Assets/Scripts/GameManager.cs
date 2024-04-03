@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
     // Event is triggered when called from another script
     public event XPHandler XPEvent;
 
+    public int currentPoints;
+    public int totalPoints;
+
+    private string totalPointsKey = "TotalPoints";
+
     public GameObject itemDisplayObject; // Reference to the game object with the ItemDisplay script
 
     void Awake()
@@ -31,6 +36,12 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    void Start()
+    {
+        // Load total points from PlayerPrefs
+        totalPoints = PlayerPrefs.GetInt(totalPointsKey, 0);
+    }
+
     public void IncreaseXP (int amount)
     {
         // If not null, increase XP by amoung gained
@@ -40,5 +51,15 @@ public class GameManager : MonoBehaviour
     public void ResetGame()
     {
         Destroy(gameObject);
+    }
+
+    public void AddPoints(int points)
+    {
+        currentPoints += points;
+        totalPoints += points;
+
+        // Save total points to PlayerPrefs
+        PlayerPrefs.SetInt(totalPointsKey, totalPoints);
+        PlayerPrefs.Save();
     }
 }

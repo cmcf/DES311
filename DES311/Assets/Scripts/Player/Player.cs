@@ -3,6 +3,8 @@ using UnityEngine;
 using static Cinemachine.DocumentationSortingAttribute;
 using static Damage;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -12,6 +14,8 @@ public class Player : MonoBehaviour, IDamageable
     public HUD playerHUD;
     Animator animator;
     CharacterController controller;
+    [SerializeField] Canvas deathCanvas;
+    [SerializeField] Button settingsButton;
 
     [SerializeField] float endSceneLoadDelay = 1f;
     [Header("Text Components")]
@@ -23,6 +27,7 @@ public class Player : MonoBehaviour, IDamageable
     public int requiredXP;
     [SerializeField] int requiredXPIncreaseRate = 150;
     public int currentLevel = 1;
+    public int pointsAmount = 10;
 
     public bool isDead = false;
     public float Health { get; set; }
@@ -35,7 +40,8 @@ public class Player : MonoBehaviour, IDamageable
         playerLoadout = GetComponent<PlayerMovement>();
         // Enable the XPEvent
         GameManager.instance.XPEvent += HandleXP;
-        currentLevelText.text = "Level: " + currentLevel.ToString();    
+        currentLevelText.text = "Level: " + currentLevel.ToString();
+        Time.timeScale = 1f;
     }
 
     void OnDisable()
@@ -49,6 +55,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         // Increase current XP
         currentXP += newXP;
+        GameManager.instance.AddPoints(pointsAmount);
         // If players current XP is equal or more than the required XP, the player levels up
         if (currentXP >= requiredXP)
         {
@@ -113,15 +120,21 @@ public class Player : MonoBehaviour, IDamageable
         FindObjectOfType<AudioManager>().Play("PlayerDeath");
 
         animator.SetTrigger("Dead");
-       
+
+        if (settingsButton != null)
+        {
+            settingsButton.enabled = false;
+        }
         // load end scene after a delay
         Invoke(nameof(LoadEndLevel), endSceneLoadDelay);
     }
 
     void LoadEndLevel()
     {
+        Time.timeScale = 0f;
         GameManager.instance.ResetGame();
-        SceneManager.LoadScene("EndScreen");
+        deathCanvas.enabled = true;
+        //SceneManager.LoadScene("EndScreen");
     }
    
 }
