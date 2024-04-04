@@ -7,6 +7,8 @@ public class VariableJoystick : Joystick
 {
     public float MoveThreshold { get { return moveThreshold; } set { moveThreshold = Mathf.Abs(value); } }
 
+    Settings settings;
+
     [SerializeField] private float moveThreshold = 1;
     [SerializeField] private JoystickType joystickType = JoystickType.Fixed;
 
@@ -26,10 +28,25 @@ public class VariableJoystick : Joystick
 
     protected override void Start()
     {
+        settings = GetComponent<Settings>();
         base.Start();
         fixedPosition = background.anchoredPosition;
         SetMode(joystickType);
         background.gameObject.SetActive(true);
+
+        // Find the Settings instance in the scene
+        settings = Settings.instance;
+        if (settings == null)
+        {
+            Debug.LogError("Settings instance not found in the scene.");
+            return;
+        }
+
+        // Retrieve the applied joystick type setting from the Settings script
+        JoystickType appliedJoystickType = settings.GetAppliedJoystickType();
+
+        // Apply the retrieved joystick type setting
+        SetMode(appliedJoystickType);
     }
 
     public override void OnPointerDown(PointerEventData eventData)

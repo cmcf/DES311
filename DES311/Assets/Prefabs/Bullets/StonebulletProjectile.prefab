@@ -9819,12 +9819,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a84dece07c61b3459eec5d85c24b8db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 20
+  damageAmount: 15
   isLaser: 0
+  isStoneBullet: 1
   destroyDelay: 3
   hitEffect: {fileID: 4205106322830315077, guid: c3e084fe7f2622843a30f9871b1c01ca,
     type: 3}
   destroyDelayAfterCollision: 0.2
+  pushbackAmount: 2
+  pushbackDuration: 0.5
   soundName: Stone
 --- !u!54 &1822452233931534250
 Rigidbody:

@@ -9,6 +9,10 @@ public class Settings : MonoBehaviour
     private const string JoystickTypeKey = "JoystickType";
     public JoystickType joystickType;
     public bool vibrationOn;
+    public bool applyJoystickTypePending;
+    public bool useFixedJoystick;
+
+     public VariableJoystick variableJoystick;
 
     void Start()
     {
@@ -61,24 +65,26 @@ public class Settings : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void SetJoystickType(JoystickType type)
+    public void ApplyFixedJoystick()
     {
-        joystickType = type;
-        SaveJoystickTypeSetting();
-        ApplyJoystickType(); // Apply the new joystick type
+        SaveJoystickValue(JoystickType.Fixed);
     }
 
-    private void ApplyJoystickType()
+    public void ApplyDynamicJoystick()
     {
-        // Find the VariableJoystick component and set its mode
-        VariableJoystick variableJoystick = FindObjectOfType<VariableJoystick>();
-        if (variableJoystick != null)
-           variableJoystick.SetMode(joystickType);
+        SaveJoystickValue(JoystickType.Dynamic);
     }
-
-    void SaveJoystickTypeSetting()
+    private void SaveJoystickValue(JoystickType joystickType)
     {
+        // Save the selected joystick type setting to PlayerPrefs
         PlayerPrefs.SetInt(JoystickTypeKey, (int)joystickType);
         PlayerPrefs.Save();
     }
+
+    public JoystickType GetAppliedJoystickType()
+    {
+        // Retrieve the saved joystick type setting from PlayerPrefs
+        int joystickTypeValue = PlayerPrefs.GetInt(JoystickTypeKey, (int)JoystickType.Fixed); // Default to Fixed if key doesn't exist
+        return (JoystickType)joystickTypeValue;
+    } 
 }

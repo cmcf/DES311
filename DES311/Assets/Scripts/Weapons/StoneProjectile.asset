@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StoneProjectile
   m_EditorClassIdentifier: 
   itemName: Stone Bullet
-  description: Fire stone bullets that deal +5 damage!
+  description: Fire stone bullets that knock enemies back!
   icon: {fileID: 0}
   projectilePrefab: {fileID: 0}
   projectileUpgrade: {fileID: 2748903383225329118, guid: 1b20ddc6768dbba409e3f2a891c43ef2,

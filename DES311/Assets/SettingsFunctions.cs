@@ -67,5 +67,15 @@ public class SettingsFunctions : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void FixedButton()
+    {
+        Settings.instance.ApplyFixedJoystick();
+    }
+
+    public void DynamicButton()
+    {
+        Settings.instance.ApplyDynamicJoystick();
+    }
+
 
 }

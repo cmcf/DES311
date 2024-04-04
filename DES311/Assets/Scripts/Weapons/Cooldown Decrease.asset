@@ -12,17 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ab8061e3fed8e4b8843cf49e5c5513, type: 3}
   m_Name: Cooldown Decrease
   m_EditorClassIdentifier: 
-  itemName: Cooldown Decrease
-  description: Decreases Cooldown by 0.1
+  itemName: Increase Fire Rate
+  description: Increases weapon fire rate by 0.1
   icon: {fileID: 0}
   projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
+  projectileUpgrade: {fileID: 0}
   modifiedAttribute: 0
   baseCooldown: 1
   baseSpeed: 20
+  baseMoveSpeed: 3.5
+  baseHealth: 50
+  defaultProjectile: {fileID: 0}
   cooldown: 0
   speed: 0
+  moveSpeed: 0
+  health: 0
+  healthMaxValue: 50
   cooldownDecrease: 0.1
   speedIncrease: 0
+  movementSpeedIncrease: 0
+  healthIncrease: 0
   minCooldown: 0.2
   maxSpeed: 95
+  maxMoveSpeed: 8.5
+  healthUpgradeMax: 90
