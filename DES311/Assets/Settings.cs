@@ -6,6 +6,8 @@ public class Settings : MonoBehaviour
 {
     public static Settings instance = null;
     private const string VibrationKey = "VibrationEnabled";
+    private const string JoystickTypeKey = "JoystickType";
+    public JoystickType joystickType;
     public bool vibrationOn;
 
     void Start()
@@ -56,6 +58,27 @@ public class Settings : MonoBehaviour
             vibrationValue = 0;
         }
         PlayerPrefs.SetInt(VibrationKey, vibrationValue);
+        PlayerPrefs.Save();
+    }
+
+    public void SetJoystickType(JoystickType type)
+    {
+        joystickType = type;
+        SaveJoystickTypeSetting();
+        ApplyJoystickType(); // Apply the new joystick type
+    }
+
+    private void ApplyJoystickType()
+    {
+        // Find the VariableJoystick component and set its mode
+        VariableJoystick variableJoystick = FindObjectOfType<VariableJoystick>();
+        if (variableJoystick != null)
+           variableJoystick.SetMode(joystickType);
+    }
+
+    void SaveJoystickTypeSetting()
+    {
+        PlayerPrefs.SetInt(JoystickTypeKey, (int)joystickType);
         PlayerPrefs.Save();
     }
 }

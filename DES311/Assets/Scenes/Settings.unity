@@ -231,7 +231,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 2.7968, y: 0.000095129}
-  m_SizeDelta: {x: 356.0407, y: 280}
+  m_SizeDelta: {x: 200, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &170727974
 MonoBehaviour:
@@ -322,8 +322,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 299.4, y: 172.10449}
-  m_SizeDelta: {x: 263.3889, y: 272.5397}
+  m_AnchoredPosition: {x: 206, y: 170}
+  m_SizeDelta: {x: 190, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &342590315
 MonoBehaviour:
@@ -698,7 +698,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -447, y: 314}
-  m_SizeDelta: {x: 300, y: 300}
+  m_SizeDelta: {x: 225, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &942917173
 MonoBehaviour:
@@ -905,7 +905,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 170}
-  m_SizeDelta: {x: 280, y: 320}
+  m_SizeDelta: {x: 200, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1249823782
 MonoBehaviour:
@@ -1153,6 +1153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonSFX: {fileID: 8300000, guid: 3b1bd8d1b535a8440b8c19972dd09634, type: 3}
   settingsCanvas: {fileID: 0}
+  deathCanvas: {fileID: 0}
 --- !u!1 &1581707215
 GameObject:
   m_ObjectHideFlags: 0
