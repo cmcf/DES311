@@ -19,7 +19,6 @@ public class Settings : MonoBehaviour
     public JoystickType joystickType;
 
 
-
     void Start()
     {
         // Load the saved vibration setting on start

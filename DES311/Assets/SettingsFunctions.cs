@@ -17,10 +17,36 @@ public class SettingsFunctions : MonoBehaviour
     [SerializeField] Button dynamicButton; // Reference to the dynamic joystick button
     [SerializeField] Button sfxOnButton;
     [SerializeField] Button sfxOffButton;
+    [SerializeField] Button musicOnButton;
+    [SerializeField] Button musicOffButton;
 
     public bool sfxEnabled = true;
+    public bool musicEnabled = true;
+
     bool vibrationEnabled = true; // Default vibration state
     bool isFixedJoystickSelected = true; // Default joystick type selection
+
+    void Start()
+    {
+        // Load saved settings
+        LoadSettings();
+        LoadSFXState();
+
+        if (vibrationOn || vibrationOff != null)
+        {
+            UpdateButtonAppearance();
+        }
+
+        if (settingsCanvas != null && deathCanvas != null)
+        {
+            settingsCanvas.enabled = false;
+            deathCanvas.enabled = false;
+        }
+        else
+        {
+            return;
+        }
+    }
 
 
     void LoadSettings()
@@ -29,6 +55,7 @@ public class SettingsFunctions : MonoBehaviour
         vibrationEnabled = PlayerPrefs.GetInt("VibrationEnabled", 1) == 1;
         sfxEnabled = PlayerPrefs.GetInt("SFXEnabled", 1) == 1;
         isFixedJoystickSelected = PlayerPrefs.GetInt("IsFixedJoystickSelected", 1) == 1;
+        musicEnabled = PlayerPrefs.GetInt("MusicEnabled", 1) == 1;
     }
 
     void SaveSettings()
@@ -37,8 +64,8 @@ public class SettingsFunctions : MonoBehaviour
         PlayerPrefs.SetInt("VibrationEnabled", vibrationEnabled ? 1 : 0);
         PlayerPrefs.SetInt("SFXEnabled", sfxEnabled ? 1 : 0);
         PlayerPrefs.SetInt("IsFixedJoystickSelected", isFixedJoystickSelected ? 1 : 0);
+        PlayerPrefs.SetInt("MusicEnabled", musicEnabled ? 1 : 0);
     }
-
 
     void UpdateButtonAppearance()
     {
@@ -75,6 +102,18 @@ public class SettingsFunctions : MonoBehaviour
             sfxOnButton.GetComponent<Image>().color = Color.grey;
             sfxOffButton.GetComponent<Image>().color = Color.white;
         }
+
+        // Update appearance of music button
+        if (musicEnabled)
+        {
+            musicOnButton.GetComponent<Image>().color = Color.white;
+            musicOffButton.GetComponent<Image>().color = Color.grey;
+        }
+        else if (!musicEnabled)
+        {
+            musicOnButton.GetComponent<Image>().color = Color.grey;
+            musicOffButton.GetComponent<Image>().color = Color.white;
+        }
     }
 
     public void ToggleVibration()
@@ -100,34 +139,22 @@ public class SettingsFunctions : MonoBehaviour
         UpdateButtonAppearance();
     }
 
-    public void ToggleSFX()
+    public void EnableMusicButton()
     {
-        sfxEnabled = !sfxEnabled;
+        PlayButtonSFX();
+        musicEnabled = false;
         SaveSettings();
         UpdateButtonAppearance();
     }
 
-    void Start()
+    public void DisableMusicButton()
     {
-        // Load saved settings
-        LoadSettings();
-        LoadSFXState();
-
-        if (vibrationOn || vibrationOff != null)
-        {
-            UpdateButtonAppearance();
-        }
-
-        if (settingsCanvas != null && deathCanvas != null)
-        {
-            settingsCanvas.enabled = false;
-            deathCanvas.enabled = false;
-        }
-        else
-        {
-            return;
-        }
+        PlayButtonSFX();
+        musicEnabled = false;
+        SaveSettings();
+        UpdateButtonAppearance();
     }
+
 
     // Method to load the saved SFX state from PlayerPrefs
     void LoadSFXState()
