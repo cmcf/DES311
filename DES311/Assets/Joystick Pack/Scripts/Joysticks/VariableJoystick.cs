@@ -49,6 +49,15 @@ public class VariableJoystick : Joystick
         SetMode(appliedJoystickType);
     }
 
+    public void OverrideJoystickType()
+    {
+        // Retrieve the applied joystick type setting from the Settings script
+        JoystickType appliedJoystickType = settings.GetAppliedJoystickType();
+
+        // Apply the retrieved joystick type setting
+        SetMode(appliedJoystickType);
+    }
+
     public override void OnPointerDown(PointerEventData eventData)
     {
         if(joystickType != JoystickType.Fixed)

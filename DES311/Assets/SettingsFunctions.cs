@@ -9,12 +9,14 @@ public class SettingsFunctions : MonoBehaviour
     [SerializeField] AudioClip buttonSFX;
     [SerializeField] Canvas settingsCanvas;
     [SerializeField] Canvas deathCanvas;
+    [SerializeField] VariableJoystick movementJoystick;
+    [SerializeField] VariableJoystick aimJoystick;
 
     [Header("Buttons")]
-    [SerializeField] Button vibrationOn; // Reference to the vibration button
-    [SerializeField] Button vibrationOff; // Reference to the vibration button
-    [SerializeField] Button fixedButton; // Reference to the fixed joystick button
-    [SerializeField] Button dynamicButton; // Reference to the dynamic joystick button
+    [SerializeField] Button vibrationOn;
+    [SerializeField] Button vibrationOff; 
+    [SerializeField] Button fixedButton; 
+    [SerializeField] Button dynamicButton;
     [SerializeField] Button sfxOnButton;
     [SerializeField] Button sfxOffButton;
     [SerializeField] Button musicOnButton;
@@ -142,9 +144,14 @@ public class SettingsFunctions : MonoBehaviour
     public void EnableMusicButton()
     {
         PlayButtonSFX();
-        musicEnabled = false;
+        musicEnabled = true;
         SaveSettings();
         UpdateButtonAppearance();
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.ToggleMusic(true);
+        }
     }
 
     public void DisableMusicButton()
@@ -153,8 +160,11 @@ public class SettingsFunctions : MonoBehaviour
         musicEnabled = false;
         SaveSettings();
         UpdateButtonAppearance();
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.ToggleMusic(false);
+        }
     }
-
 
     // Method to load the saved SFX state from PlayerPrefs
     void LoadSFXState()
@@ -227,6 +237,12 @@ public class SettingsFunctions : MonoBehaviour
         isFixedJoystickSelected = true;
         Settings.instance.ApplyFixedJoystick();
         UpdateButtonAppearance();
+
+        if (movementJoystick != null)
+        {
+            movementJoystick.OverrideJoystickType();
+            aimJoystick.OverrideJoystickType();
+        }
     }
 
     public void DynamicButton()
@@ -235,6 +251,12 @@ public class SettingsFunctions : MonoBehaviour
         isFixedJoystickSelected = false;
         Settings.instance.ApplyDynamicJoystick();
         UpdateButtonAppearance();
+
+        if (movementJoystick != null)
+        {
+            movementJoystick.OverrideJoystickType();
+            aimJoystick.OverrideJoystickType();
+        }
     }
     public void EnableSFXButton()
     {
@@ -242,6 +264,10 @@ public class SettingsFunctions : MonoBehaviour
         sfxEnabled = true;
         SaveSFXState();
         UpdateButtonAppearance();
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.ToggleSFX(true);
+        }
     }
 
     public void DisableSFXButton()
@@ -250,5 +276,9 @@ public class SettingsFunctions : MonoBehaviour
         sfxEnabled = false;
         SaveSFXState();
         UpdateButtonAppearance();
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.ToggleSFX(false);
+        }
     }
 }

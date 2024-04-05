@@ -82,7 +82,7 @@ public class Settings : MonoBehaviour
 
     public void ApplyDynamicJoystick()
     {
-        SaveJoystickValue(JoystickType.Dynamic);
+        SaveJoystickValue(JoystickType.Dynamic);  
     }
     void SaveJoystickValue(JoystickType joystickType)
     {
