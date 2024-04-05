@@ -69,11 +69,13 @@ public class SettingsFunctions : MonoBehaviour
 
     public void FixedButton()
     {
+        PlayButtonSFX();
         Settings.instance.ApplyFixedJoystick();
     }
 
     public void DynamicButton()
     {
+        PlayButtonSFX();
         Settings.instance.ApplyDynamicJoystick();
     }
 
