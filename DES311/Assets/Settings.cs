@@ -1,18 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
     public static Settings instance = null;
+    [Header("Vibration")]
+
     private const string VibrationKey = "VibrationEnabled";
+    public bool vibrationOn;
+
+    [Header("Joystick")]
+
+    public VariableJoystick variableJoystick;
     private const string JoystickTypeKey = "JoystickType";
     public JoystickType joystickType;
-    public bool vibrationOn;
-    public bool applyJoystickTypePending;
-    public bool useFixedJoystick;
 
-     public VariableJoystick variableJoystick;
 
     void Start()
     {
@@ -20,6 +25,7 @@ public class Settings : MonoBehaviour
         vibrationOn = PlayerPrefs.GetInt(VibrationKey, 1) == 1; // Default to true if key doesn't exist
         ApplyVibration(); // Apply the loaded setting
     }
+    
     void Awake()
     {
         //Check if instance already exists
@@ -36,22 +42,26 @@ public class Settings : MonoBehaviour
 
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
+
     }
 
     public void ApplyVibration()
     {
+        // Saves vibration on setting
         vibrationOn = true;
         SaveVibrationSetting();
     }
 
     public void DisableVibration()
     {
+        // Disables vibration
         vibrationOn = false;
         SaveVibrationSetting();
     }
 
     void SaveVibrationSetting()
     {
+        // Saves players vibration preference
         int vibrationValue;
         if (vibrationOn)
         {
@@ -72,9 +82,9 @@ public class Settings : MonoBehaviour
 
     public void ApplyDynamicJoystick()
     {
-        SaveJoystickValue(JoystickType.Dynamic);
+        SaveJoystickValue(JoystickType.Dynamic);  
     }
-    private void SaveJoystickValue(JoystickType joystickType)
+    void SaveJoystickValue(JoystickType joystickType)
     {
         // Save the selected joystick type setting to PlayerPrefs
         PlayerPrefs.SetInt(JoystickTypeKey, (int)joystickType);
@@ -84,7 +94,8 @@ public class Settings : MonoBehaviour
     public JoystickType GetAppliedJoystickType()
     {
         // Retrieve the saved joystick type setting from PlayerPrefs
-        int joystickTypeValue = PlayerPrefs.GetInt(JoystickTypeKey, (int)JoystickType.Fixed); // Default to Fixed if key doesn't exist
+        int joystickTypeValue = PlayerPrefs.GetInt(JoystickTypeKey, (int)JoystickType.Dynamic);
         return (JoystickType)joystickTypeValue;
-    } 
+    }
+
 }
