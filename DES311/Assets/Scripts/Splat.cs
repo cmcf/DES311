@@ -7,7 +7,6 @@ public class Splat : MonoBehaviour
 {
     [SerializeField] float damageAmount = 5f;
 
-    bool canDealDamage = true; 
     float damageCooldown = 0.5f;
     float lastDamageTime = -Mathf.Infinity;
     float destroyDelay = 4f;

@@ -28,8 +28,6 @@ public class MeleeEnemy :  Enemy
     [SerializeField] float damageAmount = 10f;
 
     private Vector3 lastPlayerPosition;
-    float chaseDistance = 1f;
-
     bool reachedPlayer = false;
 
     void Start()
