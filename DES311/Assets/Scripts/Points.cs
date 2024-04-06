@@ -5,11 +5,17 @@ using TMPro;
 
 public class Points : MonoBehaviour
 {
-    public TextMeshProUGUI currentPointsText;
+    public TextMeshProUGUI currentEnemiesKilled;
+    public TextMeshProUGUI currentCoins;
     void Start()
     {
-        currentPointsText.text = "Points earned: " + GameManager.instance.currentPoints.ToString();
+        currentEnemiesKilled.text = "Enemies Defeated: " + GameManager.instance.currentEnemiesKilled.ToString();
     }
 
+    public void UpdatePointsText()
+    {
+        currentEnemiesKilled.text = "Enemies Defeated: " + GameManager.instance.currentEnemiesKilled.ToString();
+        currentCoins.text = "Coins Earned: " + GameManager.instance.currentCoins.ToString();
+    }
 
 }

@@ -202,6 +202,10 @@ public class SettingsFunctions : MonoBehaviour
     public void PlayGame()
     {
         PlayButtonSFX();
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.ResetGame();
+        }
         SceneManager.LoadScene(1);
     }
     public void SettingsButton()

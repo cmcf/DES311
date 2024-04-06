@@ -11,10 +11,14 @@ public class GameManager : MonoBehaviour
     // Event is triggered when called from another script
     public event XPHandler XPEvent;
 
-    public int currentPoints;
-    public int totalPoints;
+    public int currentEnemiesKilled;
+    public int totalEnemiesKilled;
+
+    public int currentCoins;
+    public int totalCoins;
 
     private string totalPointsKey = "TotalPoints";
+    string totalCoinsKey = "TotalCoins";
 
     public GameObject itemDisplayObject; // Reference to the game object with the ItemDisplay script
 
@@ -39,7 +43,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Load total points from PlayerPrefs
-        totalPoints = PlayerPrefs.GetInt(totalPointsKey, 0);
+        totalEnemiesKilled = PlayerPrefs.GetInt(totalPointsKey, 0);
     }
 
     public void IncreaseXP (int amount)
@@ -53,13 +57,24 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void AddPoints(int points)
+    public void AddCoins(int points)
     {
-        currentPoints += points;
-        totalPoints += points;
+        currentCoins += points;
+        totalCoins += points;
 
-        // Save total points to PlayerPrefs
-        PlayerPrefs.SetInt(totalPointsKey, totalPoints);
+        // Save total coins  earned
+        PlayerPrefs.SetInt(totalCoinsKey, totalCoins);
         PlayerPrefs.Save();
     }
+
+    public void AddEnemy(int enemyAmount)
+    {
+        currentEnemiesKilled += enemyAmount;
+        totalEnemiesKilled += enemyAmount;
+
+        // Save total enemies killed to PlayerPrefs
+        PlayerPrefs.SetInt(totalPointsKey, totalEnemiesKilled);
+        PlayerPrefs.Save();
+    }
+
 }

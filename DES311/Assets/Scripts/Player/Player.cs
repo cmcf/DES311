@@ -16,6 +16,7 @@ public class Player : MonoBehaviour, IDamageable
     CharacterController controller;
     [SerializeField] Canvas deathCanvas;
     [SerializeField] Button settingsButton;
+    Points pointsScript;
 
     [SerializeField] float endSceneLoadDelay = 1f;
     [Header("Text Components")]
@@ -26,8 +27,11 @@ public class Player : MonoBehaviour, IDamageable
     public int currentXP;
     public int requiredXP;
     [SerializeField] int requiredXPIncreaseRate = 150;
+
     public int currentLevel = 1;
-    public int pointsAmount = 10;
+    public int enemyDeathCounter = 1;
+
+    public int points = 10;
 
     public bool isDead = false;
     public float Health { get; set; }
@@ -55,7 +59,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         // Increase current XP
         currentXP += newXP;
-        GameManager.instance.AddPoints(pointsAmount);
+        GameManager.instance.AddEnemy(enemyDeathCounter);
         // If players current XP is equal or more than the required XP, the player levels up
         if (currentXP >= requiredXP)
         {
@@ -75,6 +79,7 @@ public class Player : MonoBehaviour, IDamageable
         itemManager.DisplayItemChoice();
         // Players current level increases
         currentLevel++;
+        GameManager.instance.AddCoins(points);
         if (enemyManager != null)
         {
             enemyManager.LevelUpEnemies();
@@ -111,6 +116,16 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        pointsScript = FindObjectOfType<Points>();
+        if (pointsScript != null)
+        {
+            pointsScript.UpdatePointsText();
+        }
+        else
+        {
+            Debug.Log("Null");
+        }
+        
         if (isDead) { return; }
         isDead = true;
         // Disable the character controller
@@ -132,9 +147,7 @@ public class Player : MonoBehaviour, IDamageable
     void LoadEndLevel()
     {
         Time.timeScale = 0f;
-        GameManager.instance.ResetGame();
         deathCanvas.enabled = true;
-        //SceneManager.LoadScene("EndScreen");
     }
    
 }

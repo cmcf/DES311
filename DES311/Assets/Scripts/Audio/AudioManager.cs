@@ -52,38 +52,54 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Method to toggle SFX on/off
     public void ToggleSFX(bool enabled)
     {
         sfxEnabled = enabled;
-        PlayerPrefs.SetInt("SFXEnabled", enabled ? 1 : 0); // Save SFX status
-        ApplySFXStatus(); // Update SFX status immediately
+        // Save SFX status
+        if (enabled)
+        {
+            PlayerPrefs.SetInt("SFXEnabled", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("SFXEnabled", 0);
+        }
+        // Update SFX state
+        ApplySFXStatus();
     }
 
-    // Method to apply SFX status (enabled/disabled) from PlayerPrefs
     public void ApplySFXStatus()
     {
-        // Get SFX status from PlayerPrefs (default to enabled if not set)
+        // Get SFX status from PlayerPrefs. Set to enabled if not set. 
         sfxEnabled = PlayerPrefs.GetInt("SFXEnabled", 1) == 1;
         foreach (Sound s in sounds)
         {
-            // Set volume based on enable/disable status
-            s.source.volume = sfxEnabled ? s.volume : 0.0f;
+            // Check if the sound is SFX
+            if (s.type == SoundType.SFX)
+            {
+                // Set volume based on enable/disable state
+                s.source.volume = sfxEnabled ? s.volume : 0.0f;
+            }
         }
     }
-
-    // Method to toggle music on/off
     public void ToggleMusic(bool enabled)
     {
         musicEnabled = enabled;
-        PlayerPrefs.SetInt("MusicEnabled", enabled ? 1 : 0); // Save music status
-        ApplyMusicStatus(); // Update music status immediately
+        if (enabled)
+        {
+            PlayerPrefs.SetInt("MusicEnabled", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("MusicEnabled", 0);
+        }
+        // Update music state
+        ApplyMusicStatus(); 
     }
 
-    // Method to apply music status (enabled/disabled) from PlayerPrefs
     public void ApplyMusicStatus()
     {
-        // Get music status from PlayerPrefs (default to enabled if not set)
+        // Get music status from PlayerPrefs. Set to enabled if not set. 
         musicEnabled = PlayerPrefs.GetInt("MusicEnabled", 1) == 1;
         Sound music = Array.Find(sounds, sound => sound.type == SoundType.Music);
         if (music != null)
@@ -93,9 +109,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Method to play a sound by name
     public void Play(string name)
     {
+        // Plays sound based on name
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
