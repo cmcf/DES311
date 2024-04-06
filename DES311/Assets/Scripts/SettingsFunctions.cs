@@ -7,8 +7,13 @@ using UnityEngine.UI;
 public class SettingsFunctions : MonoBehaviour
 {
     [SerializeField] AudioClip buttonSFX;
+
+    [Header("Canvas")]
     [SerializeField] Canvas settingsCanvas;
     [SerializeField] Canvas deathCanvas;
+    [SerializeField] Canvas pauseCanvas;
+
+    [Header("Joysticks")]
     [SerializeField] VariableJoystick movementJoystick;
     [SerializeField] VariableJoystick aimJoystick;
 
@@ -21,6 +26,7 @@ public class SettingsFunctions : MonoBehaviour
     [SerializeField] Button sfxOffButton;
     [SerializeField] Button musicOnButton;
     [SerializeField] Button musicOffButton;
+    [SerializeField] Button settingsButton;
 
     public bool sfxEnabled = true;
     public bool musicEnabled = true;
@@ -43,6 +49,7 @@ public class SettingsFunctions : MonoBehaviour
         {
             settingsCanvas.enabled = false;
             deathCanvas.enabled = false;
+            pauseCanvas.enabled = false;
         }
         else
         {
@@ -194,6 +201,14 @@ public class SettingsFunctions : MonoBehaviour
         UpdateButtonAppearance();
     }
 
+    public void PauseButton()
+    {
+        PlayButtonSFX();
+        settingsButton.enabled = false;
+        pauseCanvas.enabled = true;
+        Time.timeScale = 0;
+    }
+
     public void BackButton()
     {
         PlayButtonSFX();
@@ -231,8 +246,14 @@ public class SettingsFunctions : MonoBehaviour
     public void ResumeGameButton()
     {
         PlayButtonSFX();
+
         settingsCanvas.enabled = false;
+        if (pauseCanvas != null)
+        {
+            pauseCanvas.enabled = false;
+        }
         Time.timeScale = 1f;
+        settingsButton.enabled = true;
     }
 
     public void FixedButton()
@@ -284,5 +305,11 @@ public class SettingsFunctions : MonoBehaviour
         {
             AudioManager.instance.ToggleSFX(false);
         }
+    }
+
+    public void QuitButton()
+    {
+        PlayButtonSFX();
+        Application.Quit();
     }
 }

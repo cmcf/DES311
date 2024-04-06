@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public int currentCoins;
     public int totalCoins;
 
-    private string totalPointsKey = "TotalPoints";
+    string totalPointsKey = "TotalPoints";
     string totalCoinsKey = "TotalCoins";
 
     public GameObject itemDisplayObject; // Reference to the game object with the ItemDisplay script
@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     {
         // Load total points from PlayerPrefs
         totalEnemiesKilled = PlayerPrefs.GetInt(totalPointsKey, 0);
+        totalCoins = PlayerPrefs.GetInt(totalCoinsKey, 0);
     }
 
     public void IncreaseXP (int amount)
@@ -61,7 +62,6 @@ public class GameManager : MonoBehaviour
     {
         currentCoins += points;
         totalCoins += points;
-
         // Save total coins  earned
         PlayerPrefs.SetInt(totalCoinsKey, totalCoins);
         PlayerPrefs.Save();
