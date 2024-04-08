@@ -1,9 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, IPurchaseListener
 {
     [SerializeField] Weapon[] weaponPrefabs;
     [SerializeField] Transform[] weaponSlots;
@@ -20,25 +18,30 @@ public class Inventory : MonoBehaviour
 
     void InitWeapon()
     {
-        weapons = new List<Weapon>();   
+        weapons = new List<Weapon>();
         foreach (Weapon weapon in weaponPrefabs)
         {
-            Transform weaponSlot = defaultSlot;
-            foreach (Transform slot in weaponSlot)
-            {
-                if (slot.gameObject.tag == weapon.GetSlotTag())
-                {
-                    weaponSlot = slot;
-                }
-            }
-            Weapon newWeapon = Instantiate(weapon, weaponSlot);
-            newWeapon.Init(gameObject);
-            weapons.Add(newWeapon);
+            EquipNewWeapon(weapon);
         }
         
     }
 
-   public void NextWeapon()
+    void EquipNewWeapon(Weapon weapon)
+    {
+        Transform weaponSlot = defaultSlot;
+        foreach (Transform slot in weaponSlot)
+        {
+            if (slot.gameObject.tag == weapon.GetSlotTag())
+            {
+                weaponSlot = slot;
+            }
+        }
+        Weapon newWeapon = Instantiate(weapon, weaponSlot);
+        newWeapon.Init(gameObject);
+        weapons.Add(newWeapon);
+    }
+
+    public void NextWeapon()
    {
         int nextWeaponIndex = currentWeaponIndex + 1;
         if (nextWeaponIndex >= weapons.Count)
@@ -60,5 +63,19 @@ public class Inventory : MonoBehaviour
 
         weapons[weaponIndex].Equip();
         currentWeaponIndex = weaponIndex;
+    }
+
+    public bool HandlePurchase(Object newPurchase)
+    {
+       GameObject itemAsGameObject = newPurchase as GameObject;
+
+        if (itemAsGameObject == null) { return false; }
+
+        Weapon itemsAsWeapon = itemAsGameObject.GetComponent<Weapon>();
+
+        if(itemsAsWeapon == null) { return false;  }
+
+        EquipNewWeapon(itemsAsWeapon);
+        return true;
     }
 }

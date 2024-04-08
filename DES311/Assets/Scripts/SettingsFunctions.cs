@@ -125,6 +125,12 @@ public class SettingsFunctions : MonoBehaviour
         }
     }
 
+    public void ShopButton()
+    {
+        PlayButtonSFX();
+        SceneManager.LoadScene("Shop");
+    }
+
     public void ToggleVibration()
     {
         vibrationEnabled = !vibrationEnabled;

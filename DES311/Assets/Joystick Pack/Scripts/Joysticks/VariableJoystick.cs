@@ -38,7 +38,6 @@ public class VariableJoystick : Joystick
         settings = Settings.instance;
         if (settings == null)
         {
-            Debug.LogError("Settings instance not found in the scene.");
             return;
         }
 

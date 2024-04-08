@@ -120,6 +120,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &8765927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8765929}
+  - component: {fileID: 8765928}
+  m_Layer: 0
+  m_Name: Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &8765928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8765927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a2737d7272dbba40804f694ffbb8bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vibrationOn: 0
+  variableJoystick: {fileID: 0}
+  joystickType: 0
+--- !u!4 &8765929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8765927}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &83376647
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +496,7 @@ GameObject:
   - component: {fileID: 839719795}
   - component: {fileID: 839719794}
   m_Layer: 5
-  m_Name: QuitButton
+  m_Name: ShopButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -517,7 +564,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 839719795}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1463338378}
+        m_TargetAssemblyTypeName: SettingsFunctions, Assembly-CSharp
+        m_MethodName: ShopButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &839719795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,7 +756,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1418238511}
-  - component: {fileID: 1418238514}
   - component: {fileID: 1418238515}
   m_Layer: 0
   m_Name: Menu Manager
@@ -721,21 +779,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1418238514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418238510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a2737d7272dbba40804f694ffbb8bb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vibrationOn: 1
-  variableJoystick: {fileID: 0}
-  joystickType: 0
 --- !u!114 &1418238515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,10 +791,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df4541177bcbe394089ab34939612ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerLoadout: {fileID: 11400000, guid: 7330dc1902b5ede4f8360ff3f39f8623, type: 2}
   currentEnemiesKilled: 0
   totalEnemiesKilled: 0
-  currentCoins: 0
-  totalCoins: 0
+  currentCredits: 0
+  totalCredits: 0
   itemDisplayObject: {fileID: 0}
 --- !u!1 &1463338373
 GameObject:
@@ -907,6 +951,7 @@ MonoBehaviour:
   buttonSFX: {fileID: 8300000, guid: 3b1bd8d1b535a8440b8c19972dd09634, type: 3}
   settingsCanvas: {fileID: 0}
   deathCanvas: {fileID: 0}
+  pauseCanvas: {fileID: 0}
   movementJoystick: {fileID: 0}
   aimJoystick: {fileID: 0}
   vibrationOn: {fileID: 0}
@@ -917,6 +962,7 @@ MonoBehaviour:
   sfxOffButton: {fileID: 0}
   musicOnButton: {fileID: 0}
   musicOffButton: {fileID: 0}
+  settingsButton: {fileID: 0}
   sfxEnabled: 1
   musicEnabled: 1
 --- !u!82 &1463338379
@@ -1553,3 +1599,4 @@ SceneRoots:
   - {fileID: 636066004}
   - {fileID: 2050172188}
   - {fileID: 1418238511}
+  - {fileID: 8765929}

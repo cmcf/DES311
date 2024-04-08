@@ -32,11 +32,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float muzzleDelay = 0.1f;
     bool isMoving;
 
+    
+
     void Start()
     {
         ResetPlayerStats();
         EnableJoystick();
         playerStats = GetComponent<Player>();
+      
     }
     public WeaponItem GetDefaultWeapon()
     {
@@ -46,12 +49,13 @@ public class PlayerMovement : MonoBehaviour
     void ResetPlayerStats()
     {
         // Reset default rifle upgrades to their base values
-        currentLoadout.cooldown = currentLoadout.baseCooldown;
+        currentLoadout.fireRate = currentLoadout.baseFireRate;
         currentLoadout.speed = currentLoadout.baseSpeed;
         currentLoadout.moveSpeed = currentLoadout.baseMoveSpeed;
         currentLoadout.projectilePrefab = currentLoadout.defaultProjectile;
         // Reset health
         currentLoadout.healthMaxValue = currentLoadout.baseHealth;
+
         currentLoadout.health = currentLoadout.baseHealth;
     }
     public void EnableJoystick()
@@ -111,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
     bool CanFire()
     {
         // Check if enough time has passed since the last firing
-        return Time.time - lastFireTime >= currentLoadout.cooldown;
+        return Time.time - lastFireTime >= currentLoadout.fireRate;
     }
 
     void Aim()
@@ -169,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
             // Update last fire time and call StopFiring
             lastFireTime = Time.time;
             
-            StartCoroutine(StopFiring(currentLoadout.cooldown));
+            StartCoroutine(StopFiring(currentLoadout.fireRate));
 
             // Set isFiring to true for this fire
             Invoke("ResetFiring", muzzleDelay);
@@ -201,5 +205,6 @@ public class PlayerMovement : MonoBehaviour
         isFiring = false;
         Invoke("ResetFiring", 0.4f);
     }
+
 
 }

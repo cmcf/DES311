@@ -31,8 +31,8 @@ public class ItemDisplay : MonoBehaviour
     switch (upgrade.modifiedAttribute)
     {
         case WeaponItem.UpgradeType.Cooldown:
-            currentWeapon.cooldown -= upgrade.cooldownDecrease;
-            Debug.Log(playerScript.currentLoadout.baseCooldown);
+            currentWeapon.fireRate -= upgrade.cooldownDecrease;
+            Debug.Log(playerScript.currentLoadout.baseFireRate);
             break;
         case WeaponItem.UpgradeType.Speed:
             currentWeapon.speed += upgrade.speedIncrease;

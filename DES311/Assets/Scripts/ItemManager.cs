@@ -68,7 +68,7 @@ public class ItemManager : MonoBehaviour
         playerScript = FindObjectOfType<PlayerMovement>();
 
         // Check if the current weapon has reached the maximum upgrade for each attribute
-        bool cooldownMaxed = playerScript.currentLoadout.cooldown <= playerScript.currentLoadout.minCooldown;
+        bool cooldownMaxed = playerScript.currentLoadout.fireRate <= playerScript.currentLoadout.minCooldown;
         bool speedMaxed = playerScript.currentLoadout.speed >= playerScript.currentLoadout.maxSpeed;
         bool moveSpeedMaxed = playerScript.currentLoadout.moveSpeed >= playerScript.currentLoadout.maxMoveSpeed;
         bool healthMaxed = playerScript.currentLoadout.healthMaxValue >= playerScript.currentLoadout.healthUpgradeMax;

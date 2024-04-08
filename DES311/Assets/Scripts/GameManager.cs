@@ -1,11 +1,17 @@
 using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
+
+    public WeaponItem playerLoadout;
+    PlayerMovement playerStats;
+    ShopItem item;
     // Handles XP events
     public delegate void XPHandler(int amount);
     // Event is triggered when called from another script
@@ -14,11 +20,11 @@ public class GameManager : MonoBehaviour
     public int currentEnemiesKilled;
     public int totalEnemiesKilled;
 
-    public int currentCoins;
-    public int totalCoins;
+    public int currentCredits;
+    public int totalCredits;
 
     string totalPointsKey = "TotalPoints";
-    string totalCoinsKey = "TotalCoins";
+    string totalCreditsKey = "TotalCoins";
 
     public GameObject itemDisplayObject; // Reference to the game object with the ItemDisplay script
 
@@ -44,10 +50,10 @@ public class GameManager : MonoBehaviour
     {
         // Load total points from PlayerPrefs
         totalEnemiesKilled = PlayerPrefs.GetInt(totalPointsKey, 0);
-        totalCoins = PlayerPrefs.GetInt(totalCoinsKey, 0);
+        totalCredits = PlayerPrefs.GetInt(totalCreditsKey, 0);
     }
 
-    public void IncreaseXP (int amount)
+    public void IncreaseXP(int amount)
     {
         // If not null, increase XP by amoung gained
         XPEvent?.Invoke(amount);
@@ -58,12 +64,17 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public int GetTotalCredits()
+    {
+        return totalCredits;
+    }
+
     public void AddCoins(int points)
     {
-        currentCoins += points;
-        totalCoins += points;
+        currentCredits += points;
+        totalCredits += points;
         // Save total coins  earned
-        PlayerPrefs.SetInt(totalCoinsKey, totalCoins);
+        PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
         PlayerPrefs.Save();
     }
 
@@ -77,4 +88,34 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void PurchaseItem(ShopItem item)
+    {
+        // Subtract price from current credits
+        totalCredits -= item.price;
+
+        // Update PlayerPrefs or any other relevant logic to save the new total credits
+        PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
+
+        SavePurchasedItem(item);
+
+        // Check if the purchased item is related to health
+        if (item.itemType == ShopItem.ItemType.Health)
+        {
+            IncreaseHealth(item.healthIncreaseAmount);
+        }
+
+        PlayerPrefs.Save();
+    }
+
+    void SavePurchasedItem(ShopItem item)
+    {
+        // Save purchased item data (e.g., item type, health increase amount, etc.) in PlayerPrefs or a custom save file
+        PlayerPrefs.SetInt("PurchasedItem_Type", (int)item.itemType);
+        PlayerPrefs.SetInt("PurchasedItem_HealthIncreaseAmount", item.healthIncreaseAmount);
+    }
+
+    void IncreaseHealth(int healthIncreaseAmount)
+    {
+        playerLoadout.baseHealth += healthIncreaseAmount;
+    }
 }
