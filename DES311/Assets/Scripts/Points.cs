@@ -15,7 +15,7 @@ public class Points : MonoBehaviour
     public void UpdatePointsText()
     {
         currentEnemiesKilled.text = "Enemies Defeated: " + GameManager.instance.currentEnemiesKilled.ToString();
-        currentCoins.text = "Coins Earned: " + GameManager.instance.currentCredits.ToString();
+        currentCoins.text = "Credits Earned: " + GameManager.instance.currentCredits.ToString();
     }
 
 }

@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        PlayerPrefs.Save();
         ResetPlayerStats();
         EnableJoystick();
         playerStats = GetComponent<Player>();
@@ -55,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         currentLoadout.projectilePrefab = currentLoadout.defaultProjectile;
         // Reset health
         currentLoadout.healthMaxValue = currentLoadout.baseHealth;
-
         currentLoadout.health = currentLoadout.baseHealth;
     }
     public void EnableJoystick()

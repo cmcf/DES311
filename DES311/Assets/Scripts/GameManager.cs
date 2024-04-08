@@ -1,9 +1,5 @@
-using System.Buffers.Text;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
-using static UnityEditor.Progress;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -23,10 +19,10 @@ public class GameManager : MonoBehaviour
     public int currentCredits;
     public int totalCredits;
 
+    public int currentHealthUpgrades;
+
     string totalPointsKey = "TotalPoints";
     string totalCreditsKey = "TotalCoins";
-
-    public GameObject itemDisplayObject; // Reference to the game object with the ItemDisplay script
 
     void Awake()
     {
@@ -51,6 +47,10 @@ public class GameManager : MonoBehaviour
         // Load total points from PlayerPrefs
         totalEnemiesKilled = PlayerPrefs.GetInt(totalPointsKey, 0);
         totalCredits = PlayerPrefs.GetInt(totalCreditsKey, 0);
+
+        // Load the current number of health upgrades from PlayerPrefs
+        currentHealthUpgrades = PlayerPrefs.GetInt("HealthUpgradesCount", 0);
+
     }
 
     public void IncreaseXP(int amount)
@@ -90,28 +90,63 @@ public class GameManager : MonoBehaviour
 
     public void PurchaseItem(ShopItem item)
     {
-        // Subtract price from current credits
-        totalCredits -= item.price;
 
-        // Update PlayerPrefs or any other relevant logic to save the new total credits
-        PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
-
-        SavePurchasedItem(item);
-
-        // Check if the purchased item is related to health
         if (item.itemType == ShopItem.ItemType.Health)
         {
-            IncreaseHealth(item.healthIncreaseAmount);
-        }
+            Debug.Log("Health upgrade attempted.");
 
-        PlayerPrefs.Save();
+            // Check the current count of health upgrades
+            currentHealthUpgrades = PlayerPrefs.GetInt("HealthUpgradesCount", 0);
+            Debug.Log("Current Health Upgrades: " + currentHealthUpgrades);
+
+            // If the current count is less than 5 and the player hasn't purchased this item yet, allow the purchase
+            if (currentHealthUpgrades < 5)
+            {
+                Debug.Log("Can purchase health upgrade.");
+
+                // Subtract price from current credits
+                totalCredits -= item.price;
+
+                // Update PlayerPrefs or any other relevant logic to save the new total credits
+                PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
+
+                SavePurchasedItem(item);
+
+                // Increase the count of health upgrades
+                currentHealthUpgrades++;
+
+                // Increase health
+                IncreaseHealth(item.healthIncreaseAmount);
+
+                // Update the UI
+                ShopItemUI.FindObjectOfType<ShopItemUI>().UpdateUI();
+
+                PlayerPrefs.Save();
+            }
+            else
+            {
+                Debug.Log("Purchase failed: Maximum health upgrades reached!");
+            }
+        }
+        else
+        {
+            // Subtract price from current credits
+            totalCredits -= item.price;
+
+            // Update PlayerPrefs
+            PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
+
+            SavePurchasedItem(item);
+
+            PlayerPrefs.Save();
+        }
     }
 
     void SavePurchasedItem(ShopItem item)
     {
-        // Save purchased item data (e.g., item type, health increase amount, etc.) in PlayerPrefs or a custom save file
-        PlayerPrefs.SetInt("PurchasedItem_Type", (int)item.itemType);
-        PlayerPrefs.SetInt("PurchasedItem_HealthIncreaseAmount", item.healthIncreaseAmount);
+       // Save purchased item data (e.g., item type, health increase amount, etc.) in PlayerPrefs or a custom save file
+       PlayerPrefs.SetInt("PurchasedItem_Type", (int)item.itemType);
+       PlayerPrefs.SetInt("PurchasedItem_HealthIncreaseAmount", item.healthIncreaseAmount);
     }
 
     void IncreaseHealth(int healthIncreaseAmount)
