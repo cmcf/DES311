@@ -20,28 +20,34 @@ public class GameManager : MonoBehaviour
     public int totalCredits;
 
     public int currentHealthUpgrades;
+    public bool hasPurchasedLaser = false;
 
     string totalPointsKey = "TotalPoints";
     string totalCreditsKey = "TotalCoins";
 
+    string healthUpgradesCountKey = "HealthUpgradesCount";
+    string hasPurchasedLaserKey = "HasPurchasedLaser";
+
+    [SerializeField] int totalHealthUpgraded;
+
     void Awake()
     {
-        //Check if instance already exists
+        // Check if instance already exists
         if (instance == null)
-
-            //if not, set instance to this
+        {
+            // If not, set instance to this
             instance = this;
 
-        //If instance already exists and it's not this:
+            // Set this GameObject to not be destroyed when reloading scene
+            DontDestroyOnLoad(gameObject);
+            
+        }
         else if (instance != this)
-
-            //Then destroy this. This enforces our singleton pattern, meaning there can only be one GameManager.
+        {
+            // Then destroy this. This enforces our singleton pattern, meaning there can only be one GameManager.
             Destroy(gameObject);
-
-        //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
+        }
     }
-
     void Start()
     {
         // Load total points from PlayerPrefs
@@ -50,6 +56,10 @@ public class GameManager : MonoBehaviour
 
         // Load the current number of health upgrades from PlayerPrefs
         currentHealthUpgrades = PlayerPrefs.GetInt("HealthUpgradesCount", 0);
+
+        // Load the purchased laser status from PlayerPrefs
+        hasPurchasedLaser = PlayerPrefs.GetInt(hasPurchasedLaserKey, 0) == 1;
+
 
     }
 
@@ -93,9 +103,8 @@ public class GameManager : MonoBehaviour
 
         if (item.itemType == ShopItem.ItemType.Health)
         {
-
             // Check the current count of health upgrades
-            currentHealthUpgrades = PlayerPrefs.GetInt("HealthUpgradesCount", 0);
+            currentHealthUpgrades = PlayerPrefs.GetInt(healthUpgradesCountKey, 0);
             Debug.Log("Current Health Upgrades: " + currentHealthUpgrades);
 
             // If the current count is less than 5 and the player hasn't purchased this item yet, allow the purchase
@@ -106,44 +115,68 @@ public class GameManager : MonoBehaviour
                 // Subtract price from current credits
                 totalCredits -= item.price;
 
-                // Update PlayerPrefs or any other relevant logic to save the new total credits
+                // Update PlayerPrefs to save the new total credits
                 PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
 
-                SavePurchasedItem(item);
-
-                // Increase the count of health upgrades
+                // Save the purchased health upgrades count
                 currentHealthUpgrades++;
+
+                // Save the purchased health upgrades count to PlayerPrefs
+                PlayerPrefs.SetInt(healthUpgradesCountKey, currentHealthUpgrades);
 
                 // Increase health
                 IncreaseHealth(item.healthIncreaseAmount);
 
                 // Update the UI
-                ShopItemUI.FindObjectOfType<ShopItemUI>().UpdateUI();
+                PurchaseConditions.FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
 
                 PlayerPrefs.Save();
             }
             else
             {
-                // Update the UI
-                ShopItemUI.FindObjectOfType<ShopItemUI>().UpdateUI();
+                PurchaseConditions.FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
                 Debug.Log("Purchase failed: Maximum health upgrades reached!");
             }
         }
-        else
-        {
-            // Subtract price from current credits
-            totalCredits -= item.price;
 
-            // Update PlayerPrefs
-            PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
+        else if (item.itemType == ShopItem.ItemType.Projectile)
+             {
+                if (hasPurchasedLaser)
+                {
+                    // Player has already purchased the laser, do not allow purchasing again
+                    return;
+                }
 
-            // Update the UI
-            ShopItemUI.FindObjectOfType<ShopItemUI>().UpdateUI();
+                // Check if player has enough credits
+                if (totalCredits >= item.price)
+                {
+                    // Deduct the price from total credits
+                    totalCredits -= item.price;
 
-            SavePurchasedItem(item);
+                    PurchaseConditions.FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
 
-            PlayerPrefs.Save();
-        }
+                    // Update PlayerPrefs or any other relevant logic to save the new total credits
+                    PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
+
+                    // Update the player's loadout with the purchased laser
+                    UpdateStartingProjectile(item);
+
+                    // Set hasPurchasedLaser to true
+                    hasPurchasedLaser = true;
+
+                    // Save the hasPurchasedLaser status
+                    PlayerPrefs.SetInt("HasPurchasedLaser", hasPurchasedLaser ? 1 : 0);
+                    PlayerPrefs.Save();
+
+                    // Save purchased item data
+                    SavePurchasedItem(item);
+                }
+                else
+                {
+                    PurchaseConditions.FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
+                    Debug.Log("Not enough credits");
+                }
+            }
     }
 
     void SavePurchasedItem(ShopItem item)
@@ -156,5 +189,17 @@ public class GameManager : MonoBehaviour
     void IncreaseHealth(int healthIncreaseAmount)
     {
         playerLoadout.baseHealth += healthIncreaseAmount;
+        totalHealthUpgraded = healthIncreaseAmount;
     }
+    void UpdateStartingProjectile(ShopItem item)
+    {
+        // Update the player's default projectile to the purchased item's projectile
+        playerLoadout.defaultProjectile = item.projectile;
+
+        // Save that the player has purchased the laser
+        PlayerPrefs.SetInt("HasPurchasedLaser", 1);
+        PlayerPrefs.Save();
+
+    }
+
 }

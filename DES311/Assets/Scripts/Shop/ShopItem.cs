@@ -9,7 +9,7 @@ public class ShopItem : ScriptableObject
     public enum ItemType
     {
         Health,
-        MoveSpeed,
+        Projectile,
     }
     public ItemType itemType;
 
@@ -17,6 +17,7 @@ public class ShopItem : ScriptableObject
     public string description;
     public int price;
     public Object item;
+    public GameObject projectile;
     public Sprite icon;
 
     public int healthIncreaseAmount;
