@@ -36,7 +36,7 @@ public class PurchaseConditions : MonoBehaviour
         // Update current health upgrades
         currentHealthUpgrades.text = GameManager.instance.currentHealthUpgrades.ToString() + " / 5";
 
-        // Update credits
+        // Update current credits text
         creditsText.text = "Credits: " + GameManager.instance.totalCredits.ToString();
 
         // Get prices for health and laser upgrades

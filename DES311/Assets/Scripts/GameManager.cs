@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        //PlayerPrefs.DeleteAll();
+        //playerLoadout.baseHealth = 50;
         // Load total points from PlayerPrefs
         totalEnemiesKilled = PlayerPrefs.GetInt(totalPointsKey, 0);
         totalCredits = PlayerPrefs.GetInt(totalCreditsKey, 0);
@@ -110,7 +112,6 @@ public class GameManager : MonoBehaviour
             // If the current count is less than 5 and the player hasn't purchased this item yet, allow the purchase
             if (currentHealthUpgrades < 5)
             {
-                Debug.Log("Can purchase health upgrade.");
 
                 // Subtract price from current credits
                 totalCredits -= item.price;
