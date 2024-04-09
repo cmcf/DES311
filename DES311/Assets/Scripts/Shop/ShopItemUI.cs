@@ -62,7 +62,7 @@ public class ShopItemUI : MonoBehaviour
         currentUpgradeText.text = GameManager.instance.currentHealthUpgrades.ToString() + " / 5";
         creditsText.text = "Credits: " + GameManager.instance.totalCredits.ToString();
 
-        if (GameManager.instance.currentHealthUpgrades == 5)
+        if (GameManager.instance.currentHealthUpgrades == 5 || GameManager.instance.currentCredits <= item.price)
         {
             button.GetComponent<Image>().color = Color.grey;
         }

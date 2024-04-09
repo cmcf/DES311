@@ -93,7 +93,6 @@ public class GameManager : MonoBehaviour
 
         if (item.itemType == ShopItem.ItemType.Health)
         {
-            Debug.Log("Health upgrade attempted.");
 
             // Check the current count of health upgrades
             currentHealthUpgrades = PlayerPrefs.GetInt("HealthUpgradesCount", 0);
@@ -125,6 +124,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                // Update the UI
+                ShopItemUI.FindObjectOfType<ShopItemUI>().UpdateUI();
                 Debug.Log("Purchase failed: Maximum health upgrades reached!");
             }
         }
@@ -135,6 +136,9 @@ public class GameManager : MonoBehaviour
 
             // Update PlayerPrefs
             PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
+
+            // Update the UI
+            ShopItemUI.FindObjectOfType<ShopItemUI>().UpdateUI();
 
             SavePurchasedItem(item);
 
