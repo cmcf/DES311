@@ -10,10 +10,12 @@ public class ShopItem : ScriptableObject
     {
         Health,
         Projectile,
+        Card,
     }
     public ItemType itemType;
 
     public string itemName;
+    [TextArea(3, 10)]
     public string description;
     public int price;
     public Object item;
