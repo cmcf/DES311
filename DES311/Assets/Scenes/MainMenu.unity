@@ -327,8 +327,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 200
-  m_fontSizeBase: 200
+  m_fontSize: 150
+  m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -798,6 +798,7 @@ MonoBehaviour:
   totalCredits: 0
   currentHealthUpgrades: 0
   hasPurchasedLaser: 0
+  hasPurchasedWaterCard: 0
   totalHealthUpgraded: 0
 --- !u!1 &1463338373
 GameObject:
