@@ -132,7 +132,8 @@ MonoBehaviour:
   requiredXP: 100
   requiredXPIncreaseRate: 50
   currentLevel: 1
-  pointsAmount: 10
+  enemyDeathCounter: 1
+  points: 10
   isDead: 0
 --- !u!95 &3591363647149444670
 Animator:

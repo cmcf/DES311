@@ -16,6 +16,8 @@ TagManager:
   - FireProjectile
   - StoneProjectile
   - StoneCard
+  - Water
+  - WaterCard
   layers:
   - Default
   - TransparentFX

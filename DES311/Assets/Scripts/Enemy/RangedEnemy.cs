@@ -14,9 +14,9 @@ public class RangedEnemy : Enemy
     [SerializeField] EnemyProjectile projectilePrefab;
 
     [Header("Movement")]
-    [SerializeField] float moveSpeed = 3f;
     [SerializeField] float stoppingDistance = 10f;
     [SerializeField] float rotationSpeed = 2f;
+    float originalMoveSpeed;
 
 
     [Header("Attack")]
@@ -31,6 +31,7 @@ public class RangedEnemy : Enemy
     {
         nav = GetComponent<NavMeshAgent>();
         nav.speed = moveSpeed;
+        originalMoveSpeed = moveSpeed;
         anim = GetComponent<Animator>();
         // Find the player GameObject and get its transform component
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
@@ -87,6 +88,38 @@ public class RangedEnemy : Enemy
         }
     }
 
+    public override void SlowdownEffect(float amount, float duration)
+    {
+        base.SlowdownEffect(amount, duration);
+
+        // Calculates the new movement speed after applying the slow effect
+        float newMoveSpeed = moveSpeed - amount;
+
+        // Clamps the movement speed to ensure it doesn't go below the min speed
+        float minMoveSpeed = 1.2f;
+        moveSpeed = Mathf.Max(newMoveSpeed, minMoveSpeed);
+
+        // Update NavMeshAgent's speed to match the adjusted move speed
+        nav.speed = moveSpeed;
+
+        SlowDownAnimation();
+
+        // Start coroutine to restore speed
+        StartCoroutine(RestoreMoveSpeed(duration));
+    }
+    void SlowDownAnimation()
+    {
+        // Slows down the speed of the movement animation
+        anim.SetFloat("Speed", 0.8f);
+    }
+
+    IEnumerator RestoreMoveSpeed(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        // Restore original movement speed
+        nav.speed = originalMoveSpeed;
+    }
+
     void Rotate()
     {
         // Rotate towards the player's position
@@ -100,7 +133,6 @@ public class RangedEnemy : Enemy
         if (canAttack && projectilePrefab != null)
         {
             anim.SetBool("IsAttacking", true);
-            // Shoot projectile
             StartCoroutine(ShootProjectileAfterDelay(1f));
         }
     }

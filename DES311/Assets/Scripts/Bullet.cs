@@ -11,14 +11,18 @@ public class Bullet : MonoBehaviour
     [Header("Bullet Type")]
     [SerializeField] bool isLaser = false;
     [SerializeField] bool isStoneBullet = false;
+    [SerializeField] bool isWaterBall = false;
 
-    MeleeEnemy enemy;
+    Enemy enemy;
     [SerializeField] float destroyDelay = 3f;
     [SerializeField] GameObject hitEffect;
     [SerializeField] float destroyDelayAfterCollision = 0.2f;
     [SerializeField] float pushbackAmount = 2f;
     [SerializeField] float pushbackDuration = 0.5f;
     public string soundName;
+
+    [SerializeField] float slowAmount = 0.5f;
+    [SerializeField] float slowDuration = 10f;
     void Start()
     {
         // Play the sound when the bullet is fired
@@ -57,47 +61,66 @@ public class Bullet : MonoBehaviour
                 // Disable the bullet's collider to prevent it from hitting multiple enemies
                 GetComponent<Collider>().enabled = false;
             }
-           
-            // Destroy the bullet after a delay
-            Invoke(nameof(DestroyBullet), destroyDelay);
-        }
-        else
-        {
-            // Destroy the bullet immediately if it hits something other than an enemy
-            Invoke(nameof(DestroyBullet), destroyDelayAfterCollision);
-        }
-    }
-
-    IEnumerator PushbackEnemy(Transform enemyTransform)
-    {
-        // Store the original position of the enemy
-        Vector3 originalPosition = enemyTransform.position;
-        // Calculate the target position for pushback
-        Vector3 targetPosition = enemyTransform.position - enemyTransform.forward * pushbackAmount;
-        // Initialize time elapsed
-        float elapsedTime = 0f;
-        // Smoothly move the enemy back over the specified duration
-        while (elapsedTime < pushbackDuration)
-        {
-            // Calculate interpolation factor
-            float t = elapsedTime / pushbackDuration;
-            if (enemyTransform != null)
+            if (isWaterBall)
             {
-                // Interpolate position
-                enemyTransform.position = Vector3.Lerp(originalPosition, targetPosition, t);
-                // Increment time elapsed
-                elapsedTime += Time.deltaTime;
+                enemy = other.GetComponent<Enemy>();
+
+                ApplySlowEffect(enemy);
+
             }
-          
-            yield return null;
+            else
+            {
+                // Destroy the bullet immediately if it hits something other than an enemy
+                Invoke(nameof(DestroyBullet), destroyDelayAfterCollision);
+            }
         }
 
+        IEnumerator PushbackEnemy(Transform enemyTransform)
+        {
+            // Store the original position of the enemy
+            Vector3 originalPosition = enemyTransform.position;
+            // Calculate the target position for pushback
+            Vector3 targetPosition = enemyTransform.position - enemyTransform.forward * pushbackAmount;
+            // Initialize time elapsed
+            float elapsedTime = 0f;
+            // Smoothly move the enemy back over the specified duration
+            while (elapsedTime < pushbackDuration)
+            {
+                // Calculate interpolation factor
+                float t = elapsedTime / pushbackDuration;
+                if (enemyTransform != null)
+                {
+                    // Interpolate position
+                    enemyTransform.position = Vector3.Lerp(originalPosition, targetPosition, t);
+                    // Increment time elapsed
+                    elapsedTime += Time.deltaTime;
+                }
+
+                yield return null;
+            }
+
+        }
+
+      
     }
+    void ApplySlowEffect(Enemy enemy)
+    {
+
+        // Debug the original move speed
+        Debug.Log("Original Move Speed: " + enemy.moveSpeed);
+
+        // Apply slow effect
+        enemy.SlowdownEffect(slowAmount, slowDuration);
+
+        // Debug the move speed after applying slow effect
+        Debug.Log("New Move Speed: " + enemy.moveSpeed);
+
+    }
+
 
     void DestroyBullet()
     {
         Destroy(gameObject);
     }
-
 }
 
