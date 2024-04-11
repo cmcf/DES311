@@ -16,7 +16,7 @@ public class MeleeEnemy :  Enemy
     Animator anim;
 
     [Header("Movement")]
-    float moveSpeed;
+    float originalMoveSpeed;
     [SerializeField] float minMoveSpeed = 1f;
     [SerializeField] float maxMoveSpeed = 5f;
     [SerializeField] float rotationSpeed = 2f;
@@ -38,10 +38,12 @@ public class MeleeEnemy :  Enemy
         {
             enemyManager.RegisterEnemy(this);
         }
-        moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
+        base.moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
         nav = GetComponent<NavMeshAgent>();
         nav.speed = moveSpeed;
+        originalMoveSpeed = moveSpeed;
         currentHealth = maxHealth;
+
         // Find the player GameObject and get its transform component
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -112,6 +114,38 @@ public class MeleeEnemy :  Enemy
                 }
             }
         }
+    }
+
+    public override void SlowdownEffect(float amount, float duration)
+    {
+        base.SlowdownEffect(amount, duration);
+
+        // Calculates the new movement speed after applying the slow effect
+        float newMoveSpeed = moveSpeed - amount;
+
+        // Clamps the movement speed to ensure it doesn't go below the min speed
+        float minMoveSpeed = 0.8f;
+        moveSpeed = Mathf.Max(newMoveSpeed, minMoveSpeed);
+
+        // Update NavMeshAgent's speed to match the adjusted move speed
+        nav.speed = moveSpeed;
+
+        SlowDownAnimation();
+
+        // Start coroutine to restore speed
+        StartCoroutine(RestoreMoveSpeed(duration));
+    }
+    void SlowDownAnimation()
+    {
+        // Slows down speed of the movement animation
+        anim.SetFloat("Speed", 0.8f); 
+    }
+
+    IEnumerator RestoreMoveSpeed(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        // Restore original movement speed
+        nav.speed = originalMoveSpeed;
     }
 
     void AttackPlayer()

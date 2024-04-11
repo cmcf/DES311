@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour, IDamageable
     public float maxHealth = 35f;
     public float currentHealth;
 
+    public float slowAmount;
+    public float moveSpeed;
     public int XPAmount = 25;
     // Chance of pickup spawning 
     public float spawnProbability = 0.01f;
@@ -58,10 +60,16 @@ public class Enemy : MonoBehaviour, IDamageable
     // Reset flags when enemy is hit by a new bullet
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("FireProjectile") || collision.gameObject.CompareTag("StoneProjectile"))
+        if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("FireProjectile") || collision.gameObject.CompareTag("StoneProjectile") || collision.gameObject.CompareTag("Water"))
         {
             hit = false;
         }
+    }
+
+    public virtual void SlowdownEffect(float amount, float duration)
+    {
+        // Adjust the movement speed
+        moveSpeed -= amount;
     }
 
     IEnumerator HitEffect()

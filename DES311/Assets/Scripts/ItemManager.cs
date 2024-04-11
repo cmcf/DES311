@@ -73,9 +73,11 @@ public class ItemManager : MonoBehaviour
         bool moveSpeedMaxed = playerScript.currentLoadout.moveSpeed >= playerScript.currentLoadout.maxMoveSpeed;
         bool healthMaxed = playerScript.currentLoadout.healthMaxValue >= playerScript.currentLoadout.healthUpgradeMax;
 
-        // Check if "FireCard" is already equipped and player's level is above 3
+        // Check what projectile the player has equipped
         bool fireCardEquipped = CheckIfFireCardEquipped();
         bool stoneCardEquipped = CheckIfStoneCardEquipped();
+        bool waterCardEquipped = CheckIfWaterCardEquipped();
+
         bool playerAboveRequiredLevel = CheckIfPlayerIsAboveRequiredLevel();
 
         // Deactivate all item cards
@@ -124,6 +126,11 @@ public class ItemManager : MonoBehaviour
             availableTags.Add("StoneCard");
         }
 
+        if (!waterCardEquipped && playerAboveRequiredLevel)
+        {
+            availableTags.Add("WaterCard");
+        }
+
         // Shuffle the available tags to randomize the selection
         Shuffle(availableTags);
 
@@ -170,6 +177,15 @@ public class ItemManager : MonoBehaviour
     bool CheckIfFireCardEquipped()
     {
         if (playerScript.HasProjectileWithTag("FireProjectile"))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    bool CheckIfWaterCardEquipped()
+    {
+        if (playerScript.HasProjectileWithTag("Water"))
         {
             return true;
         }
