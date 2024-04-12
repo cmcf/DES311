@@ -359,9 +359,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.99099016
-  m_Height: 2.9369202
+  m_Height: 3.770903
   m_Direction: 1
-  m_Center: {x: -0.059178114, y: 0.21846008, z: -0.0522722}
+  m_Center: {x: -0.059178114, y: 0.63545156, z: -0.0522722}
 --- !u!114 &8855579179144299166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,7 +385,8 @@ MonoBehaviour:
     type: 3}
   maxHealth: 30
   currentHealth: 0
-  destroyDelay: 0.3
+  slowAmount: 0
+  moveSpeed: 0
   XPAmount: 40
   spawnProbability: -0.14
   isBoss: 0
@@ -463,7 +464,8 @@ MonoBehaviour:
     type: 3}
   maxHealth: 30
   currentHealth: 35
-  destroyDelay: 0.8
+  slowAmount: 0
+  moveSpeed: 0
   XPAmount: 25
   spawnProbability: 0.2
   isBoss: 0

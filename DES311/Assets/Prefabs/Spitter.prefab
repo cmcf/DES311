@@ -769,9 +769,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.99099016
-  m_Height: 3.6018791
+  m_Height: 4.0580354
   m_Direction: 1
-  m_Center: {x: -0.059178118, y: 0.55093956, z: -0.0522722}
+  m_Center: {x: -0.059178114, y: 0.7790177, z: -0.0522722}
 --- !u!195 &8082736770139845148
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -817,13 +817,14 @@ MonoBehaviour:
     type: 3}
   maxHealth: 35
   currentHealth: 45
+  slowAmount: 0
+  moveSpeed: 2.5
   XPAmount: 50
   spawnProbability: 0.2
   isBoss: 0
   projectileSpawnPoint: {fileID: 8800851095730719974}
   projectilePrefab: {fileID: 2308169832292628706, guid: dc607c448b811a645ab735323bce8ef9,
     type: 3}
-  moveSpeed: 2.5
   stoppingDistance: 15
   rotationSpeed: 2
   attackCooldown: 1
@@ -850,6 +851,8 @@ MonoBehaviour:
     type: 3}
   maxHealth: 35
   currentHealth: 40
+  slowAmount: 0
+  moveSpeed: 0
   XPAmount: 25
   spawnProbability: 0.1
   isBoss: 0

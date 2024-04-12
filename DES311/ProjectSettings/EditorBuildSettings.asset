@@ -20,9 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: 9e1f523bb2b3c9e4aa94126dbac67bf6
-  - enabled: 1
-    path: Assets/Scenes/WinScreen.unity
-    guid: a389bd7e60396be499c361797706290c
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
       guid: acc3f6b96b9cefd43ab91372057d6adb, type: 2}

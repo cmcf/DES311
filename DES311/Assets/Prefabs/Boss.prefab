@@ -694,9 +694,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.99099016
-  m_Height: 3.6018791
+  m_Height: 4.295844
   m_Direction: 1
-  m_Center: {x: -0.059178118, y: 0.55093956, z: -0.0522722}
+  m_Center: {x: -0.059178114, y: 0.8979221, z: -0.0522722}
 --- !u!195 &8082736770139845148
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -738,7 +738,6 @@ MonoBehaviour:
   healthBar: {fileID: 5273094992474477014}
   deathVFX: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d,
     type: 3}
-  winCanvas: {fileID: 0}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   maxHealth: 35
@@ -773,8 +772,6 @@ MonoBehaviour:
   enemyRenderer: {fileID: 6045560917180699333}
   healthBar: {fileID: 0}
   deathVFX: {fileID: 0}
-  winCanvas: {fileID: 5612242496632505013, guid: f7af0ab3265b6c34b94d9a615ff5e2a4,
-    type: 3}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   maxHealth: 35

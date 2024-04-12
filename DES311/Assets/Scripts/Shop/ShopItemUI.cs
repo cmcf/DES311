@@ -14,7 +14,6 @@ public class ShopItemUI : MonoBehaviour
     public TextMeshProUGUI price;
     public TextMeshProUGUI description;
 
-
     void Start()
     {
         if (GameManager.instance != null)

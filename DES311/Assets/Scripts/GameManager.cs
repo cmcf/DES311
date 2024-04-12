@@ -112,120 +112,104 @@ public class GameManager : MonoBehaviour
 
     public void PurchaseItem(ShopItem item)
     {
-
-        if (item.itemType == ShopItem.ItemType.Health)
+        switch (item.itemType)
         {
-            // Check the current count of health upgrades
-            currentHealthUpgrades = PlayerPrefs.GetInt(healthUpgradesCountKey, 0);
-            Debug.Log("Current Health Upgrades: " + currentHealthUpgrades);
+            case ShopItem.ItemType.Health:
+                PurchaseHealthUpgrade(item);
+                break;
+            case ShopItem.ItemType.Projectile:
+                PurchaseProjectile(item, hasPurchasedLaser, "HasPurchasedLaser");
+                break;
+            case ShopItem.ItemType.Card:
+                PurchaseCard(item, hasPurchasedWaterCard, "HasPurchasedWater");
+                break;
+            default:
+                Debug.LogError("Invalid item type: " + item.itemType);
+                break;
+        }
+    }
 
-            // If the current count is less than 5 and the player hasn't purchased this item yet, allow the purchase
-            if (currentHealthUpgrades < 5)
+    private void PurchaseHealthUpgrade(ShopItem item)
+    {
+        // Check the current count of health upgrades
+        currentHealthUpgrades = PlayerPrefs.GetInt(healthUpgradesCountKey, 0);
+
+        // If the current count is less than 5 and the player hasn't purchased this item yet, allow the purchase
+        if (currentHealthUpgrades < 5)
+        {
+            if (PurchaseItemWithCredits(item.price))
             {
-
-                // Subtract price from current credits
-                totalCredits -= item.price;
-
-                // Update PlayerPrefs to save the new total credits
-                PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
-
-                // Save the purchased health upgrades count
                 currentHealthUpgrades++;
-
-                // Save the purchased health upgrades count to PlayerPrefs
-                PlayerPrefs.SetInt(healthUpgradesCountKey, currentHealthUpgrades);
-
-                // Increase health
                 IncreaseHealth(item.healthIncreaseAmount);
-
-                // Update the UI
-                FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
-
+                PlayerPrefs.SetInt(healthUpgradesCountKey, currentHealthUpgrades);
                 PlayerPrefs.Save();
+                FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
             }
             else
             {
-                FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
-                Debug.Log("Purchase failed: Maximum health upgrades reached!");
+                Debug.Log("Not enough credits to purchase health upgrade");
             }
         }
-
-        else if (item.itemType == ShopItem.ItemType.Projectile)
-             {
-                if (hasPurchasedLaser)
-                {
-                    // Player has already purchased the laser, do not allow purchasing again
-                    return;
-                }
-
-                // Check if player has enough credits
-                if (totalCredits >= item.price)
-                {
-                    // Deduct the price from total credits
-                    totalCredits -= item.price;
-
-                    hasPurchasedLaser = true;
-
-                    
-
-                    // Update PlayerPrefs or any other relevant logic to save the new total credits
-                    PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
-
-                    // Update the player's loadout with the purchased laser
-                    UpdateStartingProjectile(item);
-
-                    // Save the hasPurchasedLaser status
-                    PlayerPrefs.SetInt("HasPurchasedLaser", hasPurchasedLaser ? 1 : 0);
-                    
-                    PlayerPrefs.Save();
-
-                    // Save purchased item data
-                    SavePurchasedItem(item);
-                    FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
-                }
-                else
-                {
-                    FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
-                    Debug.Log("Not enough credits");
-                }
-
-            }
-        else if (item.itemType == ShopItem.ItemType.Card)
+        else
         {
-            if (hasPurchasedWaterCard)
-            {
-                return;
-            }
+            Debug.Log("Maximum health upgrades reached");
+        }
+    }
 
-            // Check if player has enough credits
-            if (totalCredits >= item.price)
-            {
-                // Deduct the price from total credits
-                totalCredits -= item.price;
-
-                // Saves current total credits
-                PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
-
-                // Set hasPurchasedLaser to true
-                hasPurchasedWaterCard = true;
-
-                // Save the hasPurchasedLaser status
-                PlayerPrefs.SetInt("HasPurchasedWater", hasPurchasedWaterCard ? 1 : 0);
-                PlayerPrefs.Save();
-
-                // Save purchased item data
-                SavePurchasedItem(item);
-
-                FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
-            }
-            else
-            {
-                FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
-                Debug.Log("Not enough credits");
-            }
+    private void PurchaseProjectile(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
+    {
+        if (hasPurchasedItem)
+        {
+            Debug.Log("Player has already purchased this item");
+            return;
         }
 
+        if (PurchaseItemWithCredits(item.price))
+        {
+            hasPurchasedItem = true;
+            PlayerPrefs.SetInt(playerPrefsKey, hasPurchasedItem ? 1 : 0);
+            PlayerPrefs.Save();
+            UpdateStartingProjectile(item);
+            SavePurchasedItem(item);
+            FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
+        }
+        else
+        {
+            Debug.Log("Not enough credits to purchase the item");
+        }
+    }
 
+    private void PurchaseCard(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
+    {
+        if (hasPurchasedItem)
+        {
+            Debug.Log("Player has already purchased this item");
+            return;
+        }
+
+        if (PurchaseItemWithCredits(item.price))
+        {
+            hasPurchasedItem = true;
+            PlayerPrefs.SetInt(playerPrefsKey, hasPurchasedItem ? 1 : 0);
+            PlayerPrefs.Save();
+            SavePurchasedItem(item);
+            FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
+        }
+        else
+        {
+            Debug.Log("Not enough credits to purchase the item");
+        }
+    }
+
+    private bool PurchaseItemWithCredits(int price)
+    {
+        if (totalCredits >= price)
+        {
+            totalCredits -= price;
+            PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
+            return true;
+        }
+        return false;
     }
 
     void SavePurchasedItem(ShopItem item)

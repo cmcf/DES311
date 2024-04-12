@@ -100,20 +100,12 @@ public class Bullet : MonoBehaviour
             }
 
         }
-
       
     }
     void ApplySlowEffect(Enemy enemy)
     {
-
-        // Debug the original move speed
-        Debug.Log("Original Move Speed: " + enemy.moveSpeed);
-
         // Apply slow effect
         enemy.SlowdownEffect(slowAmount, slowDuration);
-
-        // Debug the move speed after applying slow effect
-        Debug.Log("New Move Speed: " + enemy.moveSpeed);
 
     }
 
