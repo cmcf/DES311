@@ -117,13 +117,15 @@ public class Player : MonoBehaviour, IDamageable
     public void Die()
     {
         pointsScript = FindObjectOfType<Points>();
+        Spawner spawnerScript = FindObjectOfType<Spawner>();
+        // Stops enemies spawning when player dies
+        if (spawnerScript != null)
+        {
+            spawnerScript.canSpawn = false;
+        }
         if (pointsScript != null)
         {
             pointsScript.UpdatePointsText();
-        }
-        else
-        {
-            Debug.Log("Null");
         }
         
         if (isDead) { return; }

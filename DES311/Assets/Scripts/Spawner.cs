@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
 
     int currentWave = 0;
     int currentEnemyAmount;
-    bool canSpawn = true;
+    public bool canSpawn = true;
     bool bossSpawned = false;
 
     void Start()
