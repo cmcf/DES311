@@ -130,8 +130,7 @@ public class Player : MonoBehaviour, IDamageable
         
         if (isDead) { return; }
         isDead = true;
-        // Disable the character controller
-        controller.enabled = false;
+        DisablePlayerMovement();
 
         //Play death SFX
         FindObjectOfType<AudioManager>().Play("PlayerDeath");
@@ -144,6 +143,12 @@ public class Player : MonoBehaviour, IDamageable
         }
         // load end scene after a delay
         Invoke(nameof(LoadEndLevel), endSceneLoadDelay);
+    }
+
+    public void DisablePlayerMovement()
+    {
+        // Disable the character controller
+        controller.enabled = false;
     }
 
     void LoadEndLevel()

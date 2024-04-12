@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6325873720660650616}
   - component: {fileID: 5433124452629191358}
+  - component: {fileID: 1597804213473236722}
   m_Layer: 0
   m_Name: Trail
   m_TagString: FireProjectile
@@ -136,6 +137,29 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 0
+--- !u!136 &1597804213473236722
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6035583037249315686}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Height: 4
+  m_Direction: 1
+  m_Center: {x: -1.25, y: -1.25, z: -1.25}
 --- !u!1 &6487987637173855206
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,11 +211,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 15
   isLaser: 1
+  isStoneBullet: 0
+  isWaterBall: 0
   destroyDelay: 2
   hitEffect: {fileID: 3911334593277181048, guid: 252e45bbff96e814b8cc8641fe650525,
     type: 3}
   destroyDelayAfterCollision: 0.2
+  pushbackAmount: 2
+  pushbackDuration: 0.5
   soundName: Laser
+  slowAmount: 0.5
+  slowDuration: 10
 --- !u!54 &2234245870724255171
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -238,10 +268,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.3141841
-  m_Height: 2.6283681
+  m_Radius: 1.8032112
+  m_Height: 3.6064224
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: -0.030434966}
+  m_Center: {x: 0, y: 0, z: -0.14242113}
 --- !u!1 &6534251992373451682
 GameObject:
   m_ObjectHideFlags: 0

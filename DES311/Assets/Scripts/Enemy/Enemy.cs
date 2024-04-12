@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public Renderer enemyRenderer;
     [SerializeField] HealthBar healthBar;
     [SerializeField] GameObject deathVFX;
-
+    
     public GameObject powerUpPrefab;
     // Gets the Position property from IDamageable interface
     public float Health { get; set; }
@@ -92,16 +92,19 @@ public class Enemy : MonoBehaviour, IDamageable
 
         // Destroy the enemy object
         Destroy(gameObject);
-
-        // Load the win screen scene
-        SceneManager.LoadScene("WinScreen");
+        GameManager.instance.LevelComplete();
+        
+        Time.timeScale = 0f;
     }
 
     public virtual void Die()
     {
         if (isBoss)
         {
+            FindObjectOfType<AudioManager>().Play("EnemyDeath");
             Instantiate(deathVFX, transform.position, Quaternion.identity);
+            player.DisablePlayerMovement();
+            
             StartCoroutine(LoadWinScene(1f));
         }
         else

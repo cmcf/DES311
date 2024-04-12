@@ -9822,6 +9822,7 @@ MonoBehaviour:
   damageAmount: 15
   isLaser: 0
   isStoneBullet: 1
+  isWaterBall: 0
   destroyDelay: 3
   hitEffect: {fileID: 4205106322830315077, guid: c3e084fe7f2622843a30f9871b1c01ca,
     type: 3}
@@ -9829,6 +9830,8 @@ MonoBehaviour:
   pushbackAmount: 2
   pushbackDuration: 0.5
   soundName: Stone
+  slowAmount: 0.5
+  slowDuration: 10
 --- !u!54 &1822452233931534250
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9875,10 +9878,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.68514836
+  m_Height: 1.3702967
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.16821712, z: -0.18514884}
 --- !u!1 &8465443712002945609
 GameObject:
   m_ObjectHideFlags: 0

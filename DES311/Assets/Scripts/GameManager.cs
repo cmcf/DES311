@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public WeaponItem playerLoadout;
     PlayerMovement playerStats;
     ShopItem item;
+    [SerializeField] Points pointsScript;
+    [SerializeField] Canvas winCanvas;
     // Handles XP events
     public delegate void XPHandler(int amount);
     // Event is triggered when called from another script
@@ -64,6 +66,11 @@ public class GameManager : MonoBehaviour
         hasPurchasedLaser = PlayerPrefs.GetInt(hasPurchasedLaserKey, 0) == 1;
         // Laod the purchased water status
         hasPurchasedWaterCard = PlayerPrefs.GetInt(hasPurchasedWaterKey, 0) == 1;
+
+        if (winCanvas!= null)
+        {
+            winCanvas.enabled = false;  
+        }
 
 
     }
@@ -242,6 +249,21 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("HasPurchasedLaser", 1);
         PlayerPrefs.Save();
 
+    }
+
+    public void LevelComplete()
+    {
+        if (pointsScript != null)
+        {
+            pointsScript.UpdatePointsText();
+        }
+        else
+        {
+            Debug.Log("Null");
+        }
+
+        // Load the win screen scene
+        winCanvas.enabled = true;
     }
 
 }

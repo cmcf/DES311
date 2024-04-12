@@ -738,17 +738,19 @@ MonoBehaviour:
   healthBar: {fileID: 5273094992474477014}
   deathVFX: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d,
     type: 3}
+  winCanvas: {fileID: 0}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   maxHealth: 35
   currentHealth: 100
+  slowAmount: 0
+  moveSpeed: 3
   XPAmount: 25
   spawnProbability: 0.2
   isBoss: 1
   projectileSpawnPoint: {fileID: 8800851095730719974}
   projectilePrefab: {fileID: 2308169832292628706, guid: dc607c448b811a645ab735323bce8ef9,
     type: 3}
-  moveSpeed: 3
   stoppingDistance: 12
   rotationSpeed: 2
   attackCooldown: 0.5
@@ -771,10 +773,14 @@ MonoBehaviour:
   enemyRenderer: {fileID: 6045560917180699333}
   healthBar: {fileID: 0}
   deathVFX: {fileID: 0}
+  winCanvas: {fileID: 5612242496632505013, guid: f7af0ab3265b6c34b94d9a615ff5e2a4,
+    type: 3}
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   maxHealth: 35
   currentHealth: 40
+  slowAmount: 0
+  moveSpeed: 0
   XPAmount: 25
   spawnProbability: 0.1
   isBoss: 0
