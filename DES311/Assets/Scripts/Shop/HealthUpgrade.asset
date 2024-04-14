@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04a9ef61dea25784cbee5445441047a3, type: 3}
   m_Name: HealthUpgrade
   m_EditorClassIdentifier: 
+  itemType: 0
   itemName: Health
-  description: Increases maximum health by 5
+  description: 'Increase player maxiumum health by 5. '
   price: 20
   item: {fileID: 0}
+  projectile: {fileID: 0}
   icon: {fileID: 0}
   healthIncreaseAmount: 5

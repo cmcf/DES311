@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
                 PurchaseProjectile(item, hasPurchasedLaser, "HasPurchasedLaser");
                 break;
             case ShopItem.ItemType.Card:
-                PurchaseCard(item, hasPurchasedWaterCard, "HasPurchasedWater");
+                PurchaseWaterCard(item, hasPurchasedWaterCard, "HasPurchasedWater");
                 break;
             default:
                 Debug.LogError("Invalid item type: " + item.itemType);
@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void PurchaseHealthUpgrade(ShopItem item)
+    void PurchaseHealthUpgrade(ShopItem item)
     {
         // Check the current count of health upgrades
         currentHealthUpgrades = PlayerPrefs.GetInt(healthUpgradesCountKey, 0);
@@ -145,22 +145,18 @@ public class GameManager : MonoBehaviour
                 PlayerPrefs.Save();
                 FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
             }
-            else
-            {
-                Debug.Log("Not enough credits to purchase health upgrade");
-            }
         }
         else
         {
-            Debug.Log("Maximum health upgrades reached");
+            Debug.Log("Max health upgrades reached");
         }
     }
 
-    private void PurchaseProjectile(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
+    void PurchaseProjectile(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
     {
         if (hasPurchasedItem)
         {
-            Debug.Log("Player has already purchased this item");
+            // Do not complete purchase if player already has laser
             return;
         }
 
@@ -179,11 +175,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void PurchaseCard(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
+    void PurchaseWaterCard(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
     {
         if (hasPurchasedItem)
         {
-            Debug.Log("Player has already purchased this item");
             return;
         }
 
@@ -201,7 +196,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private bool PurchaseItemWithCredits(int price)
+    bool PurchaseItemWithCredits(int price)
     {
         if (totalCredits >= price)
         {
@@ -214,7 +209,7 @@ public class GameManager : MonoBehaviour
 
     void SavePurchasedItem(ShopItem item)
     {
-       // Save purchased item data (e.g., item type, health increase amount, etc.) in PlayerPrefs or a custom save file
+       // Save purchased item data
        PlayerPrefs.SetInt("PurchasedItem_Type", (int)item.itemType);
        PlayerPrefs.SetInt("PurchasedItem_HealthIncreaseAmount", item.healthIncreaseAmount);
     }

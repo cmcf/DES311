@@ -64,10 +64,11 @@ public class PurchaseConditions : MonoBehaviour
             healthButton.GetComponent<Image>().color = Color.white;
         }
 
-        // Grey out laser button if laser is purchased or not enough credits
+        // Grey out laser button if laser is already purchased or player does not have enough credits
         if (hasPurchasedLaser || GameManager.instance.totalCredits < laserPrice)
         {
             laserButton.GetComponent<Image>().color = Color.grey;
+            // If a laser is purchased, text is set to one and if not purchased text is set to 0
             currentLaserUpgrade.text = (hasPurchasedLaser ? "1" : "0") + " / 1";
         }
         else
@@ -85,8 +86,6 @@ public class PurchaseConditions : MonoBehaviour
             waterButton.GetComponent<Image>().color = Color.white;
         }
     }
-
-    // Method to update the UI after a purchase
     public void UpdateUIAfterPurchase()
     {
         // Update the UI with the latest data
