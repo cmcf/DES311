@@ -31,6 +31,12 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
+
+            // Loops gameplay music
+            if (s.isMusic)
+            {
+                s.source.loop = true;
+            }
         }
 
         // Apply stored SFX and music status

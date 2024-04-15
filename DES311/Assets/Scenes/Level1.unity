@@ -47417,60 +47417,70 @@ MonoBehaviour:
   sounds:
   - name: Gunshot
     clip: {fileID: 8300000, guid: 9caf19b82fe0e994aa5706bb20024fa7, type: 3}
+    isMusic: 0
     volume: 0.3
     pitch: 0.6
     type: 1
     source: {fileID: 0}
   - name: Laser
     clip: {fileID: 8300000, guid: c0fa51006db758d44bc803c4f71b7546, type: 3}
+    isMusic: 0
     volume: 1
     pitch: 0.833
     type: 1
     source: {fileID: 0}
   - name: PlayerDeath
     clip: {fileID: 8300000, guid: ea996d57b5a024ea8bc20461e2bd84b1, type: 3}
+    isMusic: 0
     volume: 0.7
     pitch: 1
     type: 1
     source: {fileID: 0}
   - name: EnemyHit
     clip: {fileID: 8300000, guid: c1c63d14bc9d9497b8f9b39c4ea3b1c7, type: 3}
+    isMusic: 0
     volume: 0.328
     pitch: 1
     type: 1
     source: {fileID: 0}
   - name: Spit
     clip: {fileID: 8300000, guid: 63075198c0ff449aa86f5e530977abfd, type: 3}
+    isMusic: 0
     volume: 1
     pitch: 0.6
     type: 1
     source: {fileID: 0}
   - name: PlayerHit
     clip: {fileID: 8300000, guid: 0fcf9924f0a4b4d4fa08969181f04328, type: 3}
+    isMusic: 0
     volume: 0.15
     pitch: 0.6
     type: 1
     source: {fileID: 0}
   - name: Stone
     clip: {fileID: 8300000, guid: 2e14cc3a9aad3c34490e4f2661d605c8, type: 3}
+    isMusic: 0
     volume: 0.38
     pitch: 1
     type: 1
     source: {fileID: 0}
   - name: EnemyDeath
     clip: {fileID: 8300000, guid: 75d77930b63ec7d4c89438b1344db621, type: 3}
+    isMusic: 0
     volume: 0.205
     pitch: 0.846
     type: 1
     source: {fileID: 0}
   - name: BiteAttack
     clip: {fileID: 8300000, guid: bf7ffafeb00554918bb2c3d15fc2a029, type: 3}
+    isMusic: 0
     volume: 0.112
     pitch: 1
     type: 1
     source: {fileID: 0}
   - name: Music
     clip: {fileID: 8300000, guid: b2bd86507093cf84a811bfde32eac438, type: 3}
+    isMusic: 1
     volume: 0.503
     pitch: 1
     type: 0
