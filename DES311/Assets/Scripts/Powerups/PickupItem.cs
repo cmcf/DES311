@@ -5,8 +5,15 @@ using UnityEngine;
 public class PickupItem : MonoBehaviour
 {
     PickupManager pickupManager;
+    [SerializeField] float spinSpeed = 5f;
 
-     void Start()
+    void Update()
+    {
+        // Rotate the object around its up axis
+        transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime);
+    }
+
+    void Start()
      {
         // Get reference to PickupManager instance
         pickupManager = GameManager.instance.GetComponent<PickupManager>();
