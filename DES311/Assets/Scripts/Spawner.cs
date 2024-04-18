@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [SerializeField] GameObject spawnPortal;
     [SerializeField] GameObject[] enemyPrefabs;
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] EnemyManager enemyManager;
@@ -23,6 +24,8 @@ public class Spawner : MonoBehaviour
     int currentEnemyAmount;
     public bool canSpawn = true;
     bool bossSpawned = false;
+
+    GameObject portal;
 
     void Start()
     {
@@ -84,6 +87,8 @@ public class Spawner : MonoBehaviour
                     // Checks a random value for spawning at a spawn point
                     if (Random.value < spawnProbability)
                     {
+                        SpawnPortal(spawnPoint);
+
                         // Spawns an enemy at the selected spawn point with no rotation
                         GameObject enemyObject = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
 
@@ -113,13 +118,41 @@ public class Spawner : MonoBehaviour
         }
     }
 
-        void CheckCurrentWave()
+    void CheckCurrentWave()
+    {
+        // Stop spawning waves after wave 10 is reached
+        if (currentWave == 5)
         {
-            // Stop spawning waves after wave 10 is reached
-            if (currentWave == 5)
-            {
-                canSpawn = false;
-            }
+            canSpawn = false;
         }
+    }
+
+    void SpawnPortal(Transform spawnPoint)
+    {
+        // Set the spawn rotation
+        float spawnRotationX = 100f;
+
+        // Set the offset to lower the portal
+        float yOffset = -0.8f;
+
+        // Create a quaternion rotation
+        Quaternion rotation = Quaternion.Euler(spawnRotationX, 0f, 0f);
+
+        // Set the spawn position with the offset applied
+        Vector3 spawnPosition = spawnPoint.position + new Vector3(0f, yOffset, 0f);
+
+        // Spawn the portal 
+        GameObject portal = Instantiate(spawnPortal, spawnPosition, rotation);
+
+        StartCoroutine(DestroyPortalWithDelay(portal, 1f));
+    }
+
+    IEnumerator DestroyPortalWithDelay(GameObject portal, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Destroy the portal object after delay
+        Destroy(portal);
+    }
 }
 
