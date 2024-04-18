@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] int spawnFromIndex1AfterWave = 2;
 
-    int currentWave = 0;
+    [SerializeField] int currentWave = 0;
     int currentEnemyAmount;
     public bool canSpawn = true;
     bool bossSpawned = false;
@@ -38,8 +38,8 @@ public class Spawner : MonoBehaviour
             // Spawns new wave of enemies after a delay
             yield return new WaitForSeconds(delayBetweenWaves + (currentWave * delayIncreasePerWave));
 
-            // Spawns boss at wave 8
-            if (currentWave == 8)
+            // Spawn boss at wave 8
+            if (currentWave == 8 && !bossSpawned)
             {
                 SpawnBossEnemy();
             }
@@ -111,6 +111,7 @@ public class Spawner : MonoBehaviour
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         GameObject bossObject = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
         enemyManager.RegisterEnemy(bossObject.GetComponent<Enemy>());
+        bossSpawned = true;
     }
 
     void SpawnPortal(Transform spawnPoint)
