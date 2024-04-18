@@ -25,40 +25,26 @@ public class Spawner : MonoBehaviour
     public bool canSpawn = true;
     bool bossSpawned = false;
 
-    GameObject portal;
-
     void Start()
     {
         currentEnemyAmount = initialEnemyAmount;
         StartCoroutine(SpawnWave());
-        CheckCurrentWave();
     }
 
     IEnumerator SpawnWave()
     {
-        while (canSpawn && !bossSpawned)
+        while (canSpawn)
         {
             // Spawns new wave of enemies after a delay
             yield return new WaitForSeconds(delayBetweenWaves + (currentWave * delayIncreasePerWave));
 
-            // Check if it's the last wave
-            if (currentWave == 6)
+            // Spawns boss at wave 8
+            if (currentWave == 8)
             {
-                // Ensure that the enemyPrefabs array has enough elements
-                if (enemyPrefabs.Length > 2)
-                {
-                    // Spawn the boss
-                    GameObject bossPrefab = enemyPrefabs[2];
-                    Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                    GameObject bossObject = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
-                    bossSpawned = true;
-                    enemyManager.RegisterEnemy(bossObject.GetComponent<Enemy>());
-                }
-
+                SpawnBossEnemy();
             }
             else
             {
-                if (bossSpawned) { break; }
                 // Counter to track the number of ranged enemies spawned in current wave
                 int rangedEnemyCount = 0;
 
@@ -118,13 +104,13 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    void CheckCurrentWave()
+    private void SpawnBossEnemy()
     {
-        // Stop spawning waves after wave 10 is reached
-        if (currentWave == 5)
-        {
-            canSpawn = false;
-        }
+        // Spawn the boss
+        GameObject bossPrefab = enemyPrefabs[2];
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        GameObject bossObject = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
+        enemyManager.RegisterEnemy(bossObject.GetComponent<Enemy>());
     }
 
     void SpawnPortal(Transform spawnPoint)

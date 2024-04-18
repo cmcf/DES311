@@ -744,7 +744,7 @@ MonoBehaviour:
   currentHealth: 100
   slowAmount: 0
   moveSpeed: 3
-  XPAmount: 25
+  XPAmount: 50
   spawnProbability: 0.2
   isBoss: 1
   projectileSpawnPoint: {fileID: 8800851095730719974}
@@ -775,10 +775,10 @@ MonoBehaviour:
   powerUpPrefab: {fileID: 660223683840123324, guid: 8a517fc65bc8f6543868bd1c44837c96,
     type: 3}
   maxHealth: 35
-  currentHealth: 40
+  currentHealth: 100
   slowAmount: 0
   moveSpeed: 0
-  XPAmount: 25
+  XPAmount: 50
   spawnProbability: 0.1
   isBoss: 0
 --- !u!95 &2419008712768529568

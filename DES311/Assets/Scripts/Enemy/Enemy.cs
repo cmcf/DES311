@@ -27,8 +27,6 @@ public class Enemy : MonoBehaviour, IDamageable
     // Chance of pickup spawning 
     public float spawnProbability = 0.01f;
 
-    [SerializeField] bool isBoss = false;
-
     bool isDestroyed = false;
     bool hasIncreasedHealth = false;
     bool hit = false;
@@ -86,43 +84,22 @@ public class Enemy : MonoBehaviour, IDamageable
         enemyRenderer.material.color = originalColour;
     }
 
-    IEnumerator LoadWinScene(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        // Destroy the enemy object
-        Destroy(gameObject);
-        GameManager.instance.LevelComplete();
-        
-        Time.timeScale = 0f;
-    }
-
     public virtual void Die()
     {
-        if (isBoss)
+        // Increase player XP
+        GameManager.instance.IncreaseXP(XPAmount);
+        // Spawn powerup by chance and only if player is above level 3
+        if (player != null && Random.value < spawnProbability && player.currentLevel >= 3)
         {
-            FindObjectOfType<AudioManager>().Play("EnemyDeath");
-            Instantiate(deathVFX, transform.position, Quaternion.identity);
-            player.DisablePlayerMovement();
-            
-            StartCoroutine(LoadWinScene(1f));
+            // Spawns the pickup at the enemy's position
+            Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
         }
-        else
-        {
-            // Increase player XP
-            GameManager.instance.IncreaseXP(XPAmount);
-            // Spawn powerup by chance and only if player is above level 3
-            if (player != null && Random.value < spawnProbability && player.currentLevel >= 3)
-            {
-                // Spawns the pickup at the enemy's position
-                Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
-            }
-            FindObjectOfType<AudioManager>().Play("EnemyDeath");
-            isDestroyed = true;
-            Instantiate(deathVFX, transform.position, Quaternion.identity);
-            // Destroy the enemy gameObject
-            DestroyEnemy();
-        }
+        FindObjectOfType<AudioManager>().Play("EnemyDeath");
+        isDestroyed = true;
+        Instantiate(deathVFX, transform.position, Quaternion.identity);
+        // Destroy the enemy gameObject
+        DestroyEnemy();
+
     }
 
     public void IncreaseHealth(float amount)

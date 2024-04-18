@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Water Card
   description: Unlocks water projectile upgrade. Projectiles slow down enemy movement
     speed for 4 seconds.
-  price: 40
+  price: 500
   item: {fileID: 0}
   projectile: {fileID: 0}
   icon: {fileID: 0}
