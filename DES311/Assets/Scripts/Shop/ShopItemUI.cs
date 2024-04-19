@@ -27,7 +27,7 @@ public class ShopItemUI : MonoBehaviour
         this.item = item;
 
         itemName.text = item.itemName;
-        price.text = "Cost: " + item.price.ToString() + " credits";
+        price.text = item.price.ToString();
         description.text = item.description;
 
     }

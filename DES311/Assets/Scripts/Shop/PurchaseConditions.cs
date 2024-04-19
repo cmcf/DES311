@@ -40,7 +40,7 @@ public class PurchaseConditions : MonoBehaviour
         currentHealthUpgrades.text = GameManager.instance.currentHealthUpgrades.ToString() + " / 5";
 
         // Update current credits text
-        creditsText.text = "Credits: " + GameManager.instance.totalCredits.ToString();
+        creditsText.text = GameManager.instance.totalCredits.ToString();
 
         // Get prices for the shop items
         int healthPrice = healthItem.price;
