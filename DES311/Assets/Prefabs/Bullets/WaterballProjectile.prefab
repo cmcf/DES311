@@ -212,7 +212,7 @@ MonoBehaviour:
   destroyDelayAfterCollision: 0.2
   pushbackAmount: 2
   pushbackDuration: 0.5
-  soundName: 
+  soundName: Water
   slowAmount: 0.6
   slowDuration: 4
 --- !u!1 &5392182988064874404
