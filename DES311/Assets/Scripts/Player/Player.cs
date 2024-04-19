@@ -79,7 +79,7 @@ public class Player : MonoBehaviour, IDamageable
         itemManager.DisplayItemChoice();
         // Players current level increases
         currentLevel++;
-        GameManager.instance.AddCoins(points);
+        GameManager.instance.AddCredits(currentLevel);
         if (enemyManager != null)
         {
             enemyManager.LevelUpEnemies();

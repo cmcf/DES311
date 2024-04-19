@@ -32,8 +32,9 @@ public class GameManager : MonoBehaviour
     string hasPurchasedLaserKey = "HasPurchasedLaser";
     string hasPurchasedWaterKey = "HasPurchasedWater";
 
-    [SerializeField] int totalHealthUpgraded;
+    private int[] creditLevels = { 5, 10, 20 };
 
+    int totalHealthUpgraded;
     void Awake()
     {
         // Check if instance already exists
@@ -91,13 +92,33 @@ public class GameManager : MonoBehaviour
         return totalCredits;
     }
 
-    public void AddCoins(int points)
+    public void AddCredits(int currentLevel)
     {
-        currentCredits += points;
-        totalCredits += points;
-        // Save total coins  earned
+        int creditsToAdd = CalculateCreditsToAdd(currentLevel);
+
+        currentCredits += creditsToAdd;
+        totalCredits += creditsToAdd;
+
+        // Save total coins earned
         PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
         PlayerPrefs.Save();
+    }
+
+    int CalculateCreditsToAdd(int currentLevel)
+    {
+        // Calculate the amount of credits to add based on the player's current level
+        if (currentLevel <= 3)
+        {
+            return 5;
+        }
+        else if (currentLevel <= 6)
+        {
+            return 10;
+        }
+        else
+        {
+            return 20;
+        }
     }
 
     public void AddEnemy(int enemyAmount)
