@@ -185,6 +185,7 @@ public class GameManager : MonoBehaviour
         {
             hasPurchasedItem = true;
             PlayerPrefs.SetInt(playerPrefsKey, hasPurchasedItem ? 1 : 0);
+            IncreaseHealth(item.healthIncreaseAmount);
             PlayerPrefs.Save();
             UpdateStartingProjectile(item);
             SavePurchasedItem(item);

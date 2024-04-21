@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class ShopItemUI : MonoBehaviour
 {
     public ShopItem item;
-    [SerializeField] Image icon;
 
     [Header("Text Components")]
     public TextMeshProUGUI itemName;
@@ -24,6 +23,7 @@ public class ShopItemUI : MonoBehaviour
 
     public void Init(ShopItem item, int avaliableCredits)
     {
+        // Displays assigned item values
         this.item = item;
 
         itemName.text = item.itemName;
