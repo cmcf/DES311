@@ -110,6 +110,7 @@ public class Player : MonoBehaviour, IDamageable
 
         if (playerLoadout.currentLoadout.health <= 0)
         {
+            playerHUD.StopTimer();
             Die();
         }
     }
@@ -130,6 +131,7 @@ public class Player : MonoBehaviour, IDamageable
         
         if (isDead) { return; }
         isDead = true;
+
         DisablePlayerMovement();
 
         //Play death SFX
@@ -149,6 +151,12 @@ public class Player : MonoBehaviour, IDamageable
     {
         // Disable the character controller
         controller.enabled = false;
+    }
+
+    public void EnablePlayerMovement()
+    {
+        // Enable player movement
+        controller.enabled = true;
     }
 
     void LoadEndLevel()

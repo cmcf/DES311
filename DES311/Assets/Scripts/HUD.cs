@@ -19,6 +19,7 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI timerText;
 
     float totalTime = 300f;
+    bool timerOn;
     void Start()
     {
         if (levelSlider == null)
@@ -78,8 +79,9 @@ public class HUD : MonoBehaviour
     IEnumerator StartTimer()
     {
         float remainingTime = totalTime;
+        timerOn = true;
 
-        while (remainingTime > 0)
+        while (remainingTime > 0 && timerOn)
         {
             // Convert remaining time to minutes and seconds
             int minutes = Mathf.FloorToInt(remainingTime / 60);
@@ -94,12 +96,19 @@ public class HUD : MonoBehaviour
             // Decrease remaining time by 1 second
             remainingTime -= 1f;
         }
+        if (timerOn)
+        {
+            // Timer reaches zero, display 00:00
+            timerText.text = "00:00";
 
-        // Timer reaches zero, display 00:00
-        timerText.text = "00:00";
+            player.DisablePlayerMovement();
+            StartCoroutine(LoadWinScene(1f));
+        }
+    }
 
-        player.DisablePlayerMovement();
-        StartCoroutine(LoadWinScene(1f));
+    public void StopTimer()
+    {
+        timerOn = false;
     }
 
     IEnumerator LoadWinScene(float delay)
