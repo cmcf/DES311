@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Waterball
   m_EditorClassIdentifier: 
   itemName: Waterball
-  description: Decreases enemy movement speed for 4 seconds
+  description: Bullet decreases enemy movement speed for 4 seconds.
   icon: {fileID: 0}
   projectilePrefab: {fileID: 2548779769269718283, guid: 4c0502167a8ff8b4fa96aca7213cf59b,
     type: 3}

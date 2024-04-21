@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: BulletSpeed
   m_EditorClassIdentifier: 
   itemName: Bullet Amplifier
-  description: Increases projectile speed and distance  by 10
+  description: Increases projectile speed and distance by 10
   icon: {fileID: 21300002, guid: fc49794cc535bef4f969645c4eb97b80, type: 3}
   projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
   projectileUpgrade: {fileID: 0}
   modifiedAttribute: 1
-  baseCooldown: 1
+  baseFireRate: 1
   baseSpeed: 20
   baseMoveSpeed: 3.5
   baseHealth: 40
-  cooldown: 0
+  defaultProjectile: {fileID: 0}
+  fireRate: 0
   speed: 0
   moveSpeed: 0
   health: 0
