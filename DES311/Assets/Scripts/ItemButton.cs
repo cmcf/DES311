@@ -6,6 +6,7 @@ public class ItemButton : MonoBehaviour
 {
     public WeaponItem upgrade;
     public ItemManager itemManager;
+    Player playerScript;
 
     ItemDisplay upgradeManager;
 
@@ -13,6 +14,7 @@ public class ItemButton : MonoBehaviour
     void Start()
     { 
         upgradeManager = FindObjectOfType<ItemDisplay>();
+        playerScript = FindObjectOfType<Player>();
         hasSelectedCard = false;
     }
     public void OnUpgradeButtonClick()
@@ -31,6 +33,8 @@ public class ItemButton : MonoBehaviour
 
                 // Resume the game
                 Time.timeScale = 1f;
+
+                playerScript.EnablePlayerMovement();
                 
                 hasSelectedCard = false;
 

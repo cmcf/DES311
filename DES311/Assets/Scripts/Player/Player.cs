@@ -76,6 +76,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         // Pauses the game
         Time.timeScale = 0f;
+
         itemManager.DisplayItemChoice();
         // Players current level increases
         currentLevel++;
