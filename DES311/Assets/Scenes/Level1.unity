@@ -46989,7 +46989,7 @@ MonoBehaviour:
     type: 1
     source: {fileID: 0}
   - name: Music
-    clip: {fileID: 8300000, guid: b2bd86507093cf84a811bfde32eac438, type: 3}
+    clip: {fileID: 8300000, guid: ee44220a3e440434dbb7cd1acefb8a08, type: 3}
     isMusic: 1
     volume: 0.503
     pitch: 1
@@ -52392,7 +52392,7 @@ MonoBehaviour:
   spawnProbability: 0.8
   delayBetweenWaves: 2
   delayIncreasePerWave: 1
-  spawnFromIndex1AfterWave: 2
+  rangedEnemySpawnWave: 2
   currentWave: 0
   canSpawn: 1
 --- !u!4 &897408124
@@ -121183,7 +121183,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 2609, y: 1}
-  m_SizeDelta: {x: -3663.5195, y: 281}
+  m_SizeDelta: {x: -3663.5195, y: 73.5168}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2190195322371572346
 MonoBehaviour:
@@ -123589,7 +123589,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -4, y: 1}
-  m_SizeDelta: {x: -1344.6636, y: 280.75}
+  m_SizeDelta: {x: -1344.6636, y: 199.0955}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &9118584400853943406
 MonoBehaviour:
