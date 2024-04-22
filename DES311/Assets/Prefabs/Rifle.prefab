@@ -97,18 +97,6 @@ PrefabInstance:
       value: Flash
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 40949a480f6b7d54f99564ee2b469dae, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 40949a480f6b7d54f99564ee2b469dae, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 40949a480f6b7d54f99564ee2b469dae, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 40949a480f6b7d54f99564ee2b469dae, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0010203909
       objectReference: {fileID: 0}
@@ -150,9 +138,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411135491255387994, guid: 40949a480f6b7d54f99564ee2b469dae,
         type: 3}
-      propertyPath: muzzle
+      propertyPath: crosshair
       value: 
-      objectReference: {fileID: 3876241281059031229}
+      objectReference: {fileID: 734146704155727196}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] float delayBetweenWaves = 2f;
     [SerializeField] float delayIncreasePerWave = 1f;
 
-    [SerializeField] int spawnFromIndex1AfterWave = 2;
+    [SerializeField] int rangedEnemySpawnWave = 2;
 
     [SerializeField] int currentWave = 0;
     int currentEnemyAmount;
@@ -58,7 +58,7 @@ public class Spawner : MonoBehaviour
                     int prefabIndex;
 
                     // Checks if ranged enemy can be spawned
-                    if (currentWave >= spawnFromIndex1AfterWave && rangedEnemyCount < 2)
+                    if (currentWave >= rangedEnemySpawnWave && rangedEnemyCount < 2)
                     {
                         prefabIndex = 1;
                         rangedEnemyCount++;
