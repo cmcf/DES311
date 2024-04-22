@@ -210,9 +210,9 @@ public class SettingsFunctions : MonoBehaviour
     public void PauseButton()
     {
         PlayButtonSFX();
-        settingsButton.enabled = false;
-        pauseCanvas.enabled = true;
         Time.timeScale = 0;
+        //settingsButton.enabled = false;
+        pauseCanvas.enabled = true; 
     }
 
     public void BackButton()
