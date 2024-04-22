@@ -8,8 +8,6 @@ public class Rifle : Weapon
     public GameObject muzzle;
     public GameObject crosshair;
 
-    bool playMuzzle;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -29,16 +27,23 @@ public class Rifle : Weapon
         // Check if the playerScript is assigned
         if (playerScript != null)
         {
-            if (playerStats.isDead) { return; }
-            // Activate the muzzle flash GameObject if the player is aiming and it's not already active
-            if (playerScript.isFiring)
-            {
-                muzzle.SetActive(true);
-            }
-            // Deactivate the muzzle flash GameObject if the player is not aiming
-            else
+            // Check if the player is dead, if so, deactivate the muzzle flash
+            if (playerStats.isDead)
             {
                 muzzle.SetActive(false);
+            }
+            else
+            {
+                // Activate the muzzle flash GameObject if the player is firing and it's not already active
+                if (playerScript.isFiring)
+                {
+                    muzzle.SetActive(true);
+                }
+                // Deactivate the muzzle flash GameObject if the player is not firing
+                else
+                {
+                    muzzle.SetActive(false);
+                }
             }
         }
     }
