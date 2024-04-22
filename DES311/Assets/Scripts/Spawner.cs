@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
     {
         while (canSpawn)
         {
-            // Spawns new wave of enemies after a delay
+            // Spawns new wave of enemies after a short delay
             yield return new WaitForSeconds(delayBetweenWaves + (currentWave * delayIncreasePerWave));
 
             // Spawn boss at wave 8

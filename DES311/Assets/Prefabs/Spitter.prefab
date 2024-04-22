@@ -821,13 +821,12 @@ MonoBehaviour:
   moveSpeed: 2.5
   XPAmount: 50
   spawnProbability: 0.2
-  isBoss: 0
   projectileSpawnPoint: {fileID: 8800851095730719974}
   projectilePrefab: {fileID: 2308169832292628706, guid: dc607c448b811a645ab735323bce8ef9,
     type: 3}
   stoppingDistance: 15
   rotationSpeed: 2
-  attackCooldown: 1
+  attackCooldown: 1.5
   reachedPlayer: 0
 --- !u!114 &-8464521690373140425
 MonoBehaviour:
@@ -855,7 +854,6 @@ MonoBehaviour:
   moveSpeed: 0
   XPAmount: 25
   spawnProbability: 0.1
-  isBoss: 0
 --- !u!95 &2419008712768529568
 Animator:
   serializedVersion: 7
