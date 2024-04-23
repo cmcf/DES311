@@ -23,6 +23,10 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] float slowAmount = 0.5f;
     [SerializeField] float slowDuration = 10f;
+
+    // Number of enemies the laser can penetrate
+    public int maxEnemyHits = 3;
+    public int hitCount = 0;
     void Start()
     {
         // Play the sound when the bullet is fired
@@ -44,6 +48,20 @@ public class Bullet : MonoBehaviour
                 // Deal damage to the target
                 damageable.Damage(damageAmount);
 
+                // Increment hit count for laser bullets
+                if (isLaser)
+                {
+                    
+                    hitCount++;
+                    Debug.Log(hitCount);
+
+                    // Check if the maximum hit count is reached
+                    if (hitCount == maxEnemyHits)
+                    {
+                        gameObject.SetActive(false);
+                    }
+                }
+
                 // If it's a stone bullet, apply pushback effect
                 if (isStoneBullet)
                 {
@@ -61,6 +79,7 @@ public class Bullet : MonoBehaviour
                 // Disable the bullet's collider to prevent it from hitting multiple enemies
                 GetComponent<Collider>().enabled = false;
             }
+
             if (isWaterBall)
             {
                 enemy = other.GetComponent<Enemy>();
@@ -77,6 +96,7 @@ public class Bullet : MonoBehaviour
 
         IEnumerator PushbackEnemy(Transform enemyTransform)
         {
+
             // Store the original position of the enemy
             Vector3 originalPosition = enemyTransform.position;
             // Calculate the target position for pushback
@@ -98,9 +118,8 @@ public class Bullet : MonoBehaviour
 
                 yield return null;
             }
-
         }
-      
+       
     }
     void ApplySlowEffect(Enemy enemy)
     {
@@ -108,7 +127,6 @@ public class Bullet : MonoBehaviour
         enemy.SlowdownEffect(slowAmount, slowDuration);
 
     }
-
 
     void DestroyBullet()
     {
