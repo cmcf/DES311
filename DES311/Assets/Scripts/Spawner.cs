@@ -16,7 +16,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] float spawnProbability = 0.8f;
 
     [SerializeField] float delayBetweenWaves = 2f;
-    [SerializeField] float delayIncreasePerWave = 1f;
 
     [SerializeField] int rangedEnemySpawnWave = 2;
 
@@ -36,7 +35,7 @@ public class Spawner : MonoBehaviour
         while (canSpawn)
         {
             // Spawns new wave of enemies after a short delay
-            yield return new WaitForSeconds(delayBetweenWaves + (currentWave * delayIncreasePerWave));
+            yield return new WaitForSeconds(delayBetweenWaves);
 
             // Spawn boss at wave 8
             if (currentWave == 8 && !bossSpawned)

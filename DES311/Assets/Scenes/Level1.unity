@@ -52487,12 +52487,11 @@ MonoBehaviour:
   - {fileID: 2070867550}
   - {fileID: 821214061}
   enemyManager: {fileID: 6626727303949553407}
-  initialEnemyAmount: 5
+  initialEnemyAmount: 8
   enemiesPerWaveIncrease: 6
   spawnRate: 1.5
   spawnProbability: 0.8
-  delayBetweenWaves: 2
-  delayIncreasePerWave: 1
+  delayBetweenWaves: 0.2
   rangedEnemySpawnWave: 2
   currentWave: 0
   canSpawn: 1
