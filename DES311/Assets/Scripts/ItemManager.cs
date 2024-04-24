@@ -126,7 +126,7 @@ public class ItemManager : MonoBehaviour
             availableTags.Add("StoneCard");
         }
 
-        if (!waterCardEquipped && playerAboveRequiredLevel && GameManager.instance.hasPurchasedWaterCard)
+        if (!waterCardEquipped && playerAboveRequiredLevel && GameManager.instance.gameData.hasPurchasedWaterCard)
         {
             availableTags.Add("WaterCard");
         }

@@ -22,14 +22,14 @@ MonoBehaviour:
   baseFireRate: 1
   baseSpeed: 20
   baseMoveSpeed: 5
-  baseHealth: 60
+  baseHealth: 50
   defaultProjectile: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
   fireRate: 1
   speed: 20
   moveSpeed: 5
-  health: 60
-  healthMaxValue: 60
+  health: 55
+  healthMaxValue: 55
   cooldownDecrease: 0
   speedIncrease: 0
   movementSpeedIncrease: 0

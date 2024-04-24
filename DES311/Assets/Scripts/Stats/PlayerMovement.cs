@@ -1,10 +1,17 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
+
+[System.Serializable]
+public class PlayerData
+{
+    public int healthUpgrades;
+}
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -27,45 +34,60 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] float rotationSpeed;
 
-    int healthIncreaseAmount;
+    public int currentHealthUpgrades;
+
+    private string savePath;
+
     float lastFireTime;
     [SerializeField] float muzzleDelay = 0.1f;
     bool isMoving;
 
-    
+
+    void Awake()
+    {
+        savePath = Path.Combine(Application.persistentDataPath, "playerData.json");
+    }
 
     void Start()
     {
-        healthIncreaseAmount = PlayerPrefs.GetInt("HealthIncreaseAmount", 0);
-        LoadPlayerStats();
+        // Load health upgrade information from PlayerPrefs
+        int healthIncreaseAmount = PlayerPrefs.GetInt("HealthIncreaseAmount", 0);
+        int healthUpgradeCount = PlayerPrefs.GetInt("HealthUpgradesCount", 0);
+
+        // Apply health upgrades
+        ApplyHealthUpgrade(healthIncreaseAmount, healthUpgradeCount);
+
+
         EnableJoystick();
         playerStats = GetComponent<Player>();
       
     }
 
-    void LoadPlayerStats()
-    {
-        ResetPlayerStats(healthIncreaseAmount);
-    }
-    public WeaponItem GetDefaultWeapon()
-    {
-        return currentLoadout;
-    }
-
-    void ResetPlayerStats(int healthIncreaseAmount)
+    void ResetPlayerStats()
     {
         // Reset default rifle upgrades to their base values
         currentLoadout.fireRate = currentLoadout.baseFireRate;
         currentLoadout.speed = currentLoadout.baseSpeed;
         currentLoadout.moveSpeed = currentLoadout.baseMoveSpeed;
         currentLoadout.projectilePrefab = currentLoadout.defaultProjectile;
+        // Reset health
+        currentLoadout.healthMaxValue = currentLoadout.baseHealth;
+        currentLoadout.health = currentLoadout.baseHealth;
+    }
 
-        // Apply health upgrades
-        int healthUpgradeCount = PlayerPrefs.GetInt("HealthUpgradesCount", 0);
+    void ApplyHealthUpgrade(int healthIncreaseAmount, int healthUpgradeCount)
+    {
+        // Apply health upgrades to the player's stats
         int totalHealthIncrease = healthIncreaseAmount * healthUpgradeCount;
         currentLoadout.healthMaxValue = currentLoadout.baseHealth + totalHealthIncrease;
         currentLoadout.health = currentLoadout.healthMaxValue;
     }
+
+    public WeaponItem GetDefaultWeapon()
+    {
+        return currentLoadout;
+    }
+
     public void EnableJoystick()
     {
         // Enables the joystick by setting it to visible

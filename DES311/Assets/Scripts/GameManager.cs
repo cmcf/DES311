@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,31 +10,29 @@ public class GameManager : MonoBehaviour
     ShopItem item;
     [SerializeField] Points pointsScript;
     [SerializeField] Canvas winCanvas;
+
     // Handles XP events
     public delegate void XPHandler(int amount);
     // Event is triggered when called from another script
     public event XPHandler XPEvent;
 
-    public int currentEnemiesKilled;
-    public int totalEnemiesKilled;
-
+    // Define a data structure to hold the game data
+    [System.Serializable]
+    public class GameData
+    {
+        public int totalCredits;
+        public int currentHealthUpgrades;
+        public bool hasPurchasedLaser;
+        public bool hasPurchasedWaterCard;
+    }
     public int currentCredits;
-    public int totalCredits;
 
-    public int currentHealthUpgrades;
-    public bool hasPurchasedLaser = false;
-    public bool hasPurchasedWaterCard = false;
+    public int currentEnemiesKilled;
 
-    string totalPointsKey = "TotalPoints";
-    string totalCreditsKey = "TotalCoins";
+    public GameData gameData;
 
-    string healthUpgradesCountKey = "HealthUpgradesCount";
-    string hasPurchasedLaserKey = "HasPurchasedLaser";
-    string hasPurchasedWaterKey = "HasPurchasedWater";
+    private string savePath;
 
-    private int[] creditLevels = { 5, 10, 20 };
-
-    int totalHealthUpgraded;
     void Awake()
     {
         // Check if instance already exists
@@ -45,7 +43,8 @@ public class GameManager : MonoBehaviour
 
             // Set this GameObject to not be destroyed when reloading scene
             DontDestroyOnLoad(gameObject);
-            
+
+            savePath = Path.Combine(Application.persistentDataPath, "gameData.json");
         }
         else if (instance != this)
         {
@@ -53,55 +52,57 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     void Start()
     {
+        // Load game data
+        LoadGameData();
+
+        //ResetGameData();
         //PlayerPrefs.DeleteAll();
-        // playerLoadout.baseHealth = 50;
-        // Load total points from PlayerPrefs
-        totalEnemiesKilled = PlayerPrefs.GetInt(totalPointsKey, 0);
-        totalCredits = PlayerPrefs.GetInt(totalCreditsKey, 0);
 
-        // Load the current number of health upgrades from PlayerPrefs
-        currentHealthUpgrades = PlayerPrefs.GetInt("HealthUpgradesCount", 0);
-        // Load the purchased laser status
-        hasPurchasedLaser = PlayerPrefs.GetInt(hasPurchasedLaserKey, 0) == 1;
-        // Laod the purchased water status
-        hasPurchasedWaterCard = PlayerPrefs.GetInt(hasPurchasedWaterKey, 0) == 1;
-
-        if (winCanvas!= null)
+        // Initialize other game elements as needed
+        if (winCanvas != null)
         {
-            winCanvas.enabled = false;  
+            winCanvas.enabled = false;
         }
+    }
 
+    void LoadGameData()
+    {
+        if (File.Exists(savePath))
+        {
+            string jsonData = File.ReadAllText(savePath);
+            gameData = JsonUtility.FromJson<GameData>(jsonData);
+        }
+        else
+        {
+            // Initialize default values if the save file doesn't exist
+            gameData = new GameData();
+        }
+    }
 
+    public void SaveGameData()
+    {
+        string jsonData = JsonUtility.ToJson(gameData);
+        File.WriteAllText(savePath, jsonData);
     }
 
     public void IncreaseXP(int amount)
     {
-        // If not null, increase XP by amoung gained
+        // If not null, increase XP by amount gained
         XPEvent?.Invoke(amount);
-    }
-
-    public void ResetGame()
-    {
-        Destroy(gameObject);
-    }
-
-    public int GetTotalCredits()
-    {
-        return totalCredits;
     }
 
     public void AddCredits(int currentLevel)
     {
         int creditsToAdd = CalculateCreditsToAdd(currentLevel);
 
+        // Update the current credits earned
         currentCredits += creditsToAdd;
-        totalCredits += creditsToAdd;
 
-        // Save total coins earned
-        PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
-        PlayerPrefs.Save();
+        // Update the total credits earned
+        gameData.totalCredits += creditsToAdd;
     }
 
     int CalculateCreditsToAdd(int currentLevel)
@@ -121,16 +122,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddEnemy(int enemyAmount)
-    {
-        currentEnemiesKilled += enemyAmount;
-        totalEnemiesKilled += enemyAmount;
-
-        // Save total enemies killed to PlayerPrefs
-        PlayerPrefs.SetInt(totalPointsKey, totalEnemiesKilled);
-        PlayerPrefs.Save();
-    }
-
     public void PurchaseItem(ShopItem item)
     {
         switch (item.itemType)
@@ -139,10 +130,10 @@ public class GameManager : MonoBehaviour
                 PurchaseHealthUpgrade(item);
                 break;
             case ShopItem.ItemType.Projectile:
-                PurchaseProjectile(item, hasPurchasedLaser, "HasPurchasedLaser");
+                PurchaseProjectile(item, gameData.hasPurchasedLaser, "HasPurchasedLaser");
                 break;
             case ShopItem.ItemType.Card:
-                PurchaseWaterCard(item, hasPurchasedWaterCard, "HasPurchasedWater");
+                PurchaseWaterCard(item, gameData.hasPurchasedWaterCard, "HasPurchasedWater");
                 break;
             default:
                 Debug.LogError("Invalid item type: " + item.itemType);
@@ -150,30 +141,42 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void PurchaseHealthUpgrade(ShopItem item)
-    {
-        // Check the current count of health upgrades
-        currentHealthUpgrades = PlayerPrefs.GetInt(healthUpgradesCountKey, 0);
 
-        // If the current count is less than 5 and the player hasn't purchased this item yet, allow the purchase
-        if (currentHealthUpgrades < 5)
+    public void AddEnemy(int enemyAmount)
+    {
+        currentEnemiesKilled += enemyAmount;
+    }
+
+    public void PurchaseHealthUpgrade(ShopItem item)
+    {
+        // Check if the player has enough credits to purchase the health upgrade
+        if (PurchaseItemWithCredits(item.price))
         {
-            if (PurchaseItemWithCredits(item.price))
-            {
-                currentHealthUpgrades++;
-                IncreaseHealth(item.healthIncreaseAmount);
-                PlayerPrefs.SetInt(healthUpgradesCountKey, currentHealthUpgrades);
-                PlayerPrefs.Save();
-                FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
-            }
+            // Increment health upgrades count
+            gameData.currentHealthUpgrades++;
+
+            // Increase health based on the item's health increase amount
+            IncreaseHealth(item.healthIncreaseAmount);
+
+            // Save health upgrade information to PlayerPrefs
+            PlayerPrefs.SetInt("HealthUpgradesCount", gameData.currentHealthUpgrades);
+            PlayerPrefs.SetInt("HealthIncreaseAmount", item.healthIncreaseAmount);
+            PlayerPrefs.Save();
+
+            // Save game data
+            SaveGameData();
+
+            // Update UI after purchase
+            FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
+
         }
         else
         {
-            Debug.Log("Max health upgrades reached");
+            Debug.Log("Not enough credits to purchase the item");
         }
     }
 
-    void PurchaseProjectile(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
+        public void PurchaseProjectile(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
     {
         if (hasPurchasedItem)
         {
@@ -184,9 +187,9 @@ public class GameManager : MonoBehaviour
         if (PurchaseItemWithCredits(item.price))
         {
             hasPurchasedItem = true;
-            PlayerPrefs.SetInt(playerPrefsKey, hasPurchasedItem ? 1 : 0);
+            gameData.hasPurchasedLaser = true;
             IncreaseHealth(item.healthIncreaseAmount);
-            PlayerPrefs.Save();
+            SaveGameData();
             UpdateStartingProjectile(item);
             SavePurchasedItem(item);
             FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
@@ -197,7 +200,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void PurchaseWaterCard(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
+    public void PurchaseWaterCard(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
     {
         if (hasPurchasedItem)
         {
@@ -207,8 +210,8 @@ public class GameManager : MonoBehaviour
         if (PurchaseItemWithCredits(item.price))
         {
             hasPurchasedItem = true;
-            PlayerPrefs.SetInt(playerPrefsKey, hasPurchasedItem ? 1 : 0);
-            PlayerPrefs.Save();
+            gameData.hasPurchasedWaterCard = true;
+            SaveGameData();
             SavePurchasedItem(item);
             FindObjectOfType<PurchaseConditions>().UpdateUIAfterPurchase();
         }
@@ -220,36 +223,39 @@ public class GameManager : MonoBehaviour
 
     bool PurchaseItemWithCredits(int price)
     {
-        if (totalCredits >= price)
+        // Check if the player has enough credits to make the purchase
+        if (gameData.totalCredits >= price)
         {
-            totalCredits -= price;
-            PlayerPrefs.SetInt(totalCreditsKey, totalCredits);
+            // Deduct the price from the total credits
+            gameData.totalCredits -= price;
+
+            // Save the updated credits to the game data
+            SaveGameData();
+
+            // Return true to indicate the successful purchase
             return true;
         }
-        return false;
+        else
+        {
+            // Return false to indicate that the purchase failed due to insufficient credits
+            return false;
+        }
     }
 
     void SavePurchasedItem(ShopItem item)
     {
-       // Save purchased item data
-       PlayerPrefs.SetInt("PurchasedItem_Type", (int)item.itemType);
-       PlayerPrefs.SetInt("PurchasedItem_HealthIncreaseAmount", item.healthIncreaseAmount);
+        // Save purchased item data
     }
 
     void IncreaseHealth(int healthIncreaseAmount)
     {
         playerLoadout.baseHealth += healthIncreaseAmount;
-        totalHealthUpgraded = healthIncreaseAmount;
     }
+
     void UpdateStartingProjectile(ShopItem item)
     {
         // Update the player's default projectile to the purchased item's projectile
         playerLoadout.defaultProjectile = item.projectile;
-
-        // Save that the player has purchased the laser
-        PlayerPrefs.SetInt("HasPurchasedLaser", 1);
-        PlayerPrefs.Save();
-
     }
 
     public void LevelComplete()
@@ -267,4 +273,20 @@ public class GameManager : MonoBehaviour
         winCanvas.enabled = true;
     }
 
+    public void ResetGameData()
+    {
+        // Reset all game data to their default values
+        gameData.totalCredits = 0;
+        gameData.currentHealthUpgrades = 0;
+        gameData.hasPurchasedLaser = false;
+        gameData.hasPurchasedWaterCard = false;
+
+        // Save the reset game data
+        SaveGameData();
+    }
+
+    public void ResetGame()
+    {
+        Destroy(gameObject);
+    }
 }
