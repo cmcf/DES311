@@ -26,9 +26,13 @@ public class PurchaseConditions : MonoBehaviour
     [SerializeField] ShopItem laserItem;
     [SerializeField] ShopItem waterItem;
 
+    private GameManager gameManager;
+
     void Start()
     {
-        if (GameManager.instance != null)
+        gameManager = GameManager.instance;
+
+        if (gameManager != null)
         {
             UpdateUI();
         }
@@ -36,26 +40,28 @@ public class PurchaseConditions : MonoBehaviour
 
     void UpdateUI()
     {
+        if (gameManager == null) return;
+
         // Update current health upgrades
-        currentHealthUpgrades.text = GameManager.instance.currentHealthUpgrades.ToString() + " / 5";
+        currentHealthUpgrades.text = gameManager.gameData.currentHealthUpgrades.ToString() + " / 5";
 
         // Update current credits text
-        creditsText.text = GameManager.instance.totalCredits.ToString();
+        creditsText.text = gameManager.gameData.totalCredits.ToString();
 
         // Get prices for the shop items
         int healthPrice = healthItem.price;
         int laserPrice = laserItem.price;
         int waterPrice = waterItem.price;
 
-        // Check if the player has purchased the laser
-        bool hasPurchasedLaser = PlayerPrefs.GetInt("HasPurchasedLaser", 0) == 1;
-        currentLaserUpgrade.text = (hasPurchasedLaser ? "1" : "0") + " / 1";
+        // Check if the player has purchased the laser and water
+        bool hasPurchasedLaser = gameManager.gameData.hasPurchasedLaser;
+        bool hasPurchasedWater = gameManager.gameData.hasPurchasedWaterCard;
 
-        bool hasPurchasedWater = PlayerPrefs.GetInt("HasPurchasedWater", 0) == 1;
+        currentLaserUpgrade.text = (hasPurchasedLaser ? "1" : "0") + " / 1";
         currentWaterUpgrade.text = (hasPurchasedWater ? "1" : "0") + " / 1";
 
         // Grey out health button if max upgrades reached or not enough credits
-        if (GameManager.instance.currentHealthUpgrades == 5 || GameManager.instance.totalCredits < healthPrice)
+        if (gameManager.gameData.currentHealthUpgrades == 5 || gameManager.gameData.totalCredits < healthPrice)
         {
             healthButton.GetComponent<Image>().color = Color.grey;
         }
@@ -65,30 +71,67 @@ public class PurchaseConditions : MonoBehaviour
         }
 
         // Grey out laser button if laser is already purchased or player does not have enough credits
-        if (hasPurchasedLaser || GameManager.instance.totalCredits < laserPrice)
+        if (hasPurchasedLaser || gameManager.gameData.totalCredits < laserPrice)
         {
             laserButton.GetComponent<Image>().color = Color.grey;
-            // If a laser is purchased, text is set to one and if not purchased text is set to 0
-            currentLaserUpgrade.text = (hasPurchasedLaser ? "1" : "0") + " / 1";
         }
         else
         {
             laserButton.GetComponent<Image>().color = Color.white;
         }
 
-        if (hasPurchasedWater || GameManager.instance.totalCredits < waterPrice)
+        // Grey out water button if water card is already purchased or player does not have enough credits
+        if (hasPurchasedWater || gameManager.gameData.totalCredits < waterPrice)
         {
             waterButton.GetComponent<Image>().color = Color.grey;
-            currentWaterUpgrade.text = (hasPurchasedWater ? "1" : "0") + " / 1";
         }
         else
         {
             waterButton.GetComponent<Image>().color = Color.white;
         }
     }
+
+    public void PurchaseHealthUpgrade()
+    {
+        if (gameManager == null) return;
+
+        if (gameManager.gameData.currentHealthUpgrades < 5 && gameManager.gameData.totalCredits >= healthItem.price)
+        {
+            gameManager.gameData.currentHealthUpgrades++;
+            gameManager.gameData.totalCredits -= healthItem.price;
+            UpdateUI();
+            gameManager.SaveGameData();
+        }
+    }
+
+    public void PurchaseLaser()
+    {
+        if (gameManager == null) return;
+
+        if (!gameManager.gameData.hasPurchasedLaser && gameManager.gameData.totalCredits >= laserItem.price)
+        {
+            gameManager.gameData.hasPurchasedLaser = true;
+            gameManager.gameData.totalCredits -= laserItem.price;
+            UpdateUI();
+            gameManager.SaveGameData();
+        }
+    }
+
+    public void PurchaseWaterCard()
+    {
+        if (gameManager == null) return;
+
+        if (!gameManager.gameData.hasPurchasedWaterCard && gameManager.gameData.totalCredits >= waterItem.price)
+        {
+            gameManager.gameData.hasPurchasedWaterCard = true;
+            gameManager.gameData.totalCredits -= waterItem.price;
+            UpdateUI();
+            gameManager.SaveGameData();
+        }
+    }
+
     public void UpdateUIAfterPurchase()
     {
-        // Update the UI with the latest data
         UpdateUI();
     }
 }

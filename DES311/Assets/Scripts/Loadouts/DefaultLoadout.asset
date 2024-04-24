@@ -15,21 +15,21 @@ MonoBehaviour:
   itemName: Rifle
   description: Starting loadout
   icon: {fileID: 0}
-  projectilePrefab: {fileID: 6487987637173855206, guid: 29a9704bef55c3240bfe88bfc33c71cc,
+  projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
   projectileUpgrade: {fileID: 0}
   modifiedAttribute: 3
   baseFireRate: 1
   baseSpeed: 20
   baseMoveSpeed: 5
-  baseHealth: 20000
-  defaultProjectile: {fileID: 6487987637173855206, guid: 29a9704bef55c3240bfe88bfc33c71cc,
+  baseHealth: 50
+  defaultProjectile: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
-  fireRate: 0.79999995
+  fireRate: 1
   speed: 20
-  moveSpeed: 7
-  health: 18485
-  healthMaxValue: 20000
+  moveSpeed: 5
+  health: 55
+  healthMaxValue: 55
   cooldownDecrease: 0
   speedIncrease: 0
   movementSpeedIncrease: 0
