@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] float rotationSpeed;
 
-    
+    int healthIncreaseAmount;
     float lastFireTime;
     [SerializeField] float muzzleDelay = 0.1f;
     bool isMoving;
@@ -36,27 +36,35 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.Save();
-        ResetPlayerStats();
+        healthIncreaseAmount = PlayerPrefs.GetInt("HealthIncreaseAmount", 0);
+        LoadPlayerStats();
         EnableJoystick();
         playerStats = GetComponent<Player>();
       
+    }
+
+    void LoadPlayerStats()
+    {
+        ResetPlayerStats(healthIncreaseAmount);
     }
     public WeaponItem GetDefaultWeapon()
     {
         return currentLoadout;
     }
 
-    void ResetPlayerStats()
+    void ResetPlayerStats(int healthIncreaseAmount)
     {
         // Reset default rifle upgrades to their base values
         currentLoadout.fireRate = currentLoadout.baseFireRate;
         currentLoadout.speed = currentLoadout.baseSpeed;
         currentLoadout.moveSpeed = currentLoadout.baseMoveSpeed;
         currentLoadout.projectilePrefab = currentLoadout.defaultProjectile;
-        // Reset health
-        currentLoadout.healthMaxValue = currentLoadout.baseHealth;
-        currentLoadout.health = currentLoadout.baseHealth;
+
+        // Apply health upgrades
+        int healthUpgradeCount = PlayerPrefs.GetInt("HealthUpgradesCount", 0);
+        int totalHealthIncrease = healthIncreaseAmount * healthUpgradeCount;
+        currentLoadout.healthMaxValue = currentLoadout.baseHealth + totalHealthIncrease;
+        currentLoadout.health = currentLoadout.healthMaxValue;
     }
     public void EnableJoystick()
     {

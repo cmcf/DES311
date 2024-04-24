@@ -47,11 +47,11 @@ public class PurchaseConditions : MonoBehaviour
         int laserPrice = laserItem.price;
         int waterPrice = waterItem.price;
 
-        // Check if the player has purchased the laser
+        // Check if the player has purchased the laser and water
         bool hasPurchasedLaser = PlayerPrefs.GetInt("HasPurchasedLaser", 0) == 1;
-        currentLaserUpgrade.text = (hasPurchasedLaser ? "1" : "0") + " / 1";
-
         bool hasPurchasedWater = PlayerPrefs.GetInt("HasPurchasedWater", 0) == 1;
+
+        currentLaserUpgrade.text = (hasPurchasedLaser ? "1" : "0") + " / 1";
         currentWaterUpgrade.text = (hasPurchasedWater ? "1" : "0") + " / 1";
 
         // Grey out health button if max upgrades reached or not enough credits

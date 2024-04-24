@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //PlayerPrefs.DeleteAll();
-        //playerLoadout.baseHealth = 50;
+        // playerLoadout.baseHealth = 50;
         // Load total points from PlayerPrefs
         totalEnemiesKilled = PlayerPrefs.GetInt(totalPointsKey, 0);
         totalCredits = PlayerPrefs.GetInt(totalCreditsKey, 0);

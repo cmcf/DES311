@@ -151,7 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vibrationOn: 0
   variableJoystick: {fileID: 0}
-  joystickType: 0
+  joystickType: 2
 --- !u!4 &8765929
 Transform:
   m_ObjectHideFlags: 0
@@ -792,6 +792,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLoadout: {fileID: 11400000, guid: 7330dc1902b5ede4f8360ff3f39f8623, type: 2}
+  pointsScript: {fileID: 0}
+  winCanvas: {fileID: 0}
   currentEnemiesKilled: 0
   totalEnemiesKilled: 0
   currentCredits: 0
@@ -799,7 +801,6 @@ MonoBehaviour:
   currentHealthUpgrades: 0
   hasPurchasedLaser: 0
   hasPurchasedWaterCard: 0
-  totalHealthUpgraded: 0
 --- !u!1 &1463338373
 GameObject:
   m_ObjectHideFlags: 0
