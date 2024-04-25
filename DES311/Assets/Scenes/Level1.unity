@@ -193,7 +193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &488181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9364,7 +9364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &98560095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89581,7 +89581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1644373158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121265,7 +121265,7 @@ MonoBehaviour:
   background: {fileID: 2190195322638867970}
   handle: {fileID: 2190195322851605507}
   moveThreshold: 1
-  joystickType: 2
+  joystickType: 0
 --- !u!114 &2190195322371572347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122012,7 +122012,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &3955005250032940287
 GameObject:
   m_ObjectHideFlags: 0
@@ -123671,7 +123671,7 @@ MonoBehaviour:
   background: {fileID: 9118584401123596310}
   handle: {fileID: 9118584401313528343}
   moveThreshold: 1
-  joystickType: 2
+  joystickType: 0
 --- !u!114 &9118584400853943407
 MonoBehaviour:
   m_ObjectHideFlags: 0
