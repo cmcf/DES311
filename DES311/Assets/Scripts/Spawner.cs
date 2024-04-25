@@ -17,7 +17,7 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] float delayBetweenWaves = 2f;
 
-    [SerializeField] int rangedEnemySpawnWave = 2;
+    [SerializeField] int rangedEnemySpawnWave = 4;
 
     [SerializeField] int currentWave = 0;
     int currentEnemyAmount;
