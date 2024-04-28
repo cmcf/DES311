@@ -15,9 +15,9 @@ public class ShopItemUI : MonoBehaviour
 
     void Start()
     {
-        if (GameManager.instance != null)
+        if (GameManager.Instance != null)
         {
-            Init(item, GameManager.instance.gameData.totalCredits);
+            Init(item, GameManager.Instance.gameData.totalCredits);
         }  
     }
 

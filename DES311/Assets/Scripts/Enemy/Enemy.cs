@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public virtual void Die()
     {
         // Increase player XP
-        GameManager.instance.IncreaseXP(XPAmount);
+        GameManager.Instance.IncreaseXP(XPAmount);
         // Spawn powerup by chance and only if player is above level 3
         if (player != null && Random.value < spawnProbability && player.currentLevel >= 3)
         {

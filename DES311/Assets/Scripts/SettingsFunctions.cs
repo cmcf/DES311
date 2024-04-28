@@ -27,6 +27,7 @@ public class SettingsFunctions : MonoBehaviour
     [SerializeField] Button musicOnButton;
     [SerializeField] Button musicOffButton;
     [SerializeField] Button settingsButton;
+    [SerializeField] Button rewardButton;
 
     public bool sfxEnabled = true;
     public bool musicEnabled = true;
@@ -223,9 +224,9 @@ public class SettingsFunctions : MonoBehaviour
     public void PlayGame()
     {
         PlayButtonSFX();
-        if (GameManager.instance != null)
+        if (GameManager.Instance != null)
         {
-            GameManager.instance.ResetGame();
+            GameManager.Instance.ResetGame();
         }
         SceneManager.LoadScene(1);
     }
@@ -289,6 +290,7 @@ public class SettingsFunctions : MonoBehaviour
             aimJoystick.OverrideJoystickType();
         }
     }
+
     public void EnableSFXButton()
     {
         PlayButtonSFX();

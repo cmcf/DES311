@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.IO;
+using System.Xml.Schema;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance = null;
+    public static GameManager Instance = null;
 
     public WeaponItem playerLoadout;
     PlayerMovement playerStats;
@@ -36,17 +37,17 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         // Check if instance already exists
-        if (instance == null)
+        if (Instance == null)
         {
             // If not, set instance to this
-            instance = this;
+            Instance = this;
 
             // Set this GameObject to not be destroyed when reloading scene
             DontDestroyOnLoad(gameObject);
 
             savePath = Path.Combine(Application.persistentDataPath, "gameData.json");
         }
-        else if (instance != this)
+        else if (Instance != this)
         {
             // Then destroy this. This enforces our singleton pattern, meaning there can only be one GameManager.
             Destroy(gameObject);
@@ -120,6 +121,12 @@ public class GameManager : MonoBehaviour
         {
             return 20;
         }
+    }
+
+    public void AddRewardCredits()
+    {
+        Debug.Log("Add reward credits");
+        gameData.totalCredits += 20;
     }
 
     public void PurchaseItem(ShopItem item)

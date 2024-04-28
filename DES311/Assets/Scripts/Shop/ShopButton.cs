@@ -10,10 +10,10 @@ public class ShopButton : MonoBehaviour
     {
 
         // Check if player has enough credits
-        if (GameManager.instance.gameData.totalCredits >= item.price)
+        if (GameManager.Instance.gameData.totalCredits >= item.price)
         {
             Debug.Log("Shop item purchased: " + item.itemName);
-            GameManager.instance.PurchaseItem(item);
+            GameManager.Instance.PurchaseItem(item);
         }
         else
         {

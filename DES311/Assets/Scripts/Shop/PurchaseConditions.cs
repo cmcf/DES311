@@ -30,7 +30,7 @@ public class PurchaseConditions : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameManager.instance;
+        gameManager = GameManager.Instance;
 
         if (gameManager != null)
         {

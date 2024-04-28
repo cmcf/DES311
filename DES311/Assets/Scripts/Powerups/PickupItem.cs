@@ -16,7 +16,7 @@ public class PickupItem : MonoBehaviour
     void Start()
      {
         // Get reference to PickupManager instance
-        pickupManager = GameManager.instance.GetComponent<PickupManager>();
+        pickupManager = GameManager.Instance.GetComponent<PickupManager>();
 
         if (pickupManager == null)
         {
