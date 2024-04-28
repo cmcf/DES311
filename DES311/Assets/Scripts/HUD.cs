@@ -117,7 +117,7 @@ public class HUD : MonoBehaviour
 
         // Destroy the enemy object
         Destroy(gameObject);
-        GameManager.instance.LevelComplete();
+        GameManager.Instance.LevelComplete();
 
         Time.timeScale = 0f;
     }

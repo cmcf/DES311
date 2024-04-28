@@ -94,7 +94,7 @@ public class PickupManager : MonoBehaviour
         Time.timeScale = 1f;
         // Increases the players current XP
         playerStats.currentXP += XPIncreaseAmount;
-        GameManager.instance.IncreaseXP(XPIncreaseAmount);
+        GameManager.Instance.IncreaseXP(XPIncreaseAmount);
         // Increases current enemies health
         enemyManager.IncreaseEnemyHealth(amount);
         DeactivateCard();

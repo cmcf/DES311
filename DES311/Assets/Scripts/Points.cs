@@ -9,9 +9,9 @@ public class Points : MonoBehaviour
     public TextMeshProUGUI currentCoins;
     public void UpdatePointsText()
     {
-        currentEnemiesKilled.text = "Enemies Defeated: " + GameManager.instance.currentEnemiesKilled.ToString();
-        currentCoins.text = "Credits Earned: " + GameManager.instance.currentCredits.ToString();
-        GameManager.instance.SaveGameData();
+        currentEnemiesKilled.text = "Enemies Defeated: " + GameManager.Instance.currentEnemiesKilled.ToString();
+        currentCoins.text = "Credits Earned: " + GameManager.Instance.currentCredits.ToString();
+        GameManager.Instance.SaveGameData();
     }
 
 }

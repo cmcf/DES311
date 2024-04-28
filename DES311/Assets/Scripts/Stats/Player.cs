@@ -43,7 +43,7 @@ public class Player : MonoBehaviour, IDamageable
         enemyManager = FindObjectOfType<EnemyManager>();
         playerLoadout = GetComponent<PlayerMovement>();
         // Enable the XPEvent
-        GameManager.instance.XPEvent += HandleXP;
+        GameManager.Instance.XPEvent += HandleXP;
         currentLevelText.text = "Level: " + currentLevel.ToString();
         Time.timeScale = 1f;
     }
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour, IDamageable
     void OnDisable()
     {
         // Disable the from the XPEvent when the script is disabled
-        GameManager.instance.XPEvent -= HandleXP;
+        GameManager.Instance.XPEvent -= HandleXP;
     }
  
     // Function called when the XPEvent is invoked
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         // Increase current XP
         currentXP += newXP;
-        GameManager.instance.AddEnemy(enemyDeathCounter);
+        GameManager.Instance.AddEnemy(enemyDeathCounter);
         // If players current XP is equal or more than the required XP, the player levels up
         if (currentXP >= requiredXP)
         {
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour, IDamageable
         itemManager.DisplayItemChoice();
         // Players current level increases
         currentLevel++;
-        GameManager.instance.AddCredits(currentLevel);
+        GameManager.Instance.AddCredits(currentLevel);
         if (enemyManager != null)
         {
             enemyManager.LevelUpEnemies();

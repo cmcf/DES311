@@ -52,11 +52,11 @@ public class Credits : MonoBehaviour
     public bool Purchase(int price, Object item)
     {
         // Check if player has enough credits
-        if (GameManager.instance.gameData.totalCredits < price)
+        if (GameManager.Instance.gameData.totalCredits < price)
             return false;
 
         // Subtract price from current credits
-        GameManager.instance.gameData.totalCredits -= price;
+        GameManager.Instance.gameData.totalCredits -= price;
 
         // Broadcast purchase event
         BroadcastPurchase(item);
