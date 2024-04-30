@@ -102,7 +102,6 @@ public class AdManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
         GameManager.Instance.AddRewardCredits();
         // Reward canvas text is displayed
         rewardCanvas.enabled = true;
-        Invoke("DisableRewardsCanvas", 5f);
     }
 
     public void ShowAd()
@@ -110,7 +109,7 @@ public class AdManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
         Advertisement.Load(adUnitId, this);
     }
 
-    void DisableRewardsCanvas()
+    public void DisableRewardsCanvas()
     {
         // Reward canvas text is disabled
         rewardCanvas.enabled = false;
