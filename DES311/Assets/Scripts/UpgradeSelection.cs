@@ -6,7 +6,7 @@ using TMPro;
 using static WeaponItem;
 using NUnit.Framework.Internal;
 
-public class ItemDisplay : MonoBehaviour
+public class UpgradeSelection : MonoBehaviour
 {
     public PlayerMovement playerScript;
     public Player playerHealth;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SettingsFunctions : MonoBehaviour
+public class ButtonFunctions : MonoBehaviour
 {
     [SerializeField] AudioClip buttonSFX;
 
