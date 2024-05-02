@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.SceneManagement;
 
 public class AdManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
@@ -20,16 +21,11 @@ public class AdManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
 
     public static AdManager Instance;
 
-    void Start()
-    {
-        rewardCanvas.enabled = false;
-    }
-
-
     void Awake()
     {
         if (Instance != null && Instance != this)
         {
+            DisableRewardsCanvas();
             Destroy(gameObject);
         }
         else
@@ -37,8 +33,17 @@ public class AdManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
             InitaliseAds();
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(rewardCanvas.gameObject);
+            DisableRewardsCanvas();
         }
     }
+
+
+    void Start()
+    {
+        DisableRewardsCanvas();
+    }
+
 
     void InitaliseAds()
     {
@@ -111,7 +116,9 @@ public class AdManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
 
     public void DisableRewardsCanvas()
     {
-        // Reward canvas text is disabled
-        rewardCanvas.enabled = false;
+        if (rewardCanvas != null)
+        {
+            rewardCanvas.enabled = false;
+        }
     }
 }

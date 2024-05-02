@@ -8,12 +8,12 @@ public class ItemButton : MonoBehaviour
     public ItemManager itemManager;
     Player playerScript;
 
-    ItemDisplay upgradeManager;
+    UpgradeSelection upgradeManager;
 
     bool hasSelectedCard;
     void Start()
     { 
-        upgradeManager = FindObjectOfType<ItemDisplay>();
+        upgradeManager = FindObjectOfType<UpgradeSelection>();
         playerScript = FindObjectOfType<Player>();
         hasSelectedCard = false;
     }
