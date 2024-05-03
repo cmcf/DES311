@@ -59,8 +59,8 @@ public class GameManager : MonoBehaviour
         // Load game data
         LoadGameData();
 
-        ResetGameData();
-        PlayerPrefs.DeleteAll();
+        //ResetGameData();
+        //PlayerPrefs.DeleteAll();
 
         // Disable level complete canvas at start of level 
         if (winCanvas != null)
