@@ -93,8 +93,8 @@ public class Settings : MonoBehaviour
 
     public JoystickType GetAppliedJoystickType()
     {
-        // Retrieve the saved joystick type setting from PlayerPrefs
-        int joystickTypeValue = PlayerPrefs.GetInt(JoystickTypeKey, (int)JoystickType.Dynamic);
+        // Retrieve the saved joystick type setting from PlayerPrefs. Fixed set to default. 
+        int joystickTypeValue = PlayerPrefs.GetInt(JoystickTypeKey, (int)JoystickType.Fixed);
         return (JoystickType)joystickTypeValue;
     }
 

@@ -58,22 +58,9 @@ public class PlayerMovement : MonoBehaviour
         // Apply health upgrades
         ApplyHealthUpgrade(healthIncreaseAmount, healthUpgradeCount);
 
-      
-        if (GameManager.Instance.gameData.hasPurchasedLaser)
-        {
-            // Enable the laser
-            EquipLaser();
-        }
-
         EnableJoystick();
         playerStats = GetComponent<Player>();
       
-    }
-
-    void EquipLaser()
-    {
-        Debug.Log("Equipped");
-        currentLoadout.projectilePrefab = currentLoadout.projectileUpgrade;
     }
 
 

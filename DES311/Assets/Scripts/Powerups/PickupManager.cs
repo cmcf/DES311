@@ -83,6 +83,7 @@ public class PickupManager : MonoBehaviour
 
     public void WipeoutEnemies()
     {
+        Debug.Log("Pressed");
         Time.timeScale = 1f;
         // Removes all current enemies spawned in the level
         enemyManager.WipeOutEnemies();
@@ -91,6 +92,7 @@ public class PickupManager : MonoBehaviour
 
     public void IncreaseXP()
     {
+        Debug.Log("Pressed");
         Time.timeScale = 1f;
         // Increases the players current XP
         playerStats.currentXP += XPIncreaseAmount;
@@ -102,6 +104,7 @@ public class PickupManager : MonoBehaviour
 
     public void IncreaseHealth()
     {
+        Debug.Log("Pressed");
         Time.timeScale = 1f;
         // Increases the players current health
         playerLoadout.currentLoadout.health += playerHealthIncreaseAmount;
@@ -123,6 +126,7 @@ public class PickupManager : MonoBehaviour
 
     public void DeclineCard()
     {
+        Debug.Log("Pressed");
         Time.timeScale = 1f;
         DeactivateCard();
     }
