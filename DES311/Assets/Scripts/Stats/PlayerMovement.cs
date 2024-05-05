@@ -47,11 +47,11 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         savePath = Path.Combine(Application.persistentDataPath, "playerData.json");
+        ResetPlayerStats();
     }
 
     void Start()
     {
-        ResetPlayerStats();
         // Load health upgrade information from PlayerPrefs
         int healthIncreaseAmount = PlayerPrefs.GetInt("HealthIncreaseAmount", 0);
         int healthUpgradeCount = PlayerPrefs.GetInt("HealthUpgradesCount", 0);
