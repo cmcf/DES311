@@ -24,7 +24,7 @@ public class MeleeEnemy :  Enemy
     [SerializeField] float levelUpStatIncrease = 0.5f;
 
     [Header("Damage")]
-    [SerializeField] float attackCooldown = 1f;
+    float attackCooldown = 5f;
     [SerializeField] float damageAmount = 10f;
 
     private Vector3 lastPlayerPosition;
