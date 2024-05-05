@@ -52345,8 +52345,8 @@ MonoBehaviour:
   enemiesPerWaveIncrease: 6
   spawnRate: 1.5
   spawnProbability: 0.8
-  delayBetweenWaves: 0.2
-  rangedEnemySpawnWave: 2
+  delayBetweenWaves: 0.1
+  rangedEnemySpawnWave: 4
   currentWave: 0
   canSpawn: 1
 --- !u!4 &897408124
