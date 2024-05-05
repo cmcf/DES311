@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-        public void PurchaseProjectile(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
+    public void PurchaseProjectile(ShopItem item, bool hasPurchasedItem, string playerPrefsKey)
     {
         if (hasPurchasedItem)
         {
@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
         {
             hasPurchasedItem = true;
             gameData.hasPurchasedLaser = true;
-            IncreaseHealth(item.healthIncreaseAmount);
+
             SaveGameData();
             UpdateStartingProjectile(item);
             SavePurchasedItem(item);
@@ -262,7 +262,7 @@ public class GameManager : MonoBehaviour
     void UpdateStartingProjectile(ShopItem item)
     {
         // Update the player's default projectile to the purchased item's projectile
-        playerLoadout.defaultProjectile = item.projectile;
+        playerLoadout.projectilePrefab = item.projectile;
     }
 
     public void LevelComplete()
@@ -287,6 +287,7 @@ public class GameManager : MonoBehaviour
         gameData.currentHealthUpgrades = 0;
         gameData.hasPurchasedLaser = false;
         gameData.hasPurchasedWaterCard = false;
+        playerLoadout.projectilePrefab = playerLoadout.defaultProjectile;
 
         // Save the reset game data
         SaveGameData();

@@ -17,7 +17,8 @@ MonoBehaviour:
   icon: {fileID: 0}
   projectilePrefab: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
-  projectileUpgrade: {fileID: 0}
+  projectileUpgrade: {fileID: 6487987637173855206, guid: 29a9704bef55c3240bfe88bfc33c71cc,
+    type: 3}
   modifiedAttribute: 3
   baseFireRate: 1
   baseSpeed: 20
@@ -25,10 +26,10 @@ MonoBehaviour:
   baseHealth: 50
   defaultProjectile: {fileID: 6099610860948857337, guid: 162b50e97d36bad4dbb1c4a7f33afac0,
     type: 3}
-  fireRate: 1
+  fireRate: 0.9
   speed: 20
   moveSpeed: 5
-  health: 55
+  health: -5
   healthMaxValue: 55
   cooldownDecrease: 0
   speedIncrease: 0
@@ -36,5 +37,5 @@ MonoBehaviour:
   healthIncrease: 0
   minCooldown: 0.8
   maxSpeed: 40
-  maxMoveSpeed: 10
+  maxMoveSpeed: 8
   healthUpgradeMax: 90

@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
+using static GameManager;
 
 [System.Serializable]
 public class PlayerData
@@ -46,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         savePath = Path.Combine(Application.persistentDataPath, "playerData.json");
+        ResetPlayerStats();
     }
 
     void Start()
@@ -57,11 +59,11 @@ public class PlayerMovement : MonoBehaviour
         // Apply health upgrades
         ApplyHealthUpgrade(healthIncreaseAmount, healthUpgradeCount);
 
-
         EnableJoystick();
         playerStats = GetComponent<Player>();
       
     }
+
 
     void ResetPlayerStats()
     {
